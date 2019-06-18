@@ -27,7 +27,7 @@ public class CountryController {
 	@GetMapping
 	public String showAll(Model model) {
 		List<Country> countries = countryRepository.findAll();
-		model.addAttribute(countries);
+		model.addAttribute("countries", countries);
 		return "countries";
 	}
 }
