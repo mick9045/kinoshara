@@ -92,5 +92,8 @@ public class Director implements Serializable {
 	public void setFilmography(List<Film> filmography) {
 		this.filmography = filmography;
 	}
-
+	
+	public void addFilm(Film film) {
+		this.filmography.add(film);
+	}
 }
