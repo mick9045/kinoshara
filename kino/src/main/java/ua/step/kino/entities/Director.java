@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,9 +40,11 @@ public class Director implements Serializable {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirth;
 
+	@ManyToOne
+	@JoinColumn(name="country_id")
 	private Country contryOfOrigin;
 
-	@OneToMany(mappedBy = "director")
+	@ManyToMany
 	private List<Film> filmography;
 
 	// для класса Film

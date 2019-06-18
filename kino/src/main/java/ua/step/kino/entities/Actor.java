@@ -1,6 +1,6 @@
 package ua.step.kino.entities;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -31,9 +31,11 @@ public class Actor {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirthday;
 	
+	@ManyToOne
+	@JoinColumn(name="country_id")
 	private Country country;
 	
-	@OneToMany(mappedBy = "actor")
+	@ManyToMany
 	private List<Film> films;
 	
 	/*
