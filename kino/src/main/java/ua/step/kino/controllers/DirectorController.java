@@ -19,12 +19,12 @@ import ua.step.kino.repositories.DirectorRepository;
 @Controller
 @RequestMapping("/directors")
 public class DirectorController {
-	@Autowired
-	private DirectorRepository directorRepository;
+	@Autowired DirectorRepository directorRepository;
+	
 	@GetMapping
 	public String showAll(Model model) {
 		List<Director> directors = directorRepository.findAll();
-		model.addAttribute(directors);
+		model.addAttribute("directors", directors);
 		return "directors";
 	}
 	
