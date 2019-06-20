@@ -67,6 +67,14 @@ public class User {
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 		
 
 }

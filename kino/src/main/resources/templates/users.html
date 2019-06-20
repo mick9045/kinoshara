@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Mkyong.com</a>
+</nav>
+
+<main role="main" class="container">
+
+   <h2>Users</h2>
+
+	<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Login</th>
+      <th scope="col">Password</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr th:each="user : ${users}">
+     <td  th:text="${user.name}"></td>
+     <td  th:text="${user.login}"></td>
+     <td  th:text="${user.password}"></td>
+     <td  th:text="${user.birthday}"></td>
+     <td  th:text="${user.role.name}"></td>
+     </tr>
+  </tbody>
+</table>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
