@@ -86,11 +86,11 @@ public class Director implements Serializable {
 		this.country = contry;
 	}
 	
-	public List<Film> getFilmography() {
+	public List<Film> getFilms() {
 		return films;
 	}
 
-	public void setFilmography(List<Film> filmography) {
+	public void setFilms(List<Film> films) {
 		this.films = films;
 	}
 	
