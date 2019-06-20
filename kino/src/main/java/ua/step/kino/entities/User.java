@@ -2,6 +2,7 @@ package ua.step.kino.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,9 @@ public class User {
 	private int id;
 	
 	private String name;
+	@Column(nullable = false)
 	private String login;
+	@Column(nullable = false)
 	private String password;
     private LocalDate birthday;
     
