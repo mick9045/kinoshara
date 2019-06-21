@@ -27,6 +27,5 @@ public class DirectorController {
 		model.addAttribute("directors", directors);
 		return "directors";
 	}
-	
-	
 }
+
