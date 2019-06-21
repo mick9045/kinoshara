@@ -36,6 +36,10 @@ public class Actor {
 	private Country country;
 	
 	@ManyToMany
+	@JoinTable(
+			  name = "Actors_Films", 
+			  joinColumns = @JoinColumn(name = "actor_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "films_id"))
 	private List<Film> films;
 	
 	/*
