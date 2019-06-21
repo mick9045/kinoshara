@@ -13,8 +13,20 @@
 
 <body>
 <main role="main" class="container">
-    <ol>
-        <li th:each="film : ${films}" th:text="${film.title}"></li>    
+    <ol th:each="film : ${films}">
+        <li th:text="${film.title}"></li>
+        <li><ol>
+			<li th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" />
+		</ol></li>
+		<li><ol>
+			<li th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName}" />
+		</ol></li>
+		<li><ol>
+			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
+		</ol></li>
+		<li><ol>
+			<li th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" />
+		</ol></li>
     </ol>
 </main>
 <!-- /.container -->

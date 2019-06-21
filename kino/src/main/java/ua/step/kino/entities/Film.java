@@ -3,6 +3,7 @@ package ua.step.kino.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -22,25 +23,25 @@ public class Film {
 	
 	private String title;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 		     name = "Directors_Films", 
 		     joinColumns = @JoinColumn(name = "films_id"), 
 		     inverseJoinColumns = @JoinColumn(name = "director_id"))
 	private Set<Director> directors = new HashSet<Director>();
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 	     name = "Actors_Films", 
 	     joinColumns = @JoinColumn(name = "films_id"), 
 	     inverseJoinColumns = @JoinColumn(name = "actor_id"))
 	 private Set<Actor> actors = new HashSet<Actor>();
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Genre> genres = new HashSet<Genre>();
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Country> countries = new HashSet<Country>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Country> countries = new ArrayList<Country>();
 
 	public int getId() {
 		return id;
@@ -82,11 +83,11 @@ public class Film {
 		this.genres = genres;
 	}
 
-	public Set<Country> getCountries() {
+	public List<Country> getCountries() {
 		return countries;
 	}
 
-	public void setCountries(Set<Country> countries) {
+	public void setCountries(List<Country> countries) {
 		this.countries = countries;
 	}
 	
