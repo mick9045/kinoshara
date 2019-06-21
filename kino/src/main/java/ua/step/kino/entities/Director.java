@@ -1,6 +1,7 @@
 package ua.step.kino.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -36,29 +37,25 @@ public class Director implements Serializable {
 
 	private String name;
 
-	@Temporal(javax.persistence.TemporalType.DATE)
+//	@Temporal(javax.persistence.TemporalType.DATE)
 	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Date dateOfBirth;
+	private LocalDate birthday;
 
 	@ManyToOne
 	@JoinColumn(name="country_id")
-	private Country contryOfOrigin;
+	private Country country;
 
 	@ManyToMany
-	private List<Film> filmography;
-
-	// для класса Film
-	// @ManyToOne
-	// private Director director = new Director();
+	private List<Film> films;
 
 	public Director() {
 
 	}
 
-	public Director(String name, Date dateOfBirth, Country contryOfOrigin) {
+	public Director(String name, LocalDate birthday, Country country) {
 		this.setName(name);
-		this.setDateOfBirth(dateOfBirth);
-		this.setContryOfOrigin(contryOfOrigin);
+		this.setBirthday(birthday);
+		this.setCountry(country);
 	}
 
 	public int getId() {
@@ -73,31 +70,31 @@ public class Director implements Serializable {
 		this.name = name;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public LocalDate getBirthday() {
+		return birthday;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
 	}
 
-	public Country getContryOfOrigin() {
-		return contryOfOrigin;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setContryOfOrigin(Country contryOfOrigin) {
-		this.contryOfOrigin = contryOfOrigin;
+	public void setCountry(Country contry) {
+		this.country = contry;
 	}
 	
-	public List<Film> getFilmography() {
-		return filmography;
+	public List<Film> getFilms() {
+		return films;
 	}
 
-	public void setFilmography(List<Film> filmography) {
-		this.filmography = filmography;
+	public void setFilms(List<Film> films) {
+		this.films = films;
 	}
 	
 	public void addFilm(Film film) {
-		this.filmography.add(film);
+		this.films.add(film);
 	}
 }
