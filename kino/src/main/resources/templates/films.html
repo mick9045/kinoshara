@@ -13,21 +13,36 @@
 
 <body>
 <main role="main" class="container">
-    <ol th:each="film : ${films}">
-        <li th:text="${film.title}"></li>
+
+<div class ="card-columns">
+	<div class="card" style="width: 18rem;" th:each="film : ${films}">
+	<div class="card-header"> 
+	<h5 th:text="${film.title}"></h5>
+	</div>
+		<div class="card-body">
+		<ul type="none">
+		<h6>Countries:</h6>
         <li><ol>
 			<li th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" />
 		</ol></li>
+		<h6>Actors:</h6>
 		<li><ol>
 			<li th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName}" />
 		</ol></li>
+		<h6>Directors:</h6>
 		<li><ol>
 			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
 		</ol></li>
+		<h6>Genres:</h6>
 		<li><ol>
 			<li th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" />
 		</ol></li>
-    </ol>
+		</ul>
+</div>
+
+</div>
+</div>
+
 </main>
 <!-- /.container -->
 
