@@ -26,7 +26,11 @@ public class Film {
 	private Set<Director> directors = new HashSet<Director>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Actor> actors = new HashSet<Actor>();
+	 @JoinTable(
+	     name = "Actors_Films", 
+	     joinColumns = @JoinColumn(name = "films_id"), 
+	     inverseJoinColumns = @JoinColumn(name = "actor_id"))
+	 private Set<Actor> actors = new HashSet<Actor>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Genre> genres = new HashSet<Genre>();
