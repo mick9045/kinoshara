@@ -23,10 +23,14 @@ public class Film {
 	private String title;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+		     name = "Directors_Films", 
+		     joinColumns = @JoinColumn(name = "films_id"), 
+		     inverseJoinColumns = @JoinColumn(name = "director_id"))
 	private Set<Director> directors = new HashSet<Director>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	 @JoinTable(
+	@JoinTable(
 	     name = "Actors_Films", 
 	     joinColumns = @JoinColumn(name = "films_id"), 
 	     inverseJoinColumns = @JoinColumn(name = "actor_id"))
