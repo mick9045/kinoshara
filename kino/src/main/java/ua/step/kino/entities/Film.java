@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "films")
 public class Film {
+	
+	//==============================Fields==============================================
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -53,10 +55,39 @@ public class Film {
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date releaseDate;
-	private double rating;
+	private Double rating;
+	private Double filmLength;
 	
-	private double filmLength;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Comment> comments = new ArrayList<Comment>();
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Review> reviews = new ArrayList<Review>();
+	//==============================Fields==============================================
+	
+	public Film() {
+
+	}
+	
+	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
+			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
+			Double filmLength, List<Comment> comments, List<Review> reviews) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.directors = directors;
+		this.actors = actors;
+		this.genres = genres;
+		this.countries = countries;
+		this.posterSmall = posterSmall;
+		this.posterBig = posterBig;
+		this.releaseDate = releaseDate;
+		this.rating = rating;
+		this.filmLength = filmLength;
+		this.comments = comments;
+		this.reviews = reviews;
+	}
+
 	public String getPosterSmall() {
 		return posterSmall;
 	}
@@ -85,7 +116,7 @@ public class Film {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -93,7 +124,7 @@ public class Film {
 		return filmLength;
 	}
 
-	public void setFilmLength(double filmLength) {
+	public void setFilmLength(Double filmLength) {
 		this.filmLength = filmLength;
 	}
 
@@ -110,32 +141,6 @@ public class Film {
 	}
 
 	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Comment> comments = new ArrayList<Comment>();
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Review> reviews = new ArrayList<Review>();
-	
-	
-	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
-			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, double rating,
-			double filmLength, List<Comment> comments, List<Review> reviews) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.directors = directors;
-		this.actors = actors;
-		this.genres = genres;
-		this.countries = countries;
-		this.posterSmall = posterSmall;
-		this.posterBig = posterBig;
-		this.releaseDate = releaseDate;
-		this.rating = rating;
-		this.filmLength = filmLength;
-		this.comments = comments;
 		this.reviews = reviews;
 	}
 
