@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Main Page WebSite!</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/movie.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="#">Kinoshara.com</a>
+</nav>
+
+<main role="main" class="container">
+
+<div class ="card-columns">
+	<div class="card card-film" th:each="film : ${films}">
+	<div class="card-header"> 
+	<h5 th:text="${film.title}"></h5>
+	</div>
+		<div class="card-body">
+		<img th:src="${film.imageSmallPath}" class="card-img-top img-film" alt="...">
+		<ul type="none">
+		<h6>Countries:</h6>
+        <li><ol>
+			<li th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" />
+		</ol></li>
+		<h6>Actors:</h6>
+		<li><ol>
+			<li th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName}" />
+		</ol></li>
+		<h6>Directors:</h6>
+		<li><ol>
+			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
+		</ol></li>
+		<h6>Genres:</h6>
+		<li><ol>
+			<li th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" />
+		</ol></li>
+		</ul>
+</div>
+
+</div>
+</div>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

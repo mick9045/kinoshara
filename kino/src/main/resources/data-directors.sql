@@ -3,7 +3,7 @@ insert into directors (id, name, birthday, country_id) VALUES (2,'test director 
 insert into directors (id, name, birthday, country_id) VALUES (3,'Gordon Din', '1986-02-01', 4)
 insert into directors (id, name, birthday, country_id) VALUES (4,'John Smight', '1991-10-21', 3)
 
-insert into films(id, title) VALUES (1,'FILM TEST')
+insert into films(id, title, image_Small_Path) VALUES (1,'FILM TEST', '/images/1.jpg')
 insert into films(id, title) VALUES (2,'Averangrs')
 insert into films(id, title) VALUES (3, 'Green Mile')
 insert into films(id, title) VALUES (4, 'Long way home')

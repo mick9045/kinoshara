@@ -23,13 +23,15 @@ public class Film {
 	
 	private String title;
 	
+	private String imageSmallPath;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 		     name = "Directors_Films", 
 		     joinColumns = @JoinColumn(name = "films_id"), 
 		     inverseJoinColumns = @JoinColumn(name = "director_id"))
 	private Set<Director> directors = new HashSet<Director>();
-	
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 	     name = "Actors_Films", 
@@ -57,6 +59,14 @@ public class Film {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getImageSmallPath() {
+		return imageSmallPath;
+	}
+
+	public void setImageSmallPath(String imageSmallPath) {
+		this.imageSmallPath = imageSmallPath;
 	}
 
 	public Set<Director> getDirectors() {

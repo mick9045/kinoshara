@@ -1,0 +1,14 @@
+.card-film
+{
+	width: 18rem;
+	height: 30rem;
+}
+
+.img-film
+{
+	display: block;
+	width: 75%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
