@@ -1,5 +1,7 @@
 package ua.step.kino.controllers;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,11 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ImageController {
 
 	@GetMapping("image/{name}")
-	  public String getImage(@PathVariable String name) {
+	  public void getImage(@PathVariable String name, HttpServletResponse httpServletResponse) {
 	    String path = "http://kinoshara.kl.com.ua/img/";
-	    return "redirect:" + path + name;
+	    httpServletResponse.setHeader("Location", path + name);
+	    httpServletResponse.setStatus(302);
 	  }
-	
-	
 	
 }
