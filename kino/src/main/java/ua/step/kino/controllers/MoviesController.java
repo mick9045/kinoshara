@@ -2,6 +2,8 @@ package ua.step.kino.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +35,10 @@ public class MoviesController {
 	}
 	
 	@GetMapping("image/{name}")
-	public String getImage(@PathVariable String name) {
-		String path = "http://kinoshara.kl.com.ua/img/";
-		return "redirect:" + path + name;
+	public void getImage(@PathVariable String name, HttpServletResponse httpServletResponse) {
+		String path = "http://kinoshara.rf.gd/images/";
+		httpServletResponse.setHeader("Location", path + name);
+		httpServletResponse.setStatus(302);
 	}
 
 }
