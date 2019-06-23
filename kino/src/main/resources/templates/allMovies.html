@@ -21,32 +21,29 @@
 <main role="main" class="container">
 
 <div class ="card-columns">
-	<div class="card card-film" th:each="film : ${films}">
-	<div class="card-header"> 
+	<div class="card " th:each="film : ${films}">
+	<!--  <div class="card-header"> 
 	<h5 th:text="${film.title}"></h5>
 	</div>
+	-->
+	<img th:src="${film.imageSmallPath}" class="card-img-top img-film" alt="...">
 		<div class="card-body">
-		<img th:src="${film.imageSmallPath}" class="card-img-top img-film" alt="...">
+		
 		<ul type="none">
-		<h6>Countries:</h6>
-        <li><ol>
-			<li th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" />
-		</ol></li>
-		<h6>Actors:</h6>
-		<li><ol>
-			<li th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName}" />
-		</ol></li>
-		<h6>Directors:</h6>
-		<li><ol>
-			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
-		</ol></li>
-		<h6>Genres:</h6>
-		<li><ol>
-			<li th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" />
-		</ol></li>
+		<a th:href="@{/films/(id=${film.id})}" ><h5 th:text="${film.title}"></h5></a>
+		<span class="label font-weight-normal" >Countries:</span>
+			<span class="badge badge-pill badge-primary" th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" /><br/>
+		<span class="label ">Actors:</span>
+			<span class="badge badge-pill badge-primary" th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName} + ' ' +  ${actor.lastName}" /><br/>
+		<span class="label font-weight-normal">Directors:</span>
+			<span class="badge badge-pill badge-primary" th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" /><br/>
+		<span class="label font-weight-normal">Genres:</span>
+			<span class="badge badge-pill badge-primary" th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" /><br/>
+			
 		</ul>
-</div>
-
+		</div>
+		
+		
 </div>
 </div>
 
