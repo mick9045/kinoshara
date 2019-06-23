@@ -14,9 +14,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand" href="#">Kinoshara.com</a>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 
 <main role="main" class="container">
 
@@ -46,6 +44,9 @@
 			<span class="badge badge-pill badge-primary" th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" /><br/>
 		<span class="label font-weight-normal">Genres:</span>
 			<span class="badge badge-pill badge-primary" th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" /><br/>
+		<span class="label font-weight-normal">Release Year:</span>
+			<span class="badge badge-pill badge-primary" th:if="${film.releaseYear}" th:text="${film.releaseYear}" /><br/>
+		
 			
 		</ul>
 		</div>

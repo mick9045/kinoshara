@@ -31,11 +31,5 @@ public class MoviesController {
 		model.addAttribute("films", films);
 		return "allMovies";
 	}
-	
-	@GetMapping("image/{name}")
-	public String getImage(@PathVariable String name) {
-		String path = "http://kinoshara.kl.com.ua/img/";
-		return "redirect:" + path + name;
-	}
 
 }
