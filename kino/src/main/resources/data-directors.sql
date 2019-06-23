@@ -5,7 +5,7 @@ insert into directors (id, name, birthday, country_id) VALUES (4,'John Smight', 
 
 insert into films(id, title, image_Small_Path) VALUES (1,'Men in Black International', 'MIB.jpg')
 insert into films(id, title, image_Small_Path) VALUES (2, 'Kingdom', 'Inception.jpg')
-insert into films(id, title, image_Small_Path) VALUES (3, 'Alise', 'Thor 3.jpg')
+insert into films(id, title, image_Small_Path) VALUES (3, 'Alise', 'thor_3.jpg')
 insert into films(id, title) VALUES (4,'Averangrs')
 insert into films(id, title) VALUES (5, 'Green Mile')
 insert into films(id, title) VALUES (6, 'Long way home')
