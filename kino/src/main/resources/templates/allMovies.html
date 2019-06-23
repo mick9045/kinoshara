@@ -26,8 +26,15 @@
 	<h5 th:text="${film.title}"></h5>
 	</div>
 	-->
-	<img th:src="${film.imageSmallPath}" class="card-img-top img-film" alt="...">
+	
+	<!-- @{/image/victory.jpg} -->
+	
+	
+	
+	<img th:src="@{'/image/' + ${film.imageSmallPath}}" class="card-img-top img-film" alt="...">
 		<div class="card-body">
+		
+		<!-- ${film.imageSmallPath} -->
 		
 		<ul type="none">
 		<a th:href="@{/films/(id=${film.id})}" ><h5 th:text="${film.title}"></h5></a>

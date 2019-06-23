@@ -3,9 +3,9 @@ insert into directors (id, name, birthday, country_id) VALUES (2,'test director 
 insert into directors (id, name, birthday, country_id) VALUES (3,'Gordon Din', '1986-02-01', 4)
 insert into directors (id, name, birthday, country_id) VALUES (4,'John Smight', '1991-10-21', 3)
 
-insert into films(id, title, image_Small_Path) VALUES (1,'Men in Black International', '/images/1.jpg')
-insert into films(id, title, image_Small_Path) VALUES (2, 'Kingdom', '/images/2.jpg')
-insert into films(id, title, image_Small_Path) VALUES (3, 'Alise', '/images/3.jpg')
+insert into films(id, title, image_Small_Path) VALUES (1,'Men in Black International', 'MIB.jpg')
+insert into films(id, title, image_Small_Path) VALUES (2, 'Kingdom', 'Inception.jpg')
+insert into films(id, title, image_Small_Path) VALUES (3, 'Alise', 'Thor 3.jpg')
 insert into films(id, title) VALUES (4,'Averangrs')
 insert into films(id, title) VALUES (5, 'Green Mile')
 insert into films(id, title) VALUES (6, 'Long way home')
