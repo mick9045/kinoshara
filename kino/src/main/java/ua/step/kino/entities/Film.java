@@ -25,6 +25,8 @@ public class Film {
 	
 	private String imageSmallPath;
 	
+	private int releaseYear;
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 		     name = "Directors_Films", 
@@ -67,6 +69,14 @@ public class Film {
 
 	public void setImageSmallPath(String imageSmallPath) {
 		this.imageSmallPath = imageSmallPath;
+	}
+	
+	public int getReleaseYear() {
+		return releaseYear;
+	}
+
+	public void setReleaseYear(int releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
 	public Set<Director> getDirectors() {
