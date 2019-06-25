@@ -18,22 +18,22 @@ public class FilmSorter implements FilmSortService {
 	@Override
 	public List<Film> sortFilmsByRleaseYear() {
 		
-		return filmsRepository.findAll(Sort.by(Sort.Direction.ASC, "releaseYear"));
+		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "releaseYear"));
 	}
 
 	@Override
 	public List<Film> sortFilmsByRate() {
-		return filmsRepository.findAll(Sort.by(Sort.Direction.ASC, "rate"));
+		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "rating"));
 	}
 
 	@Override
 	public List<Film> sortFilmsByViewsFrequency() {
-		return filmsRepository.findAll(Sort.by(Sort.Direction.ASC, "views"));
+		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "views"));
 	}
 
 	@Override
 	public List<Film> sortFilmsByAdditionDate() {
-		return filmsRepository.findAll(Sort.by(Sort.Direction.ASC, "additionDate"));
+		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "additionDate"));
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class FilmSorter implements FilmSortService {
 		switch(query) {
 		case "year":
 			return sortFilmsByRleaseYear();
-		case "rate":
+		case "rating":
 			return sortFilmsByRate();
 		case "views":
 			return sortFilmsByViewsFrequency();

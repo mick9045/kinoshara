@@ -31,6 +31,8 @@ public class Film {
 	private String imageSmallPath;
 	
 	private int releaseYear;
+	
+	private int views;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
@@ -75,7 +77,7 @@ public class Film {
 	
 	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, List<Comment> comments, List<Review> reviews) {
+			Double filmLength, List<Comment> comments, List<Review> reviews, int views) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -90,6 +92,7 @@ public class Film {
 		this.filmLength = filmLength;
 		this.comments = comments;
 		this.reviews = reviews;
+		this.views = views;
 	}
 
 	public String getPosterSmall() {
@@ -210,6 +213,14 @@ public class Film {
 
 	public void setCountries(List<Country> countries) {
 		this.countries = countries;
+	}
+
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
 	}
 	
 	
