@@ -7,28 +7,38 @@ import org.springframework.stereotype.Service;
 
 import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.FilmRepository;
+
 /**
  * 
  * @author AZavoruyev
  *
  */
-@Service 
+@Service
 public class FilmSearchServiceImpl implements FilmSearchService {
 	private FilmRepository filmRepository;
-	
+
 	@Autowired
-	public FilmSearchServiceImpl(FilmRepository filmRepository)
-	{
-		this.filmRepository=filmRepository;
+	public FilmSearchServiceImpl(FilmRepository filmRepository) {
+		this.filmRepository = filmRepository;
 	}
-	
+
 	@Override
 	public List<Film> searchFilmsByName(String name) {
-		 List<Film> films=filmRepository.findAll();
-		 List<Film> afterSearch;
-		 //метод поиска фильма по названию
-		 
-		return null;
+		if (!name.isEmpty()) {
+			List<Film> films = filmRepository.findAll();
+			List<Film> afterSearch = null;
+			String search = name.toLowerCase().replaceAll("[^\\w\\s]"," ").replaceAll("\\s+"," ");
+			// метод поиска фильма по названию
+			for (Film film : films) {
+				String title = film.getTitle().toLowerCase().replaceAll("[^\\w\\s]"," ").replaceAll("\\s+"," ");
+				if (title.contains(search)) {
+					afterSearch.add(film);
+				}
+			}
+			return afterSearch;
+		} else {
+			return null;
+		}
 	}
 
 }
