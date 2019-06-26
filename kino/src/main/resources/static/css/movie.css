@@ -19,3 +19,14 @@ a:hover
 {
 	text-decoration: none;
 }
+
+
+.card-image {
+	display: block;
+	width: 60%;
+	margin: 0 auto;
+}
+
+.film-description-list {
+	padding-inline-start: 0px;	
+}

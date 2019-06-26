@@ -11,7 +11,7 @@ public class ImageController {
 
 	@GetMapping("image/{name}")
 	  public void getImage(@PathVariable String name, HttpServletResponse httpServletResponse) {
-	    String path = "http://kinoshara.rf.gd/images/";
+	    String path = "http://mick9045.000webhostapp.com/images/";
 	    httpServletResponse.setHeader("Location", path + name);
 	    httpServletResponse.setStatus(302);
 	  }
