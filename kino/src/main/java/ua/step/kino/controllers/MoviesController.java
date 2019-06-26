@@ -55,7 +55,6 @@ public class MoviesController {
 	@GetMapping(value = "search/{query}", produces = "application/json")
 	@ResponseBody
 	public String searchFilms(@PathVariable String query) {
-		System.out.println(query+"controller");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(searchService.searchFilmsByName(query));

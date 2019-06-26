@@ -18,8 +18,8 @@ import ua.step.kino.repositories.FilmRepository;
  * @author AZavoruyev
  *
  */
-//@Service
-@Component("FilmSearchService")
+@Service
+//@Component("FilmSearchService")
 public class FilmSearchServiceImpl implements FilmSearchService {
 	private FilmRepository filmRepository;
 
@@ -46,7 +46,8 @@ public class FilmSearchServiceImpl implements FilmSearchService {
 //		} else {
 //			return null;
 //		}
-		System.out.println(name+"service");
+	
+	
 		return filmRepository.searchFilmsByName(name);
 	}
 
