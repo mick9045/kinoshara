@@ -19,6 +19,7 @@ $(function() {
 			});
 		},
 		select: function(event, ui) {
+			window.location.href="/films/?id="+ui.item.data.id;
 		}
 	});
 })
