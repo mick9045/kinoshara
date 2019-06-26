@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ua.step.kino.entities.Country;
 import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.FilmRepository;
 
