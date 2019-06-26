@@ -27,8 +27,6 @@ public class Film {
 	
 	private String title;
 	
-	private String imageSmallPath;
-	
 	private int releaseYear;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -161,14 +159,6 @@ public class Film {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	
-	public String getImageSmallPath() {
-		return imageSmallPath;
-	}
-
-	public void setImageSmallPath(String imageSmallPath) {
-		this.imageSmallPath = imageSmallPath;
 	}
 	
 	public int getReleaseYear() {
