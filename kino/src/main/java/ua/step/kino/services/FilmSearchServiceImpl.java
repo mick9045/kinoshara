@@ -47,7 +47,7 @@ public class FilmSearchServiceImpl implements FilmSearchService {
 //			return null;
 //		}
 		System.out.println(name+"service");
-		return filmRepository.findByContainsName(name);
+		return filmRepository.searchFilmsByName(name);
 	}
 
 }
