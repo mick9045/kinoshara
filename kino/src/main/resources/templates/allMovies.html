@@ -32,65 +32,46 @@
 		<div class="col-2">
 			<div th:replace="fragments/moviesSidebar :: sidebar"></div>
 		</div>
-		<div class="card-columns col-10">
-			<div class="card " th:each="film : ${films}">
-				<!--  <div class="card-header"> 
+		<div class ="card-columns col-10">
+	<div class="card" th:each="film : ${films}">
+	<!--  <div class="card-header"> 
 	<h5 th:text="${film.title}"></h5>
 	</div>
 	-->
-
-				<!-- @{/image/victory.jpg} -->
-
-
-
-				<img th:src="@{'/image/' + ${film.imageSmallPath}}"
-					class="card-img-top img-film" alt="...">
-				<div class="card-body">
-
-					<!-- ${film.imageSmallPath} -->
-
-					<ul class="list-group list-group-flush" type="none" style="text-align: center;">
-						<li><a th:href="@{/films/(id=${film.id})}">
-								<h5 th:text="${film.title}"></h5>
-						</a></li>
-						<li><span class="label font-weight-normal"
-							th:if="${film.countries!=null and !film.countries.isEmpty()}">Countries:</span>
-							<span class="badge badge-pill badge-primary"
-							th:if="${film.countries}" th:each="country : ${film.countries}"
-							th:text="${country.name}"></span></li>
-						<li><span class="label font-weight-normal"
-							th:if="${film.actors!=null and !film.actors.isEmpty()}">Actors:
-								<span class="badge badge-pill badge-primary"
-								th:if="${film.actors}" th:each="actor : ${film.actors}"
-								th:text="${actor.firstName} + ' ' +  ${actor.lastName}" /><br /></li>
-						<li><span class="label font-weight-normal"
-							th:if="${film.directors!=null and !film.directors.isEmpty()}">Directors:
-							<span class="badge badge-pill badge-primary"
-							th:if="${film.directors}" th:each="director : ${film.directors}"
-							th:text="${director.name}" />
-						</span>
-						</li>
-						<li>
-						<span class="label font-weight-normal"
-							th:if="${film.genres!=null and !film.genres.isEmpty()}">Genres:
-							<span class="badge badge-pill badge-primary"
-							th:if="${film.genres}" th:each="genre : ${film.genres}"
-							th:text="${genre.name}" />
-						</span>
-						</li>
-						<li>
-						<span class="label font-weight-normal"
-							th:if="${film.releaseYear!=null}">Release Year: <span
-							class="badge badge-pill badge-primary"
-							th:if="${film.releaseYear}" th:text="${film.releaseYear}" />
-						</span>
-						</li>
-
-					</ul>
-				</div>
-
-			</div>
+	
+	<!-- @{/image/victory.jpg} -->
+	
+	
+	
+	<img th:src="@{'/image/' + ${film.imageSmallPath}}" class="img-film card-img-top" alt="...">
+		<div class="card-body">
+		
+		<!-- ${film.imageSmallPath} -->
+		
+		<ul type="none">
+		<a th:href="@{/films/(id=${film.id})}" ><h5 th:text="${film.title}"></h5></a>
+		<span class="label font-weight-normal" th:if="${film.countries!=null and !film.countries.isEmpty()}">Countries:
+			<span class="badge badge-pill badge-primary" th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" /><br/>
+		</span>
+		<span class="label font-weight-normal" th:if="${film.actors!=null and !film.actors.isEmpty()}">Actors:
+			<span class="badge badge-pill badge-primary" th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName} + ' ' +  ${actor.lastName}" /><br/>
+		</span>
+		<span class="label font-weight-normal" th:if="${film.directors!=null and !film.directors.isEmpty()}" >Directors:
+			<span class="badge badge-pill badge-primary" th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" /><br/>
+		</span>
+		<span class="label font-weight-normal" th:if="${film.genres!=null and !film.genres.isEmpty()}" >Genres:
+			<span class="badge badge-pill badge-primary" th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" /><br/>
+		</span>
+		<span class="label font-weight-normal" th:if="${film.releaseYear!=null}">Release Year:
+			<span class="badge badge-pill badge-primary" th:if="${film.releaseYear}" th:text="${film.releaseYear}" /><br/>
+		</span>
+			
+		</ul>
 		</div>
+		
+		
+</div>
+</div>
 	</div>
 
 	</main>
