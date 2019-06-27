@@ -1,2 +1,2 @@
-insert into Genres (name) VALUES('Horror')
-insert into Genres (name) VALUES('Comedy')
+insert into Genres (id, name) VALUES (9, 'horror')
+insert into Genres (id, name) VALUES (10, 'comedy')

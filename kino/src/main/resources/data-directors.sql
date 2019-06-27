@@ -101,8 +101,6 @@ insert into Genres (id, name) VALUES (5, 'action ')
 insert into Genres (id, name) VALUES (6, 'thriller')
 insert into Genres (id, name) VALUES (7, 'drama')
 insert into Genres (id, name) VALUES (8, 'romance')
-insert into Genres (id, name) VALUES (9, 'horror')
-insert into Genres (id, name) VALUES (10, 'comedy')
 
 insert into FILMS_GENRES (film_id, genres_id) VALUES (1, 1)
 insert into FILMS_GENRES (film_id, genres_id) VALUES (1, 2)
