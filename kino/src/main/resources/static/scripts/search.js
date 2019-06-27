@@ -19,7 +19,7 @@ $(function() {
 			});
 		},
 		select: function(event, ui) {
-			window.location.href="/films/?id="+ui.item.data.id;
+			window.location.href="/films/"+ui.item.data.id;
 		}
 	});
 })

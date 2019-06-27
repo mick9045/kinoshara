@@ -1,6 +1,5 @@
 package ua.step.kino.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -29,8 +28,6 @@ public class Film {
 	
 	private String title;
 	
-	private String imageSmallPath;
-	
 	private int releaseYear;
 	
 	private int views;
@@ -58,13 +55,15 @@ public class Film {
 	private List<Country> countries = new ArrayList<Country>();
 	
 	
-	private String posterSmall;
+	private String imageSmallPath;
 	private String posterBig;
 	
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date releaseDate;
+	@JsonIgnore
 	private Double rating;
+	@JsonIgnore
 	private Double filmLength;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -88,7 +87,7 @@ public class Film {
 		this.actors = actors;
 		this.genres = genres;
 		this.countries = countries;
-		this.posterSmall = posterSmall;
+		this.imageSmallPath = posterSmall;
 		this.posterBig = posterBig;
 		this.releaseDate = releaseDate;
 		this.rating = rating;
@@ -98,12 +97,12 @@ public class Film {
 		this.views = views;
 	}
 
-	public String getPosterSmall() {
-		return posterSmall;
+	public String getImageSmallPath() {
+		return imageSmallPath;
 	}
 
-	public void setPosterSmall(String posterSmall) {
-		this.posterSmall = posterSmall;
+	public void setImageSmallPath(String imageSmallPath) {
+		this.imageSmallPath = imageSmallPath;
 	}
 
 	public String getPosterBig() {
@@ -168,14 +167,6 @@ public class Film {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	
-	public String getImageSmallPath() {
-		return imageSmallPath;
-	}
-
-	public void setImageSmallPath(String imageSmallPath) {
-		this.imageSmallPath = imageSmallPath;
 	}
 	
 	public int getReleaseYear() {

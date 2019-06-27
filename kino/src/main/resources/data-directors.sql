@@ -20,6 +20,20 @@ insert into films(id, title, image_Small_Path, release_Year, views) VALUES (7, '
 insert into films(id, title, image_Small_Path, release_Year, views) VALUES (8, 'Man of steel', 'Man_of_Steel.jpg', 2013, 0)
 insert into films(id, title, image_Small_Path, release_Year, views) VALUES (9, 'Doctor Strange', 'Doctor_Strange_poster.jpg', 2016, 0)
 
+insert into comments(id, comment) values (1, 'Best movie ever')
+insert into comments(id, comment) values (2, 'Hate it')
+insert into comments(id, comment) values (3, 'Its Brilliant')
+insert into comments(id, comment) values (4, 'WOW')
+insert into comments(id, comment) values (5, 'Its plenty good, but actors play was terrible some moments')
+insert into comments(id, comment) values (6, 'i wish i forget about it and watch it again and again')
+
+insert into films_comments(film_id, comments_id) values (1, 1)
+insert into films_comments(film_id, comments_id) values (1, 2)
+insert into films_comments(film_id, comments_id) values (1, 3)
+insert into films_comments(film_id, comments_id) values (1, 4)
+insert into films_comments(film_id, comments_id) values (1, 5)
+insert into films_comments(film_id, comments_id) values (1, 6)
+
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (1,1)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (2,2)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (3,6)
@@ -51,7 +65,6 @@ insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VAL
 insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(11, 'Bella', 'Thorne', '1997-10-8 ', 2)
 
 insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(12, 'Matthew', 'McConaughey', '1969-11-04', 2)
-
 
 insert into ACTORS_FILMS (films_id, actor_id) VALUES (1,1)
 insert into ACTORS_FILMS (films_id, actor_id) VALUES (1,5)
@@ -90,8 +103,6 @@ insert into Genres (id, name) VALUES (7, 'drama')
 insert into Genres (id, name) VALUES (8, 'romance')
 insert into Genres (id, name) VALUES (9, 'horror')
 insert into Genres (id, name) VALUES (10, 'comedy')
-
-
 
 insert into FILMS_GENRES (film_id, genres_id) VALUES (1, 1)
 insert into FILMS_GENRES (film_id, genres_id) VALUES (1, 2)

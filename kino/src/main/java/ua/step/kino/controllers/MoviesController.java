@@ -73,7 +73,7 @@ public class MoviesController {
 	
 	@GetMapping(value = "filter/{type}/{query}")
 	public String filterFilms(@PathVariable String type, @PathVariable String query, Model model) {
-		List<Film> films =filterService.filterBy(type, query);
+		List<Film> films = filterService.filterBy(type, query);
 		model.addAttribute("films", films);
 		return "allMovies";
 	}

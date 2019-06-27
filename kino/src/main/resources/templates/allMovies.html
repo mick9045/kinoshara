@@ -7,7 +7,6 @@
 
 <title>Main Page WebSite!</title>
 
-
 <link rel="stylesheet" th:href="@{/css/main.css}" />
 <link rel="stylesheet" th:href="@{/css/movie.css}" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
@@ -18,7 +17,6 @@
 <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
 <script th:src="@{/scripts/search.js}"/></script>
 <script th:src="@{/scripts/filter.js}"/></script>
-
 </head>
 
 <body>
@@ -39,9 +37,7 @@
 	<h5 th:text="${film.title}"></h5>
 	</div>
 	-->
-
 				<!-- @{/image/victory.jpg} -->
-
 
 				<div>
 					<img th:src="@{'/image/' + ${film.imageSmallPath}}" class="card-image" alt="...">
@@ -49,9 +45,9 @@
 				<div class="card-body">
 
 					<!-- ${film.imageSmallPath} -->
-
+					
 					<ul type="none" class="film-description-list">
-						<a th:href="@{/films/(id=${film.id})}"><h5
+						<a th:href="@{'/films/' + ${film.id}}"><h5
 								th:text="${film.title}"></h5></a>
 						<span class="label font-weight-normal"
 							th:if="${film.countries!=null and !film.countries.isEmpty()}">Countries:
@@ -85,7 +81,6 @@
 
 					</ul>
 				</div>
-
 
 			</div>
 		</div>
