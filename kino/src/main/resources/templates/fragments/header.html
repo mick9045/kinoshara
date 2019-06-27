@@ -10,6 +10,7 @@
 	<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
 	<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
 	<script th:src="@{webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script th:src="@{scripts/search.js}"></script>
 </head>
 <body>
 	<nav class="navbar 	navbar-expand-lg navbar-dark bg-dark"
@@ -31,10 +32,10 @@
 				</ul>
 				<form autocomplete="off" class="form-inline my-2 my-lg-0">
 					<div class="autocomplete">
-						<input class="form-control mr-sm-2"
-							type="search" placeholder="Search" aria-label="Search">
+						<input class="form-control mr-sm-2" id="searchTextBox"
+							 placeholder="Search" aria-label="Search">
 					</div>
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
 				</form>
 			</div>
 		</div>

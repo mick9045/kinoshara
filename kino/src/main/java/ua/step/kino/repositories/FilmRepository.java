@@ -15,7 +15,13 @@ import ua.step.kino.entities.Film;
  */
 
 public interface FilmRepository extends JpaRepository<Film, Integer> {
-
 	@Query("select f from Film f join f.genres g where g.name = :genre")
 	List<Film> findByGenres(@Param("genre")String genre);
+	/**
+	 * @author Azavoruyev
+	 * @param search by contains
+	 * @return
+	 */
+	@Query("select b from Film b where b.title like %:title%")
+	   List<Film>  searchFilmsByName(@Param("title") String name);
 }
