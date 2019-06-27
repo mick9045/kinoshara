@@ -33,7 +33,7 @@ public class GenreController {
 		return "genres";
 	}
 	
-	@GetMapping("/all")
+	@GetMapping(value = "/all", produces = "application/json")
 	@ResponseBody
 	public String getAll() {
 	    ObjectMapper mapper = new ObjectMapper();
