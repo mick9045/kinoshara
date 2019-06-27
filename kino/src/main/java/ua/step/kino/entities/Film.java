@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author Aleksey
@@ -28,6 +30,7 @@ public class Film {
 	private int releaseYear;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(
 		     name = "Directors_Films", 
 		     joinColumns = @JoinColumn(name = "films_id"), 
@@ -35,6 +38,7 @@ public class Film {
 	private Set<Director> directors = new HashSet<Director>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(
 	     name = "Actors_Films", 
 	     joinColumns = @JoinColumn(name = "films_id"), 
