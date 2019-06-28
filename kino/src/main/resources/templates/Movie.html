@@ -13,23 +13,26 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<main role="main" class="container">
-
+<main role="main" class="container bg-light">
 		<ul type="none">
-		<div class="container">
+		<div class="container pt-5">
 			<div class="row">
 				<div class="col"><img th:src="@{'/image/' + ${film.imageSmallPath}}" style="width:260px; height:366px;"></div>
 				<div class="col"> <span class="float-left"><h5 th:text="${film.releaseYear} + ', ' + ${film.title} + ', ' + ${film.countries[0]} + ', ' + ${film.genres[0].name}"></h5> </span> 
 				
-				<div class="col align-self-end">
-      				<h6>Actors:</h6>
-						<li><ul type="none">
-							<li th:if="${film.actors}" th:each="actor : ${film.actors}" th:text="${actor.firstName}" />
-						</ul></li>
+				<div class="col align-self-left">
+				<h2 class="text-primary" >Actors:</h2>
+					<div class="card-columns" th:if="${film.actors}" th:each="actor : ${film.actors}">
+						<div class="card border-dark">
+							<div class="card-body">
+								<span th:text="${actor.firstName}"></span>
+							</div>
+						</div>
+					</div>
    				 </div>
    				 
    				 <div class="col align-self-end">
-      				<h6>Directors:</h6>
+      				<h2 class="text-primary" >Directors:</h2>
 		<li><ul type="none">
 			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
 		</ul></li>
@@ -43,10 +46,28 @@
 			<div class="col-lg-2 align-self-end"></div>
 			<div class="col-lg-2 align-self-end"></div>
 				<div class = "col">
-					<h6>Comments:</h6>
-						<li><ul type="none">
-							<li th:if="${film.comments}" th:each="comment : ${film.comments}" th:text="${comment.comment}" />
-						</ul></li>
+				
+				<!-- <h1 class="display-4" >Comments:</h6>
+				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  					<div class="carousel-inner">
+  						<div class="card-columns" th:if="${film.comments}" th:each="comment : ${film.comments}">
+    						<div class="carousel-item">
+     						 	<span class="d-block w-100" th:text="${comment.comment}"></span>
+    						</div>
+  					</div>
+				</div>
+				</div> -->
+				
+				
+				
+					<h2 class="text-primary" >Comments:</h2>
+							<div class="card-deck" th:if="${film.comments}" th:each="comment : ${film.comments}" >
+								<div class="card border-dark mt-2">
+									<div class="card-body lead">
+										<span th:text="${comment.comment}"></span>
+								</div>
+								</div>
+							</div>
 				</div>
 			</div>
 		</div>
