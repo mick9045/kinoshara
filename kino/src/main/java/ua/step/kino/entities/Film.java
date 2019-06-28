@@ -61,6 +61,9 @@ public class Film {
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date releaseDate;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date additionalDate;
+	
 	@JsonIgnore
 	private Double rating;
 	@JsonIgnore
@@ -79,7 +82,7 @@ public class Film {
 	
 	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, List<Comment> comments, List<Review> reviews, int views) {
+			Double filmLength, List<Comment> comments, List<Review> reviews, int views, Date additionalDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -95,6 +98,7 @@ public class Film {
 		this.comments = comments;
 		this.reviews = reviews;
 		this.views = views;
+		this.setAdditionalDate(additionalDate);
 	}
 
 	public String getImageSmallPath() {
@@ -215,6 +219,14 @@ public class Film {
 
 	public void setViews(int views) {
 		this.views = views;
+	}
+
+	public Date getAdditionalDate() {
+		return additionalDate;
+	}
+
+	public void setAdditionalDate(Date additionlDate) {
+		this.additionalDate = additionlDate;
 	}
 	
 	

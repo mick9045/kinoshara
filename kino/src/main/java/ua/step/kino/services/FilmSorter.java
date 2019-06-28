@@ -33,7 +33,7 @@ public class FilmSorter implements FilmSortService {
 
 	@Override
 	public List<Film> sortFilmsByAdditionDate() {
-		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "additionDate"));
+		return filmsRepository.findAll(Sort.by(Sort.Direction.DESC, "additionalDate"));
 	}
 
 	@Override
