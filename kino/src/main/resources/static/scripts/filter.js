@@ -23,14 +23,39 @@ $(function() {
 			if (window.location.pathname.startsWith("/filter/genre/") &&
 					window.location.pathname.endsWith(val.name)) {
 				checkbox.prop("checked", true);
+				checkbox.attr("on", true);
 				checkbox.button("refresh");
+			} else {
+				checkbox.attr("on", false);
 			}
 			
 			checkbox.on("change", onRadioChangeHandler);
+			checkbox.on("click", function (event) {
+				var t = $(this);
+				if (t.attr("on") == "true") {
+					t.prop("checked", false);
+					t.attr("on", false);
+					
+					t.button("refresh");
+					window.location.href = "/";
+				} else {
+					t.prop("checked", true);
+					t.button("refresh");
+					
+					t.attr("on", true);
+					window.location.href = "/filter/genre/" + this.getAttribute("key");
+				}
+			});
 		});
 	});
 	
 	function onRadioChangeHandler(event) {
-		window.location.href = "/filter/genre/" + this.getAttribute("key");
+		/*
+		if (event.target.checked) {
+			window.location.href = "/filter/genre/" + this.getAttribute("key");
+		} else {
+			window.location.href = "/" 	 	;
+		}
+		*/
 	}
 });

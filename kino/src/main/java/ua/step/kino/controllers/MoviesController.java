@@ -55,6 +55,7 @@ public class MoviesController {
 	@GetMapping(value = "search/{query}", produces = "application/json")
 	@ResponseBody
 	public String searchFilms(@PathVariable String query) {
+		query = query.toLowerCase();
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(searchService.searchFilmsByName(query));
@@ -62,6 +63,16 @@ public class MoviesController {
 			e.printStackTrace();
 			return "";
 		}
+	}
+	
+	@GetMapping(value = "searchresult/{query}", produces = "application/json")
+	public String searchFilms2(@PathVariable String query, Model model) {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		model.addAttribute("films", searchService.searchFilmsByName(query));
+		return "allMovies";
+			
+		
 	}
 	
 	@GetMapping(value = "sort/{query}")

@@ -21,5 +21,10 @@ $(function() {
 		select: function(event, ui) {
 			window.location.href="/films/"+ui.item.data.id;
 		}
+		
 	});
+	searchButton.click(function(event) {
+	    event.preventDefault();
+	      window.location.href="/searchresult/"+searchTextBox.val();
+	  });
 })

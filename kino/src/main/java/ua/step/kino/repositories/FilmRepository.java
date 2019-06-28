@@ -27,6 +27,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 	 * @param search by contains
 	 * @return
 	 */
-	@Query("select b from Film b where b.title like %:title%")
+	@Query("select b from Film b where lower(b.title) like %:title%")
 	   List<Film>  searchFilmsByName(@Param("title") String name);
 }
