@@ -21,14 +21,13 @@
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="#">Kinoshara</a>
+			<a class="navbar-brand" href="/">Kinoshara</a>
 
 			<div class="collapse navbar-collapse" id="navbarTogglerKino">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active"><a class="nav-link" href="/">Movies
+					<li class="nav-item" th:classappend="${module == 'movies' ? 'active' : ''}"><a class="nav-link" href="/">Movies
 							<span class="sr-only">(current)</span>
 					</a></li>
-					</li>
 				</ul>
 				<form autocomplete="off" class="form-inline my-2 my-lg-0">
 					<div class="autocomplete">
