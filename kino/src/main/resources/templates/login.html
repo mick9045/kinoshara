@@ -7,13 +7,10 @@
 <link rel="stylesheet" th:href="@{/css/main.css}" />
 <link rel="stylesheet" th:href="@{/css/login.css}" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-<link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script th:src="@{/scripts/search.js}"/></script>
-<script th:src="@{/scripts/filter.js}"/></script>
+<script th:src="@{/scripts/validateLoginForm.js}"/></script>
 
 </head>
 <body>
@@ -24,12 +21,12 @@
             <div class="row">
                 <div class="col-md-5 col-centered login-form-1">
                     <h3>Log in to Kinoshara</h3>
-                    <form>
+                    <form name="my-form" onsubmit="return validateLoginForm()">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your login" value="" />
+                            <input type="text" id="user_name" name="username" class="form-control" minlength="5" maxlength="15" placeholder="Your login" value="" />
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your password" value="" />
+                            <input type="password" id="password" name="password" class="form-control" minlength="6" maxlength="15" placeholder="Your password" value="" />
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btnSubmit" value="Login" />

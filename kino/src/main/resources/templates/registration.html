@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" th:href="@{/css/registration.css}">
+<script th:src="@{/scripts/validateRegistrationForm.js}"/></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,39 +20,39 @@
                     <div class="card">
                         <div class="card-header">Register</div>
                         <div class="card-body">
-                            <form name="my-form" onsubmit="return validform()">
+                            <form name="my-form" onsubmit="return validateRegistrationForm()">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Login</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="user_name" class="form-control" placeholder="Your login" name="username">
+                                        <input type="text" id="user_name" class="form-control" minlength="5" maxlength="15" placeholder="Your login" name="username">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label for="present_address" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">
-                                        <input type="password" id="password" class="form-control" placeholder="Your password" name="password" value="" />
+                                        <input type="password" id="password" class="form-control" minlength="6" maxlength="15" placeholder="Your password" name="password" value="" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Password Confirm</label>
                                     <div class="col-md-6">
-                                        <input type="password" id="confirm_password" class="form-control" placeholder="Your password" name="password" value="" />
+                                        <input type="password" id="confirm_password" class="form-control" minlength="6" maxlength="15" placeholder="Your confirm password" name="confirm-password" value="" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" placeholder="Your email" name="email-address">
+                                        <input type="text" id="email_address" class="form-control" minlength="3" maxlength="15" placeholder="Your email" name="email-address">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="nid_number" class="col-md-4 col-form-label text-md-right">Year of birth</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="Year_Of_Date" class="form-control" placeholder="Your year of birth" name="nid-number">
+                                        <input type="number" id="Year_Of_Date" class="form-control" min="1" maxlength="4" max="2019" placeholder="Your year of birth" name="year_of_birth">
                                     </div>
                                 </div>
 
