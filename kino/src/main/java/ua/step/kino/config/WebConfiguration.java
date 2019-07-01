@@ -10,4 +10,5 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         //registry.addResourceHandler("/images/**").addResourceLocations("http://kinoshara.kl.com.ua/img");
     }
+    
 }

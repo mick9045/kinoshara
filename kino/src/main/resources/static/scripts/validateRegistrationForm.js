@@ -1,14 +1,14 @@
 function validateRegistrationForm() {
 
-        var username = document.forms["my-form"]["username"].value;
+        var login = document.forms["my-form"]["login"].value;
         var password = document.forms["my-form"]["password"].value;
         var passwordConfirm = document.forms["my-form"]["confirm-password"].value;
-        var emailAddress = document.forms["my-form"]["email-address"].value;
-        var yearOfBirthday = document.forms["my-form"]["year_of_birth"].value;
+        var emailAddress = document.forms["my-form"]["email"].value;
+        var yearOfBirthday = document.forms["my-form"]["birthday"].value;
 
-        if (username==null || username=="")
+        if (login==null || login=="")
         {
-            alert("Please enter your username");
+            alert("Please enter your login");
             return false;
         }else if (password==null || password=="")
         {
