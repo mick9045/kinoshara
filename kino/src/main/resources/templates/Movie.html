@@ -1,108 +1,198 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Movie</title>
 
 
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/movie.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/search.js}" /></script>
+<script th:src="@{/scripts/filter.js}" /></script>
+
+<style>
+.sticky {
+	position: fixed;
+	top: 56px;
+	width: 100%;
+}
+</style>
+
 </head>
+
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
-<main role="main" class="container bg-light">
-		<ul type="none">
-		<div class="container pt-5">
-			<div class="row">
-				<div class="col"><img th:src="@{'/image/' + ${film.imageSmallPath}}" style="width:260px; height:366px;"></div>
-				<div class="col"> <span class="float-left"><h5 th:text="${film.releaseYear} + ', ' + ${film.title} + ', ' + ${film.countries[0]} + ', ' + ${film.genres[0].name}"></h5> </span> 
-				
-				<div class="col align-self-left">
-				<h2 class="text-primary" >Actors:</h2>
-					<div class="card-columns" th:if="${film.actors}" th:each="actor : ${film.actors}">
-						<div class="card border-dark">
-							<div class="card-body">
-								<span th:text="${actor.firstName}"></span>
-							</div>
-						</div>
-					</div>
-   				 </div>
-   				 
-   				 <div class="col align-self-end">
-      				<h2 class="text-primary" >Directors:</h2>
-		<li><ul type="none">
-			<li th:if="${film.directors}" th:each="director : ${film.directors}" th:text="${director.name}" />
-		</ul></li>
-   				 </div>
+	<main role="main" class="container bg-light">
+
+	<div class="container-fluid pt-5">
+		<div class="row">
+			<div class="col-md-3" style="height: 370px;">
+				<div id="image">
+					<img th:src="@{'/image/' + ${film.imageSmallPath}}"
+						style="width: 260px; height: 366px;">
 				</div>
-				
-				<div class="col-lg-2 align-self-end"></div>
-				<div class="col-lg-2 align-self-end"></div>
+
 			</div>
-			<div class="row">
-			<div class="col-lg-2 align-self-end"></div>
-			<div class="col-lg-2 align-self-end"></div>
-				<div class = "col">
-				
-				<!-- <h1 class="display-4" >Comments:</h6>
-				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  					<div class="carousel-inner">
-  						<div class="card-columns" th:if="${film.comments}" th:each="comment : ${film.comments}">
-    						<div class="carousel-item">
-     						 	<span class="d-block w-100" th:text="${comment.comment}"></span>
-    						</div>
-  					</div>
-				</div>
-				</div> -->
-				
-				
-				
-					<h2 class="text-primary" >Comments:</h2>
-							<div class="card-deck" th:if="${film.comments}" th:each="comment : ${film.comments}" >
-								<div class="card border-dark mt-2">
-									<div class="card-body lead">
-										<span th:text="${comment.comment}"></span>
-								</div>
-								</div>
-							</div>
+			<div class="col-md-9">
+				<h5 th:text="${film.title}"></h5>
+
+				<br>
+				<div class="row">
+					<div class="col-md-3">
+						Genres
+						<ul type="none">
+							<li th:each="genre : ${film.genres}" th:text="${genre.name}" />
+						</ul>
+					</div>
+					<div class="col-md-3">
+						Length:
+						<ul type="none">
+							<li><p th:text=" ${film.filmLength}"></p></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						Contries
+						<ul type="none">
+							<li th:each="country : ${film.countries}"
+								th:text="${country.name}" />
+						</ul>
+					</div>
+					<div class="col-md-3">
+						IMDb
+						<ul type="none">
+							<li th:text="${film.rating}" />
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!--  <h6>Countries:</h6>
-        <li><ol>
-			<li th:if="${film.countries}" th:each="country : ${film.countries}" th:text="${country.name}" />
-		</ol></li>
-		
-		
-		
-		<h6>Genres:</h6>
-		<li><ol>
-			<li th:if="${film.genres}" th:each="genre : ${film.genres}" th:text="${genre.name}" />
-		</ol></li>
-		<h6>Release Year: </h6>
-			<li> <p th:text="${film.releaseYear}"/> </li>
-			<h6>Rating: </h6>
-			<li> <p th:text="${film.rating}"/> </li>
-			<h6>Film Length: </h6>
-			<li> <p th:text="${film.filmLength}"/> </li>
-			<h6>Comments:</h6>
-		<li><ol>
-			<li th:if="${film.comments}" th:each="comment : ${film.comments}" th:text="${comment.comment}" />
-		</ol></li>
-		<h6>Reviews:</h6>
-		<li><ol>
-			<li th:if="${film.reviews}" th:each="review : ${film.reviews}" th:text="${review.review}" />
-		</ol></li>
-			
-		</ul>
-		-->
+		<div class="row  p-2">
+			<div class="col-md-3"></div>
+			<div class="col-md-9">
+				<h2 class="text-primary">Actors</h2>
+				<div class="row  p-2">
+					<div class="col-md-3 pt-2" th:each="actor, iter : ${film.actors}">
+						<div class="card" style="height: 100px;">
+							<div class="card-body">
+								<p th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<div class="row">
+					<div class="col-md-4">
+						<h5 class="text-primary">
+							Directors
+							</h2>
+							<ul type="none">
+								<li th:if="${film.directors}"
+									th:each="director : ${film.directors}"
+									th:text="${director.name}" />
+							</ul>
+					</div>
 
-</main>
+					<div class="col-md-4">
+						<h5 class="text-primary">
+							Operators
+							</h2>
+							<ul type="none">
+								<li th:if="${film.directors}"
+									th:each="director : ${film.directors}"
+									th:text="${director.name}" />
+							</ul>
+					</div>
 
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+					<div class="col-md-4">
+						<h5 class="text-primary">
+							Scenario
+							</h2>
+							<ul type="none">
+								<li th:if="${film.directors}"
+									th:each="director : ${film.directors}"
+									th:text="${director.name}" />
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-9">
+				<div class="container mt-3">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link active"
+							href="#comments"><h2 class="text-primary">Feedback</h2></a></li>
+						<li class="nav-item"><a class="nav-link" href="#reviews">
+								<h2 class="text-primary">Reviews</h2>
+						</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="comments" class="container tab-pane active">
+							<ul class="list-unstyled">
+								<li class="media mt-3" th:if="${film.comments}"
+									th:each="comment : ${film.comments}"><img
+									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
+									<div class="media-body">
+										<h5 class="mt-0 mb-1">Username</h5>
+										<span th:text="${comment.comment}"></span>
+										<h5 class="text-right m-2">Date</h5>
+									</div></li>
+
+							</ul>
+						</div>
+						<div id="reviews" class="container tab-pane fade">
+							<ul class="list-unstyled">
+								<li class="media mt-3" th:if="${film.reviews}"
+									th:each="review : ${film.reviews}"><img
+									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
+									<div class="media-body">
+										<h5 class="mt-0 mb-1">Username</h5>
+										<span th:text="${review.review}"></span>
+										<h5 class="text-right m-2">Date</h5>
+									</div></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		window.onscroll = function() {
+			myFunction()
+		};
+
+		var header = document.getElementById("image");
+		var sticky = header.offsetTop;
+
+		function myFunction() {
+			if (window.pageYOffset > 56) {
+				header.classList.add("sticky");
+			} else {
+				header.classList.remove("sticky");
+			}
+		}
+		$(document).ready(function() {
+			$(".nav-tabs a").click(function() {
+				$(this).tab('show');
+			});
+		});
+	</script> </main>
 </body>
+
 </html>
