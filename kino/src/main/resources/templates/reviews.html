@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Directors</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+		<a class="navbar-brand" href="#">Mkyong.com</a>
+	</nav>
+
+	<main role="main" class="container">
+
+	<div class="card-columns">
+		<div class="card" th:each="review : ${reviews}">
+			<div class="card-header" th:text="${review.user.name}"></div>
+			<div class="card-body">
+				<ul type="disc">
+					<li th:text="${review.film.title}" />
+					<li><input type="checkbox"  name="mycheckbox" th:checked="${review.isGood}" disabled/>Положительный отзыв</li>
+					<li th:text="${review.review}" />
+				</ul>
+			</div>
+		</div>
+	</div>
+	</main>
+	<!-- /.container -->
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
