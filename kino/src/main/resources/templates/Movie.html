@@ -44,38 +44,37 @@
 					<img th:src="@{'/image/' + ${film.imageSmallPath}}"
 						style="width: 260px; height: 366px;">
 				</div>
-				
+
 			</div>
 			<div class="col-md-9">
-				<h5
-					th:text="${film.title}">
-				</h5>
+				<h5 th:text="${film.title}"></h5>
 
 				<br>
-				<div class ="row">
+				<div class="row">
 					<div class="col-md-3">
 						Genres
-							<ul type="none">
-								<li th:each="genre : ${film.genres}" th:text="${genre.name}" />
-							</ul>
+						<ul type="none">
+							<li th:each="genre : ${film.genres}" th:text="${genre.name}" />
+						</ul>
 					</div>
 					<div class="col-md-3">
 						Length:
-							<ul type="none">
-								<li><p th:text=" ${film.filmLength}"></p></li>
-							</ul>
+						<ul type="none">
+							<li><p th:text=" ${film.filmLength}"></p></li>
+						</ul>
 					</div>
 					<div class="col-md-3">
 						Contries
-							<ul type="none">
-								<li th:each="country : ${film.countries}" th:text="${country.name}" />
-							</ul>
+						<ul type="none">
+							<li th:each="country : ${film.countries}"
+								th:text="${country.name}" />
+						</ul>
 					</div>
 					<div class="col-md-3">
 						IMDb
-							<ul type="none">
-								<li th:text="${film.rating}" />
-							</ul>
+						<ul type="none">
+							<li th:text="${film.rating}" />
+						</ul>
 					</div>
 				</div>
 			</div>
