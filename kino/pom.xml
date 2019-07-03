@@ -22,6 +22,7 @@
 		<jquery.version>3.4.1</jquery.version>
 		<popper.version>1.12.9-1</popper.version>
 		<jqueryui.version>1.12.1</jqueryui.version>
+		<octions.version>4.2.0</octions.version>
 	</properties>
 
 	<dependencies>
@@ -101,6 +102,12 @@
 			<artifactId>jquery-ui</artifactId>
 			<version>${jqueryui.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>octicons</artifactId>
+			<version>${octions.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

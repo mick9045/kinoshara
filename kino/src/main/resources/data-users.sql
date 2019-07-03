@@ -1,2 +1,2 @@
 insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Valery', 'valera228', 'valerabas', '1997-10-29', 'vasya@gmail.com', 1)
-insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('AAdmin', 'admin', 'admin', '2000-10-29', 'kolia@gmail.com', 2)
+insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', 2)

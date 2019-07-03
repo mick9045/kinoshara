@@ -1,6 +1,7 @@
 package ua.step.kino.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private UsersRepository userRepo;
 	@Autowired
 	private RolesRepository rolesRepo;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Transactional
 	@Override
@@ -29,9 +32,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 		if (loginExists(accountDto.getLogin())) {
 			throw new LoginExistsException();
 		}
+		System.out.println(accountDto.getLogin());
 		User user = new User();
-		user.setPassword(accountDto.getPassword());
+		user.setPassword(encoder.encode(accountDto.getPassword()));
 		user.setLogin(accountDto.getLogin());
+		user.setName(accountDto.getLogin());
 		user.setEmail(accountDto.getEmail());
 		user.setBirthday(accountDto.getBirthday());
 		user.setRole(rolesRepo.getOne(1));

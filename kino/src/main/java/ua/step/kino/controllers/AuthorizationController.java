@@ -2,6 +2,7 @@ package ua.step.kino.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,11 +52,14 @@ public class AuthorizationController {
 	RegistrationService registrationService;
 
 	@GetMapping
-	public String showAll(Model model) 
+	public String showAll(Model model, @RequestParam Optional<String> error, @RequestParam Optional<String> logout) 
 	{
-		List<User> users = usersRepository.findAll();
-		model.addAttribute("users", users);
-		return "login";
+		if (error.isPresent()) {
+			model.addAttribute("error", "Invalid login or password.");
+		} else if (logout.isPresent()) {
+			model.addAttribute("logout", "You have successfully log out.");
+		}
+		return "login"; 
 	}
 	
 	@GetMapping(value="/registration")
@@ -91,7 +97,7 @@ public class AuthorizationController {
 	    	}
 	    }
 	   
-	        return "success";
+	        return "redirect:/";
 	    }
 	
 	private User createUserAccount(@Valid UserDto accountDto, BindingResult result) throws EmailExistsException, LoginExistsException {

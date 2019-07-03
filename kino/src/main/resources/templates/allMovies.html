@@ -10,11 +10,13 @@
 <link rel="stylesheet" th:href="@{/css/main.css}" />
 <link rel="stylesheet" th:href="@{/css/movie.css}" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-<link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/webjars/jquery-ui/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/webjars/octicons/build/font/octicons.min.css}"/>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+
 <script th:src="@{/scripts/search.js}"/></script>
 <script th:src="@{/scripts/filter.js}"/></script>
 </head>
@@ -22,6 +24,8 @@
 <body>
 
 	<div th:replace="fragments/header :: header(module='movies')"></div>
+	<div th:if="${currentUser != null}">
+	</div>
 
 	<main role="main" class="container">
 	<div class="row">

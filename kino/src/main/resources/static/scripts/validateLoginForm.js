@@ -1,5 +1,5 @@
 function validateLoginForm() {
-
+		
         var username = document.forms["my-form"]["username"].value;
         var password = document.forms["my-form"]["password"].value;
 
