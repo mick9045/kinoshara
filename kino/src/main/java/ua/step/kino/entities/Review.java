@@ -33,18 +33,18 @@ public class Review {
 	
 	private Boolean isGood;
 	
-	private String review;
+	private String text;
 	
 	public Review() {
 //		super();
 	}
-	public Review(User user, Film film, Boolean isGood, String review) {
+	public Review(User user, Film film, Boolean isGood, String text) {
 //		super();
 //		this.id = id;
 		this.setUser(user);
 		this.setFilm(film);
 		this.setIsGood(isGood);
-		this.setReview(review);
+		this.setText(text);
 	}
 
 	
@@ -57,13 +57,7 @@ public class Review {
 		this.id = id;
 	}
 
-	public String getReview() {
-		return review;
-	}
-
-	public void setReview(String review) {
-		this.review = review;
-	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -81,6 +75,12 @@ public class Review {
 	}
 	public void setIsGood(Boolean isGood) {
 		this.isGood = isGood;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
 	}
 
 }

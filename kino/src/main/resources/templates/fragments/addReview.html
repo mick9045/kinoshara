@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div th:fragment="review (film, user)" id="rev">
+		<form th:action="@{/addReview}" th:object="${review}" method="post">
+			<div class="form-group">
+			<br/><p th:text="${film.title}">...</p>
+			<br/><p th:text="${user}">...</p>
+				<textarea cols="100" rows="3" maxlength="10" placeholder="Добавъте рецензию:"></textarea>
+				<br/>
+				<input type="checkbox" /> 
+				<label> Положительный отзыв</label>
+				<br/>
+				<input type="submit" value="Ввести" />
+			</div>
+		</form>
+	</div>
+
+
+</body>
