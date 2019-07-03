@@ -47,33 +47,33 @@
 
 			</div>
 			<div class="col-md-9">
-				<h5 th:text="${film.title}"></h5>
+				<h5 class="display-3" th:text="${film.title}"></h5>
 
 				<br>
-				<div class="row">
+				<div class="row ml-2">
 					<div class="col-md-3">
-						Genres
+						<h5 class="font-weight-light text-muted">Genres</h5>
 						<ul type="none">
-							<li th:each="genre : ${film.genres}" th:text="${genre.name}" />
+							<li class="font-weight-lighter" th:each="genre : ${film.genres}" th:text="${genre.name}" />
 						</ul>
 					</div>
 					<div class="col-md-3">
-						Length:
+						<h5 class="font-weight-light text-muted">Length</h5>
 						<ul type="none">
-							<li><p th:text=" ${film.filmLength}"></p></li>
+							<li><p class="font-weight-lighter" th:text=" ${film.filmLength}"></p></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
-						Contries
+						<h5 class="font-weight-light text-muted">Contries</h5>
 						<ul type="none">
-							<li th:each="country : ${film.countries}"
+							<li class="font-weight-lighter" th:each="country : ${film.countries}"
 								th:text="${country.name}" />
 						</ul>
 					</div>
 					<div class="col-md-3">
-						IMDb
+						<h5 class="font-weight-light text-muted">IMDb</h5>
 						<ul type="none">
-							<li th:text="${film.rating}" />
+							<li><p class="font-weight-lighter" th:text="${film.rating}"></p></li>
 						</ul>
 					</div>
 				</div>
@@ -82,46 +82,46 @@
 		<div class="row  p-2">
 			<div class="col-md-3"></div>
 			<div class="col-md-9">
-				<h2 class="text-primary">Actors</h2>
+				<h2 class="display-4 ml-2">Actors</h2>
 				<div class="row  p-2">
 					<div class="col-md-3 pt-2" th:each="actor, iter : ${film.actors}">
 						<div class="card" style="height: 100px;">
-							<div class="card-body">
+							<div class="card-body font-weight-light font-weight-bold">
 								<p th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row ml-2">
 					<div class="col-md-4">
-						<h5 class="text-primary">
+						<h5 class="text-muted font-weight-light">
 							Directors
-							</h2>
+							</h5>
 							<ul type="none">
-								<li th:if="${film.directors}"
+								<li class="font-weight-lighter"
 									th:each="director : ${film.directors}"
 									th:text="${director.name}" />
 							</ul>
 					</div>
 
 					<div class="col-md-4">
-						<h5 class="text-primary">
+						<h5 class="text-muted font-weight-light">
 							Operators
-							</h2>
+							</h5>
 							<ul type="none">
-								<li th:if="${film.directors}"
+								<li class="font-weight-lighter"
 									th:each="director : ${film.directors}"
 									th:text="${director.name}" />
 							</ul>
 					</div>
 
 					<div class="col-md-4">
-						<h5 class="text-primary">
+						<h5 class="text-muted font-weight-light">
 							Scenario
-							</h2>
+							</h5>
 							<ul type="none">
-								<li th:if="${film.directors}"
+								<li class="font-weight-lighter"
 									th:each="director : ${film.directors}"
 									th:text="${director.name}" />
 							</ul>
@@ -135,9 +135,9 @@
 				<div class="container mt-3">
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a class="nav-link active"
-							href="#comments"><h2 class="text-primary">Feedback</h2></a></li>
+							href="#comments"><h3 class="font-weight-light">Feedback</h3></a></li>
 						<li class="nav-item"><a class="nav-link" href="#reviews">
-								<h2 class="text-primary">Reviews</h2>
+								<h3 class="font-weight-light">Reviews</h3>
 						</a></li>
 					</ul>
 					<div class="tab-content">
