@@ -6,19 +6,23 @@
 	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
 </head>
 <body>
-	<div th:fragment="review (film, user)" id="rev">
-	<form th:action="@{/addReview}" th:object="${review}" method="post"> 
-			<div class="form-group">
-			<br/><p th:text="${film.title}">...</p>
-			<br/><p th:text="${user}">...</p>
-				<textarea cols="100" rows="3" maxlength="10" placeholder="Добавъте рецензию:" th:field="*{title}"></textarea>
-				<br/>
-				<input type="checkbox" th:field="*{isGood}"/> 
-				<label> Положительный отзыв</label>
-				<br/>
-				<input type="submit" value="Ввести" />
-			</div>
-		</form>
+	<div th:fragment="review (film)" id="rev">
+		<div sec:authorize="isAuthenticated()">
+
+			<form th:action="@{/reviews/addReview}" th:object="${review}"
+				method="post">
+				<div class="form-group">
+					<br /> <input type="hidden" name="filmId" th:value="${film.id}">
+					<input type="hidden" name="userId"
+						th:value="${currentUser.user.id}">
+					<textarea cols="100" rows="3" maxlength="10"
+						placeholder="Добавъте рецензию:" name="text"></textarea>
+					<br /> <input type="checkbox" name="isGood" /> <label>
+						Положительный отзыв</label>
+					<br /> <input type="submit" value="Ввести" />
+				</div>
+			</form>
+		</div>
 	</div>
 
 
