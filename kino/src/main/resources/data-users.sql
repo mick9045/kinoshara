@@ -1,6 +1,6 @@
-insert into users (name, login, password, birthday, ROLE_ID) VALUES('Valery', 'valera228', 'valerabas', '1997-10-29', 1)
-insert into users (name, login, password, birthday, ROLE_ID) VALUES('AAdmin', 'admin', 'admin', '2000-10-29', 2)
-insert into users (name, login, password, birthday, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', 'admin', '1986-08-15', 1)
+insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Valery', 'valera228', 'valerabas', '1997-10-29', 'vasya@gmail.com', 1)
+insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', 2)
+insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', 'admin', '1986-08-15','azavoruev@gmail.com', 1)
 
 
 insert into reviews(id, text, is_good, film_id, user_id) values (1, 'i wish i forget about it and watch it again and again', true, 1, 1)
@@ -9,3 +9,4 @@ insert into reviews(id, text, is_good, film_id, user_id) values (3, 'Its Brillia
 insert into reviews(id, text, is_good, film_id, user_id) values (4, 'You are all suck', false, 4,3)
 insert into reviews(id, text, is_good, film_id, user_id) values (5, 'Hate it',false,5,3)
 insert into reviews(id, text, is_good, film_id, user_id) values (6, 'Best movie ever',true,6,3)
+
