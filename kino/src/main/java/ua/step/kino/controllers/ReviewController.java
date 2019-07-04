@@ -30,8 +30,18 @@ public class ReviewController {
 		return "reviews";
 	}
 	
-	@RequestMapping(value = "/addReview", method=RequestMethod.POST)
-	public void addReview(Model model,@ModelAttribute(value="review") Review review) {
+	 @RequestMapping(value = { "/addReview" }, method = RequestMethod.GET)
+	    public String showAddPersonPage(Model model) {
 	 
+		 Review review = new Review();
+	        model.addAttribute("review", review);
+	 
+	        return "addReview";
+	    }
+	
+	@RequestMapping(value = "/addReview", method=RequestMethod.POST)
+	public String addReview(Model model,@ModelAttribute(value="review") Review review) {
+		
+		return "/";
 	}
 }
