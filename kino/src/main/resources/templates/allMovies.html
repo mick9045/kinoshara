@@ -1,33 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Main Page WebSite!</title>
-
-<link rel="stylesheet" th:href="@{/css/main.css}" />
-<link rel="stylesheet" th:href="@{/css/movie.css}" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-<link rel="stylesheet" th:href="@{/webjars/jquery-ui/jquery-ui.min.css}" />
-<link rel="stylesheet" th:href="@{/webjars/octicons/build/font/octicons.min.css}"/>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-
-<script th:src="@{/scripts/search.js}"/></script>
-<script th:src="@{/scripts/filter.js}"/></script>
-</head>
-
-<body>
-
-	<div th:replace="fragments/header :: header(module='movies')"></div>
-	<div th:if="${currentUser != null}">
-	</div>
-
-	<main role="main" class="container">
+<div th:replace="layout/body :: body('movies', 'movies', ~{ ::content})">
+	<main role="main" class="container" th:fragment="content">
 	<div class="row">
 		<div class="col-12">
 			<div th:replace="fragments/moviesNavigationPanel :: navigationPanel"></div>
@@ -44,18 +19,19 @@
 				<!-- @{/image/victory.jpg} -->
 
 				<div>
-					<img th:src="@{'/image/' + ${film.imageSmallPath}}" class="card-image" alt="...">
+					<img th:src="@{'/image/' + ${film.imageSmallPath}}"
+						class="card-image" alt="...">
 				</div>
 				<div class="card-body">
 
 					<!-- ${film.imageSmallPath} -->
-					
+
 					<ul type="none" class="film-description-list">
 						<a th:href="@{'/films/' + ${film.id}}"><h5
 								th:text="${film.title}"></h5></a>
-					 
-						
-						
+
+
+
 						<span class="label font-weight-normal"
 							th:if="${film.genres!=null and !film.genres.isEmpty()}">Genres:
 							<span class="badge badge-pill badge-primary"
@@ -76,5 +52,4 @@
 	</div>
 
 	</main>
-</body>
 </html>
