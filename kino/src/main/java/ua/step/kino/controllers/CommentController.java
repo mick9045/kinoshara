@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.step.kino.entities.Comment;
 import ua.step.kino.repositories.CommentRepository;
+import ua.step.kino.services.CommentService;
 
 /**
  * 
@@ -23,8 +24,11 @@ import ua.step.kino.repositories.CommentRepository;
 @Controller
 @RequestMapping("/comments")
 public class CommentController {
-	@Autowired CommentRepository commentRepository;
+	@Autowired 
+	CommentRepository commentRepository;
 	
+	@Autowired(required = false)
+	CommentService commentService;
 //	@GetMapping
 //	public String showAll(Model model) {
 //		List<Comment> comments = commentRepository.findAll();
@@ -35,7 +39,9 @@ public class CommentController {
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
 	private String addComment(@ModelAttribute("comments") Comment comment) {
 		comment.setDate(new Date());
-		commentRepository.save(comment);
-		return "addComment";
+		
+		commentService.Add(comment);
+	
+		return "redirect:/Movie/";
 	}
 }

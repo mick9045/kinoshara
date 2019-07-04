@@ -9,7 +9,7 @@
 	<div th:fragment="comment" id="com">
 		<form th:action="@{/addComment}" th:object="${comment}" method="post">
 			<div class="form-group">
-				<br/><textarea cols="105" maxlength="300" rows="5" placeholder="Comment:"></textarea>
+				<br/><textarea cols="105" maxlength="300" rows="5" name="text" placeholder="Comment:"></textarea>
 				<input type="submit" value="Add"/>
 			</div>
 		</form>
