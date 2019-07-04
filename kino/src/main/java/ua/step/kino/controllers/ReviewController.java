@@ -31,7 +31,7 @@ public class ReviewController {
 	}
 	
 	 @RequestMapping(value = { "/addReview" }, method = RequestMethod.GET)
-	    public String showAddPersonPage(Model model) {
+	    public String showAddReviewPage(Model model) {
 	 
 		 Review review = new Review();
 	        model.addAttribute("review", review);
@@ -40,8 +40,8 @@ public class ReviewController {
 	    }
 	
 	@RequestMapping(value = "/addReview", method=RequestMethod.POST)
-	public String addReview(Model model,@ModelAttribute(value="review") Review review) {
-		
-		return "/";
+	public void addReview(Model model,@ModelAttribute(value="review") Review review) {
+		reviewRepository.saveAndFlush(review);
+	
 	}
 }

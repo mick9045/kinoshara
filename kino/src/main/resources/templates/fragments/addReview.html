@@ -7,13 +7,13 @@
 </head>
 <body>
 	<div th:fragment="review (film, user)" id="rev">
-		<form th:action="@{/addReview}" th:object="${review}" method="post">
+	<form th:action="@{/addReview}" th:object="${review}" method="post"> 
 			<div class="form-group">
 			<br/><p th:text="${film.title}">...</p>
 			<br/><p th:text="${user}">...</p>
-				<textarea cols="100" rows="3" maxlength="10" placeholder="Добавъте рецензию:" ></textarea>
+				<textarea cols="100" rows="3" maxlength="10" placeholder="Добавъте рецензию:" th:field="*{title}"></textarea>
 				<br/>
-				<input type="checkbox" /> 
+				<input type="checkbox" th:field="*{isGood}"/> 
 				<label> Положительный отзыв</label>
 				<br/>
 				<input type="submit" value="Ввести" />
