@@ -1,5 +1,6 @@
 package ua.step.kino.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,15 +25,17 @@ import ua.step.kino.repositories.CommentRepository;
 public class CommentController {
 	@Autowired CommentRepository commentRepository;
 	
-	@GetMapping
-	public String showAll(Model model) {
-		List<Comment> comments = commentRepository.findAll();
-		model.addAttribute("comments", comments);
-		return "comments";
-	}
+//	@GetMapping
+//	public String showAll(Model model) {
+//		List<Comment> comments = commentRepository.findAll();
+//		model.addAttribute("comments", comments);
+//		return "comments";
+//	}
 	
-	@RequestMapping("/addComment")
-	public void addComment(Model model) {
-
+	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
+	private String addComment(@ModelAttribute("comments") Comment comment) {
+		comment.setDate(new Date());
+		commentRepository.save(comment);
+		return "addComment";
 	}
 }

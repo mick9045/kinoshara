@@ -1,5 +1,7 @@
 package ua.step.kino.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,6 +33,8 @@ public class Comment {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="film_id")
 	private Film film;
+	
+	private Date date;
 
 	public Comment() {
 		super();
@@ -74,5 +78,15 @@ public class Comment {
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}	
+	
+	
 }

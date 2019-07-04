@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<link rel="stylesheet"
 		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -8,10 +9,8 @@
 	<div th:fragment="comment" id="com">
 		<form th:action="@{/addComment}" th:object="${comment}" method="post">
 			<div class="form-group">
-				<br/><p th:text="${film.title}">...</p>
-				<br/><p th:text="${user}">...</p>
-				<br/><textarea cols="105" id="commentText" maxlength="300" rows="5" placeholder="Comment:"></textarea>
-				<br/><input type="submit" id="commentButton" value="Add" />
+				<br/><textarea cols="105" maxlength="300" rows="5" placeholder="Comment:"></textarea>
+				<input type="submit" value="Add"/>
 			</div>
 		</form>
 	</div>
