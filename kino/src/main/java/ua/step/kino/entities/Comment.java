@@ -1,12 +1,19 @@
 package ua.step.kino.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//Комментарий
+/**
+ * 
+ * @author Julia
+ *
+ */
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -15,16 +22,26 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String comment;
-
-	public Comment(int id, String comment) {
-		super();
-		this.id = id;
-		this.comment = comment;
-	}
+	private String text;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_ID")
+	private User user;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="film_id")
+	private Film film;
 
 	public Comment() {
 		super();
+	}
+	
+	public Comment(int id, String text, User user, Film film) {
+		super();
+		this.id = id;
+		this.text = text;
+		this.user = user;
+		this.film = film;
 	}
 
 	public int getId() {
@@ -35,12 +52,27 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getText() {
+		return text;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setText(String text) {
+		this.text = text;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}	
 }

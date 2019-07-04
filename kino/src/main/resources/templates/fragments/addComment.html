@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet"
+		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+	<div th:fragment="comment" id="com">
+		<form th:action="@{/addComment}" th:object="${comment}" method="post">
+			<div class="form-group">
+				<br/><p th:text="${film.title}">...</p>
+				<br/><p th:text="${user}">...</p>
+				<br/><textarea cols="105" id="commentText" maxlength="300" rows="5" placeholder="Комментарий:"></textarea>
+				<br/><input type="submit" id="commentButton" value="Добавить" />
+			</div>
+		</form>
+	</div>
+</body>
+</html>
