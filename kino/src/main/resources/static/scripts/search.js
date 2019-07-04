@@ -25,6 +25,8 @@ $(function() {
 	});
 	searchButton.click(function(event) {
 	    event.preventDefault();
-	      window.location.href="/searchresult/"+searchTextBox.val();
+	    if (searchTextBox.val().length > 0) {
+		  window.location.href="/searchresult/"+searchTextBox.val();
+		}
 	  });
 })

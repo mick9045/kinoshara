@@ -6,10 +6,12 @@
 		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet"
 		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
+	<link rel="stylesheet"
+		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
 	<script th:src="@{webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
 	<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script th:src="@{webjars/jquery-ui/jquery-ui.min.js}"></script>
 	<script th:src="@{scripts/search.js}"></script>
 </head>
 <body>
@@ -29,13 +31,23 @@
 							<span class="sr-only">(current)</span>
 					</a></li>
 				</ul>
-				<form autocomplete="off" class="form-inline my-2 my-lg-0">
+				<form autocomplete="off" class="form-inline">
 					<div class="autocomplete">
-						<input class="form-control mr-sm-2" id="searchTextBox"
-							 placeholder="Search" aria-label="Search">
+						<div class="input-group">
+							<input class="form-control" id="searchTextBox"
+								 placeholder="Search" aria-label="Search">
+							<div class="input-group-append">
+								<button id="searchButton" class="btn btn-primary octicon octicon-search" type="button"></button>
+							</div>
+						</div>
 					</div>
-					<button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
 				</form>
+				<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/logout}" method="POST">
+					<button class="btn btn-outline-success mx-2" id="logout-button" type="submit">logout</button>
+				</form>
+				<a th:href="@{/login/registration}" sec:authorize="isAnonymous()" class="btn btn-outline-success mr-2 ml-3" id="singup-button" type="submit">sign up</a>
+				<a th:href="@{/login}" sec:authorize="isAnonymous()" class="btn btn-outline-success ml-1" id="signin-button" type="submit">sign in</a>
+				
 			</div>
 		</div>
 	</nav>

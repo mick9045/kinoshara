@@ -6,6 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Aleksey
+ *
+ */
+
+
 //Комментарий
 @Entity
 @Table(name = "comments")
@@ -16,6 +23,8 @@ public class Comment {
 	private int id;
 	
 	private String comment;
+	
+	//private int userId;
 
 	public Comment(int id, String comment) {
 		super();

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" th:href="@{/webjars/octicons/build/font/octicons.min.css}"/>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/scripts/validateLoginForm.js}" /></script>
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header(module='movies')"></div>
+	<div class="container login-container">
+		<div class="row">
+			<div class="col-md-5 col-centered login-form-1">
+				<h3>Log in to Kinoshara</h3>
+				<form th:action="@{/login}" role="form" name="my-form"
+					onsubmit="validateLoginForm()" method="post">
+					<input th:if="${_csrf != null}" type="hidden"
+						th:attr="name=${_csrf.parameterName},value=${_csrf.token}" />
+					<div class="form-group">
+						<input required type="text" id="username" name="username"
+							class="form-control" minlength="4" maxlength="15"
+							placeholder="Your login" value="" />
+					</div>
+					<div class="form-group">
+						<input required type="password" id="password" name="password"
+							class="form-control" minlength="6" maxlength="15"
+							placeholder="Your password" value="" />
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btnSubmit" value="Login" />
+					</div>
+					<div class="my-2">
+						<small th:if="${error != null}" id="passwordHelp" class="text-danger">[[${error}]]</small>
+						<small th:if="${logout != null}" id="passwordHelp" class="text-success">[[${logout}]]</small>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

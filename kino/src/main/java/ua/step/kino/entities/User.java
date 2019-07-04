@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,7 +27,10 @@ public class User {
 	private String login;
 	@Column(nullable = false)
 	private String password;
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthday;
+    @Column(nullable = false)
+    private String email;
     
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ROLE_ID")
@@ -70,13 +75,25 @@ public class User {
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
-
+	public void setBirthday(String birthday) {
+		LocalDate date = LocalDate.parse(birthday);
+		this.birthday = date;
+	}
+	
 	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 		
 
