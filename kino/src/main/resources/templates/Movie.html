@@ -142,13 +142,14 @@
 					</ul>
 					<div class="tab-content">
 						<div id="comments" class="container tab-pane active">
+							<div th:replace="fragments/addComment :: comment(${film})"></div>
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
 									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
 									<div class="media-body">
 										<h5 class="mt-0 mb-1">Username</h5>
-										<span th:text="${comment.comment}"></span>
+										<span th:text="${comment.text}"></span>
 										<h5 class="text-right m-2">Date</h5>
 									</div></li>
 

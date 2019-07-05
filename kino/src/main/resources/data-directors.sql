@@ -20,12 +20,12 @@ insert into films(id, title, image_Small_Path, release_Year, views) VALUES (7, '
 insert into films(id, title, image_Small_Path, release_Year, views) VALUES (8, 'Man of steel', 'Man_of_Steel.jpg', 2013, 0)
 insert into films(id, title, image_Small_Path, release_Year, views) VALUES (9, 'Doctor Strange', 'Doctor_Strange_poster.jpg', 2016, 0)
 
-insert into comments(id, comment) values (1, 'Best movie ever')
-insert into comments(id, comment) values (2, 'Hate it')
-insert into comments(id, comment) values (3, 'Its Brilliant')
-insert into comments(id, comment) values (4, 'WOW')
-insert into comments(id, comment) values (5, 'Its plenty good, but actors play was terrible some moments')
-insert into comments(id, comment) values (6, 'i wish i forget about it and watch it again and again')
+insert into comments(id, text) values (1, 'Best movie ever')
+insert into comments(id, text) values (2, 'Hate it')
+insert into comments(id, text) values (3, 'Its Brilliant')
+insert into comments(id, text) values (4, 'WOW')
+insert into comments(id, text) values (5, 'Its plenty good, but actors play was terrible some moments')
+insert into comments(id, text) values (6, 'i wish i forget about it and watch it again and again')
 
 insert into reviews(id, review) values (1, 'i wish i forget about it and watch it again and again')
 insert into reviews(id, review) values (2, 'Its plenty good, but actors play was terrible some moments')
