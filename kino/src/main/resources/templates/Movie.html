@@ -142,7 +142,7 @@
 					</ul>
 					<div class="tab-content">
 						<div id="comments" class="container tab-pane active">
-							<div th:replace="fragments/addComment :: comment"></div>
+							<div th:replace="fragments/addComment :: comment(${film})"></div>
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
