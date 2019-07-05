@@ -45,8 +45,8 @@
 				<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/logout}" method="POST">
 					<button class="btn btn-outline-success mx-2" id="logout-button" type="submit">logout</button>
 				</form>
-				<a th:href="@{/login/registration}" sec:authorize="isAnonymous()" class="btn btn-outline-success mr-2 ml-3" id="singup-button" type="submit">sign up</a>
-				<a th:href="@{/login}" sec:authorize="isAnonymous()" class="btn btn-outline-success ml-1" id="signin-button" type="submit">sign in</a>
+				<button th:onclick="window.location.href='/login/registration'" th:href="@{/login/registration}" sec:authorize="isAnonymous()" class="btn btn-outline-success mr-2 ml-3" id="singup-button" type="submit">sign up</a>
+				<button th:onclick="window.location.href='/login'" sec:authorize="isAnonymous()" class="btn btn-outline-success ml-1" id="signin-button" type="submit">sign in</a>
 				
 			</div>
 		</div>
