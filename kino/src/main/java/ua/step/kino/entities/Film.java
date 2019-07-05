@@ -145,8 +145,8 @@ public class Film {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public void setComments(Comment comments) {
+		this.comments.add(comments);
 	}
 
 	public List<Review> getReviews() {

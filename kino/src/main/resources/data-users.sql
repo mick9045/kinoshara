@@ -2,6 +2,9 @@ insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Vale
 insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', 2)
 insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', 'admin', '1986-08-15','azavoruev@gmail.com', 1)
 
+insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Mizanin', 'Mizanin', '$2a$10$ySqBjl.DJ8ycoGIuYQP9qOPDZoAIgLB9TCN.Y/PDFdWenby30uNbu', '1998-08-15','mizanin666@gmail.com', 1)
+
+
 
 insert into reviews(id, text, is_good, film_id, user_id) values (1, 'i wish i forget about it and watch it again and again', true, 1, 1)
 insert into reviews(id, text, is_good, film_id, user_id) values (2, 'Its plenty good, but actors play was terrible some moments', true, 2,1 )

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.step.kino.entities.Comment;
+import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.UsersRepository;
@@ -50,6 +51,11 @@ public class CommentController {
 		comment.setDate(new Date());
 		
 		commentRepository.save(comment);
+		
+		Film film = filmRepository.getOne(filmId);
+		film.setComments(comment);
+		filmRepository.save(film);
+		
 		
 		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!" + comment.getText() + comment.getUser()+ comment.getFilm() + comment.getDate());
 
