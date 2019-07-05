@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 public class UserDto {
 	
@@ -13,11 +15,12 @@ public class UserDto {
 	    
 	     
 	    @NotNull
-	    @NotEmpty
-	    private String birthday;
+	    @Past
+	    private LocalDate birthday;
 	     
 	    @NotNull
 	    @NotEmpty
+	    @Pattern(regexp="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$")
 	    private String password;
 	    private String confirm_password;
 	     
@@ -34,11 +37,12 @@ public class UserDto {
 		}
 
 		public LocalDate getBirthday() {
-			return LocalDate.parse(birthday);
+			return (birthday);
 		}
 
 		public void setBirthday(String birthday) {
-			this.birthday = birthday;
+			
+			this.birthday =  LocalDate.parse(birthday);
 		}
 
 		public String getPassword() {
