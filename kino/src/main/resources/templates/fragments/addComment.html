@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org">
 
 <head>
 	<link rel="stylesheet"
-		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
 </head>
 <body>
-	<div th:fragment="comment(film)" id="com">
+	<div th:fragment="comment(film)" id="com" sec:authorize="isAuthenticated()" >
 	
 		<form th:action="@{/comments/addComment}" th:object="${comment}" method="post">
 			<div class="form-group">
@@ -19,7 +20,6 @@
 				<input type="submit" value="Add"/>
 			</div>
 		</form>
-		
-	</div>
+		</div>
 </body>
 </html>
