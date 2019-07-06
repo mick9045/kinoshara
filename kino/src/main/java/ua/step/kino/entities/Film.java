@@ -153,8 +153,8 @@ public class Film {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+	public void setReviews(Review reviews) {
+		this.reviews.add(reviews);
 	}
 
 	public int getId() {
