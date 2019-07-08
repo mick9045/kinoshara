@@ -138,39 +138,39 @@
 					</ul>
 					<div class="tab-content">
 						<div id="comments" class="container tab-pane active">
-							
-							
-							<div th:replace="fragments/addComment :: comment(${film})"></div>
-							
-							
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
 									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
 									<div class="media-body">
-										<h5 class="text-muted"><p th:text="${comment.getUser().getName()}"></p></h5>
-										<h5 class="font-weight-light text-muted" th:text="${comment.text}"></h5>
-										<h6 class="text-right"><p th:text="${comment.getDate()}"></h6>
+										<h5 class="text-muted">
+											<p th:text="${comment.getUser().getName()}"></p>
+										</h5>
+										<h5 class="font-weight-light" th:text="${comment.text}"></h5>
+										<h6 class="text-right">
+											<p th:text="${comment.getDate().toString()}">
+										</h6>
 									</div></li>
-
 							</ul>
+							<div th:replace="fragments/addComment :: comment(${film})"></div>
 						</div>
 						<div id="reviews" class="container tab-pane fade">
-						
-						
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.reviews}"
 									th:each="review : ${film.reviews}"><img
 									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
-									<div class="media-body">
-										<h5 class="mt-0 mb-1">Username</h5>
-										<span th:text="${review.review}"></span>
-										<h5 class="text-right m-2">Date</h5>
+									<div class="media-body p-2"
+										th:classappend="${review.getIsGood() == true} ? 'border border-success' : 'border border-danger'">
+										<h5 class="text-muted">
+											<p th:text="${review.getUser().getName()}"></p>
+										</h5>
+										<h5 class="font-weight-light" th:text="${review.text}"></h5>
+										<h6 class="text-right">
+											<p th:text="${review.getDate().toString()}">
+										</h6>
 									</div></li>
-
 							</ul>
-							<div
-								th:replace="fragments/addReview :: review (${film})"></div>
+							<div th:replace="fragments/addReview :: review (${film})"></div>
 						</div>
 					</div>
 				</div>
