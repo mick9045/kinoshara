@@ -8,17 +8,14 @@
 </head>
 <body>
 	<div th:fragment="comment(film)" id="com" sec:authorize="isAuthenticated()" >
-	
 		<form th:action="@{/comments/addComment}" th:object="${comment}" method="post">
-			<div class="form-group">
-				<br /> <input type="hidden" name="filmId" th:value="${film.id}">
-				
+				<input type="hidden" name="filmId" th:value="${film.id}">
 				<input type="hidden" name="userId" th:value="${currentUser.user.id}">
 				
-				<br/><textarea cols="105" rows="5" name="text" placeholder="Comment:"></textarea>
-				
-				<input type="submit" value="Add"/>
-			</div>
+				<div class="form-group">
+					<textarea class="form-control" cols="105" rows="5" name="text" placeholder="Comment:"></textarea>
+				</div>
+				<input class="btn btn-primary" type="submit" value="Add"/>
 		</form>
 		</div>
 </body>
