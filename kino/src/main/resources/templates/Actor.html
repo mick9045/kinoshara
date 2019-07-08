@@ -5,6 +5,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>Welcom + </p>
+<div class="card-columns">
+		<div class="card">
+			<div class="card-header" th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></div>
+			<div class="card-body">
+				<ul type="disc">
+					<li th:text="${actor.dateOfBirthday}" />
+					<li th:text="${actor.Country}" />
+					 <li>Фильмография:
+							<ol>
+								<li th:if="${actor.films}" th:each="film : ${actor.films}" th:text="${film.title}" />
+							</ol>
+						</li> 
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
