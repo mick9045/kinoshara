@@ -31,6 +31,10 @@ public class Actor {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirthday;
 	
+	private String biography;
+	
+	private String photo;
+	
 	@ManyToOne
 	@JoinColumn(name="country_id")
 	private Country country;
@@ -97,6 +101,22 @@ public class Actor {
 
 	public void setFilms(List<Film> films) {
 		this.films = films;
+	}
+
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	
