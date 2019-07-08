@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div th:fragment="review (film)" id="rev">
+		<div sec:authorize="isAuthenticated()">
+
+			<form th:action="@{/reviews/addReview}" th:object="${review}"
+				method="post">
+					<input type="hidden" name="filmId" th:value="${film.id}">
+					<input type="hidden" name="userId"
+						th:value="${currentUser.user.id}">
+					<div class="form-group">
+						<textarea cols="100" rows="3" class="form-control"
+							placeholder="Add review:" name="text"></textarea>
+					</div>
+					 <div class="custom-control custom-checkbox my-1 mr-sm-2">
+						<input type="checkbox" id="recommend-checkbox" class="custom-control-input" name="isGood" >
+						<label class="custom-control-label" for="recommend-checkbox">Recommend</label>
+					</div>
+					<input type="submit" class="btn btn-primary" value="Add" />
+			</form>
+		</div>
+	</div>
+
+
+</body>

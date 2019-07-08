@@ -145,16 +145,16 @@ public class Film {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public void setComments(Comment comments) {
+		this.comments.add(comments);
 	}
 
 	public List<Review> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+	public void setReviews(Review reviews) {
+		this.reviews.add(reviews);
 	}
 
 	public int getId() {
