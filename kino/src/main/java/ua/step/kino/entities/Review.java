@@ -1,5 +1,7 @@
 package ua.step.kino.entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 /**
  * 
  * @author AZavoruyev
@@ -31,6 +36,15 @@ public class Review {
 	@JoinColumn(name="film_id")
 	private Film film;
 	
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date date;
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	private Boolean isGood;
 	
 	private String text;

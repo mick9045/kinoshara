@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class ImageController {
 
-	@GetMapping("image/{name}")
-	  public void getImage(@PathVariable String name, HttpServletResponse httpServletResponse) {
-	    String path = "http://mick9045.000webhostapp.com/images/";
-	    httpServletResponse.setHeader("Location", path + name);
+	@GetMapping("image/{type}/{name}")
+	  public void getImage(@PathVariable String type, @PathVariable String name, HttpServletResponse httpServletResponse) {
+	    String path = "http://mick9045.000webhostapp.com/images/" + type +"/" + name;
+	    httpServletResponse.setHeader("Location", path);
 	    httpServletResponse.setStatus(302);
 	  }
 	

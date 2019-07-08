@@ -13,7 +13,12 @@
 <link rel="stylesheet"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+	
+<link rel="stylesheet"
 	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+		<link rel="stylesheet"
+		th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -132,47 +137,52 @@
 			<div class="col-md-9">
 				<div class="container mt-3">
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a class="nav-link active"
-							href="#comments"><h3 class="font-weight-light">Feedback</h3></a></li>
-						<li class="nav-item"><a class="nav-link" href="#reviews">
+						<li class="nav-item"><a data-toggle="tab"
+							class="nav-link active" href="#comments"><h3
+									class="font-weight-light">Feedback</h3></a></li>
+						<li class="nav-item"><a data-toggle="tab" class="nav-link"
+							href="#reviews">
 								<h3 class="font-weight-light">Reviews</h3>
 						</a></li>
 					</ul>
 					<div class="tab-content">
 						<div id="comments" class="container tab-pane active">
-							
-							
-							<!-- <div th:replace="fragments/addComment :: comment(${film})"></div>-->
-							
-							
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
-									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
-									<div class="media-body">
-										<h5 class="mt-0 mb-1">Username</h5>
-										<span th:text="${comment.text}"></span>
-										<h5 class="text-right m-2">Date</h5>
+									class="align-self-top mr-3 rounded" src="/image/icon.jpg" alt="...">
+									<div class="media-body p-2 border-bottom border-info">
+										<h5 class="text-muted">
+											<span th:text="${comment.getUser().getName()}"></span>
+										</h5>
+										<h5 class="font-weight-light" th:text="${comment.text}"></h5>
+										<h6 class="text-right">
+											<span th:text="${comment.getDate().toString()}"></span>
+										</h6>
 									</div></li>
-
 							</ul>
+							<div th:replace="fragments/addComment :: comment(${film})"></div>
 						</div>
 						<div id="reviews" class="container tab-pane fade">
-						
-						
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.reviews}"
 									th:each="review : ${film.reviews}"><img
-									class="align-self-top mr-3" src="/image/icon.jpg" alt="...">
-									<div class="media-body">
-										<h5 class="mt-0 mb-1">Username</h5>
-										<span th:text="${review.review}"></span>
-										<h5 class="text-right m-2">Date</h5>
+									class="align-self-top mr-3 rounded" src="/image/icon.jpg" alt="...">
+									<div class="media-body p-2 "
+										th:classappend="${review.getIsGood() == true} ? 'border-bottom border-success' : 'border-bottom border-danger'">
+										<h5 class="text-muted">
+											<span th:text="${review.getUser().getName()}"></span>
+											<span th:if="${review.getIsGood() == true}" class="octicon octicon-thumbsup"></span>
+											<!-- Crap expression -->
+											<span th:if="${review.getIsGood() != true}" class="octicon octicon-thumbsdown"></span>
+										</h5>
+										<h5 class="font-weight-light" th:text="${review.text}"></h5>
+										<h6 class="text-right">
+											<p th:text="${review.getDate().toString()}">
+										</h6>
 									</div></li>
-
 							</ul>
-							<div
-								th:replace="fragments/addReview :: review (${film})"></div>
+							<div th:replace="fragments/addReview :: review (${film})"></div>
 						</div>
 					</div>
 				</div>
@@ -194,10 +204,28 @@
 				header.classList.remove("sticky");
 			}
 		}
+		/*
 		$(document).ready(function() {
 			$(".nav-tabs a").click(function() {
 				$(this).tab('show');
 			});
+		});
+		 */
+
+		$(document).ready(function() {
+
+			$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+				/*
+				var id = $(e.target).attr("href").substr(1);
+				window.location.hash = id;
+				 */
+				var id = $(e.target).attr("href");
+				localStorage.setItem('tabhash', id);
+
+			});
+			//var hash = window.location.hash;
+			var hash = localStorage['tabhash'];
+			$('.nav-tabs a[href="' + hash + '"]').tab('show')
 		});
 	</script> </main>
 </body>

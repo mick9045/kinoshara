@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 /**
  * 
  * @author Julia
@@ -34,6 +37,7 @@ public class Comment {
 	@JoinColumn(name="film_id")
 	private Film film;
 	
+	 @DateTimeFormat(iso = ISO.DATE)
 	private Date date;
 	
 	//private int userId;
@@ -82,6 +86,7 @@ public class Comment {
 		this.film = film;
 	}
 
+	@DateTimeFormat(iso = ISO.DATE)
 	public Date getDate() {
 		return date;
 	}
