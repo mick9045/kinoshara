@@ -7,8 +7,7 @@
 </head>
 <body>
 	<div th:fragment="review (film)" id="rev">
-		<div sec:authorize="isAuthenticated()">
-
+			<div sec:authorize="isAuthenticated()" th:if="${reviewed == true}">
 			<form th:action="@{/reviews/addReview}" th:object="${review}"
 				method="post">
 				<div class="form-group">

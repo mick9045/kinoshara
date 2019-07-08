@@ -1,6 +1,7 @@
 package ua.step.kino.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Review {
 	private Film film;
 	
 	private Boolean isGood;
-	
+	@Column(columnDefinition="TEXT")
 	private String text;
 	
 	public Review() {
