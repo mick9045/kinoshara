@@ -1,25 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Actor</title>
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/movie.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/search.js}" /></script>
+<script th:src="@{/scripts/filter.js}" /></script>
+
+<style>
+.sticky {
+	position: fixed;
+	top: 56px;
+	width: 100%;
+}
+</style>
+
+
 </head>
 <body>
-<div class="card-columns">
-		<div class="card">
-			<div class="card-header" th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></div>
-			<div class="card-body">
+	<div th:replace="fragments/header :: header"></div>
+
+	<main role="main" class="container bg-light body-container">
+	<div class="row">
+		<div class="col-md-3" style="height: 185px;">
+			<div id="image">
+				<img th:src="@{'/image/bigportrait/' + ${actor.photo}}"
+					style="width: 260px; height: 366px;">
+			</div>
+		</div>
+		<div class="col-md-9">
+			<h3 class="display-3"
+				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h3>
+			<br>
+			<div class="col-md-6">
 				<ul type="disc">
-					<li th:text="${actor.dateOfBirthday}" />
-					<li th:text="${actor.Country}" />
-					 <li>Фильмография:
-							<ol>
-								<li th:if="${actor.films}" th:each="film : ${actor.films}" th:text="${film.title}" />
-							</ol>
-						</li> 
+					<li th:text="'Родился: '+${actor.dateOfBirthday}" />
+					<li th:text="'Гражданство: '+${actor.Country}" />
 				</ul>
+			</div>
+
+		</div>
+	</div>
+	<div class="row  p-2">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h3 class="display-4 ml-2">Биография</h3>
+			<div class="row  p-2">
+				<p th:text="${actor.biography}"></p>
 			</div>
 		</div>
 	</div>
+	<div class="row  p-2">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h3 class="display-4 ml-2">Фильмография</h3>
+			<ol>
+				<li th:if="${actor.films}" th:each="film : ${actor.films}"
+					th:text="${film.title}" />
+			</ol>
+		</div>
+	</div>
+	</main>
+
+
+	<!-- <div class="card-columns">
+		<div class="card">
+			<div class="card-header"
+				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-3" style="height: 185px;">
+						<div id="image">
+							<img th:src="@{'/image/' + ${actor.photo}}"
+								style="width: 130px; height: 185px;">
+						</div>
+					</div>
+					<div class="col-md-9">
+						<ul type="disc">
+							<li th:text="${actor.dateOfBirthday}" />
+							<li th:text="${actor.Country}" />
+							<li>Фильмография:
+								<ol>
+									<li th:if="${actor.films}" th:each="film : ${actor.films}"
+										th:text="${film.title}" />
+								</ol>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
 </body>
 </html>

@@ -31,7 +31,7 @@ insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (7,11)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (8,9)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (9,5)
 
-insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 'Chris', 'Hemsworth', '1983-08-11', 2)
+insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id, photo, biography) VALUES(1, 'Chris', 'Hemsworth', '1983-08-11', 2, 'prat.jpg', 'Крис Хемсворт родился в 1983 году в Мельбурне. Его братья, Люк и Лиам, тоже актёры. Когда Хемсворту было 14 лет, он и его семья переехали на маленький остров Филипп. В марте 2009 года Хемсворт переехал в Соединенные Штаты, чтобы продолжить свою карьеру там. Он и его брат Лиам остались в гостевом доме агента Криса Уильяма Ворда, прежде чем арендовать свою собственную квартиру в Лос-Анджелесе, где они проживают в настоящее время.')
 insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(2, 'Scarlett', 'Johansson', '1984-11-22', 2)
 insert into Actors (id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(3, 'Chris', 'Evans', '1981-07-13', 2)
 
