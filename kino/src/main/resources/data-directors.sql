@@ -20,6 +20,8 @@ insert into films(id, title, image_Small_Path, release_Year, views, rating, film
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (8, 'Man of steel', 'Man_of_Steel.jpg', 2013, 0, 5.45, 120)
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (9, 'Doctor Strange', 'Doctor_Strange_poster.jpg', 2016, 0, 5.45, 120)
 
+/*
+
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (1,1)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (2,2)
 insert into DIRECTORS_FILMS  (films_id, director_id) VALUES (3,6)
@@ -70,7 +72,7 @@ insert into ACTORS_FILMS (films_id, actor_id) VALUES (8,7)
 insert into ACTORS_FILMS (films_id, actor_id) VALUES (8,8)
 insert into ACTORS_FILMS (films_id, actor_id) VALUES (9,1)
 insert into ACTORS_FILMS (films_id, actor_id) VALUES (9,6)
-
+*/
 
 insert into FILMS_COUNTRIES (film_id, countries_id) VALUES (1, 2)
 insert into FILMS_COUNTRIES (film_id, countries_id) VALUES (2, 2)
