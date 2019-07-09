@@ -45,22 +45,19 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<h3 class="display-3"
-				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h3>
+		<br>
+			<h1 class="display-4"
+				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h1>
 			<br>
-			<div class="col-md-6">
-				<ul type="disc">
-					<li th:text="'Родился: '+${actor.dateOfBirthday}" />
-					<li th:text="'Гражданство: '+${actor.Country}" />
-				</ul>
+			<h5  th:text="'Родился: '+${actor.dateOfBirthday}" /></h5><br>
+			<h5  th:text="'Гражданство: '+${actor.Country}" /></h5><br>
 			</div>
-
 		</div>
 	</div>
 	<div class="row  p-2">
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
-			<h3 class="display-4 ml-2">Биография</h3>
+			<h3 class="display-6 ml-2">Биография</h3>
 			<div class="row  p-2">
 				<p th:text="${actor.biography}"></p>
 			</div>
@@ -69,7 +66,7 @@
 	<div class="row  p-2">
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
-			<h3 class="display-4 ml-2">Фильмография</h3>
+			<h3 class="display-6 ml-2">Фильмография</h3>
 			<ol>
 				<li th:if="${actor.films}" th:each="film : ${actor.films}"
 					th:text="${film.title}" />
@@ -77,36 +74,5 @@
 		</div>
 	</div>
 	</main>
-
-
-	<!-- <div class="card-columns">
-		<div class="card">
-			<div class="card-header"
-				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></div>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-md-3" style="height: 185px;">
-						<div id="image">
-							<img th:src="@{'/image/' + ${actor.photo}}"
-								style="width: 130px; height: 185px;">
-						</div>
-					</div>
-					<div class="col-md-9">
-						<ul type="disc">
-							<li th:text="${actor.dateOfBirthday}" />
-							<li th:text="${actor.Country}" />
-							<li>Фильмография:
-								<ol>
-									<li th:if="${actor.films}" th:each="film : ${actor.films}"
-										th:text="${film.title}" />
-								</ol>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
-</body>
+	</body>
 </html>
