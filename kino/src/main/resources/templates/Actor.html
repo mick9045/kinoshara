@@ -24,10 +24,9 @@
 <script th:src="@{/scripts/filter.js}" /></script>
 
 <style>
-.sticky {
-	position: fixed;
-	top: 56px;
-	width: 100%;
+
+a:hover {
+	text-decoration: none;
 }
 </style>
 
@@ -45,14 +44,16 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-		<br>
+			<br>
 			<h1 class="display-4"
 				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h1>
 			<br>
-			<h5  th:text="'Родился: '+${actor.dateOfBirthday}" /></h5><br>
-			<h5  th:text="'Гражданство: '+${actor.Country}" /></h5><br>
-			</div>
+			<h5 th:text="'Родился: '+${actor.dateOfBirthday}" /></h5>
+			<br>
+			<h5 th:text="'Гражданство: '+${actor.Country}" />
+				</h5><br>
 		</div>
+	</div>
 	</div>
 	<div class="row  p-2">
 		<div class="col-md-3"></div>
@@ -68,11 +69,11 @@
 		<div class="col-md-9">
 			<h3 class="display-6 ml-2">Фильмография</h3>
 			<ol>
-				<li th:if="${actor.films}" th:each="film : ${actor.films}"
-					th:text="${film.title}" />
+				<li th:if="${actor.films}" th:each="film : ${actor.films}"><a
+					th:href="@{'/films/' + ${film.id}}"><h5 th:text="${film.title}"></h5></a></li>
 			</ol>
 		</div>
 	</div>
 	</main>
-	</body>
+</body>
 </html>
