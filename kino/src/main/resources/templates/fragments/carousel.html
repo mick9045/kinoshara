@@ -26,38 +26,22 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active" th:each="film : ${films}" th:if="${film} == ${films[0]}">
-    
-      <div class="carousell-card">
-    <span style="display: inline-block">
-      <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
+    <div class="carousel-item" th:each="film,iterstat  : ${films}" th:if="${iterstat.index} % 3 == 0" th:classappend="${iterstat.first == true}?active">
+   <span th:text="${iterstat.count+1}"></span>
+      <div class="carousell-card" >
+    <span style="display: inline-block" >
+      <img th:src="@{'/image/' + ${films[iterstat.count-1].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
+      <h5 class="h5 carousell-h5" th:text="${films[iterstat.count-1].title}"></h5>
      </span>
        <span  style="display: inline-block">
-       <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-       <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
+       <img th:src="@{'/image/' + ${films[iterstat.count].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
+       <h5 class="h5 carousell-h5" th:text="${films[iterstat.count].title}"></h5>
       </span>
        <span  style="display: inline-block">
-      <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
+      <img th:src="@{'/image/' + ${films[iterstat.count+1].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
+      <h5 class="h5 carousell-h5" th:text="${films[iterstat.count+1].title}"></h5>
        </span>
       </div>
-      
-    </div>
-    <div class="carousel-item " th:each="film : ${films}" th:if="${film} != ${films[0]}">
-    <div class="carousell-card">
-    <span style="display: inline-block">
-      <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
-     </span>
-       <span  style="display: inline-block">
-       <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-       <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
-      </span>
-       <span  style="display: inline-block">
-      <img th:src="@{'/image/' + ${film.imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${film.title}"></h5>
-       </span>
       
       </div>
     </div>

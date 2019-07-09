@@ -4,10 +4,10 @@
 }
 
 .carousell-image {
-	display: block;
-	width: 60%;
-	margin: 0 auto;
-	margin-top: 5px;
+	width: 350px !important;
+	margin: 0 50px !important;
+	margin-top: 5px !important;
+	
 }
 
 .carousell-card{
