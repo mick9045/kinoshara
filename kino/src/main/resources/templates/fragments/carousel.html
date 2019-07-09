@@ -27,7 +27,6 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item" th:each="film,iterstat  : ${films}" th:if="${iterstat.index} % 3 == 0" th:classappend="${iterstat.first == true}?active">
-   <span th:text="${iterstat.count+1}"></span>
       <div class="carousell-card" >
     <span style="display: inline-block" >
       <img th:src="@{'/image/' + ${films[iterstat.count-1].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
