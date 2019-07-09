@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 @Table(name = "actors")
+@DiscriminatorValue("1")
 public class Actor extends Personality {
 	
 }

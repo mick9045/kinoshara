@@ -14,11 +14,11 @@
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet"
 	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
-	
+
 <link rel="stylesheet"
 	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
-		<link rel="stylesheet"
-		th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -94,8 +94,8 @@
 					<div class="col-md-3 pt-2" th:each="actor, iter : ${film.actors}">
 						<div class="card" style="height: 100px;">
 							<div class="card-body font-weight-light font-weight-bold">
-							<a th:href="@{'/actors/' + ${actor.id}}"><p
-								th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p></a>
+								<a th:href="@{'/actors/' + ${actor.id}}"><p
+										th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p></a>
 								<!-- <p th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p> -->
 							</div>
 						</div>
@@ -108,7 +108,7 @@
 						<ul type="none">
 							<li class="font-weight-lighter"
 								th:each="director : ${film.directors}"
-								th:text="${director.name}" />
+								th:text="${director.firstName}" />
 						</ul>
 					</div>
 
@@ -117,7 +117,7 @@
 						<ul type="none">
 							<li class="font-weight-lighter"
 								th:each="director : ${film.directors}"
-								th:text="${director.name}" />
+								th:text="${director.firstName}" />
 						</ul>
 					</div>
 
@@ -126,7 +126,7 @@
 						<ul type="none">
 							<li class="font-weight-lighter"
 								th:each="director : ${film.directors}"
-								th:text="${director.name}" />
+								th:text="${director.firstName}" />
 						</ul>
 					</div>
 				</div>
@@ -150,7 +150,8 @@
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
-									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg" alt="...">
+									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg"
+									alt="...">
 									<div class="media-body p-2 border-bottom border-info">
 										<h5 class="text-muted">
 											<span th:text="${comment.getUser().getName()}"></span>
@@ -167,14 +168,17 @@
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.reviews}"
 									th:each="review : ${film.reviews}"><img
-									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg" alt="...">
+									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg"
+									alt="...">
 									<div class="media-body p-2 "
 										th:classappend="${review.getIsGood() == true} ? 'border-bottom border-success' : 'border-bottom border-danger'">
 										<h5 class="text-muted">
-											<span th:text="${review.getUser().getName()}"></span>
-											<span th:if="${review.getIsGood() == true}" class="octicon octicon-thumbsup"></span>
+											<span th:text="${review.getUser().getName()}"></span> <span
+												th:if="${review.getIsGood() == true}"
+												class="octicon octicon-thumbsup"></span>
 											<!-- Crap expression -->
-											<span th:if="${review.getIsGood() != true}" class="octicon octicon-thumbsdown"></span>
+											<span th:if="${review.getIsGood() != true}"
+												class="octicon octicon-thumbsdown"></span>
 										</h5>
 										<h5 class="font-weight-light" th:text="${review.text}"></h5>
 										<h6 class="text-right" th:if="${review.getDate() != null}">

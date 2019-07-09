@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity(name = "personalities")
+@DiscriminatorColumn(name="personality_position", discriminatorType = DiscriminatorType.INTEGER)
 public class Personality {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,7 @@ public class Personality {
 	@ElementCollection(targetClass = Position.class)
 	@Column(name = "position", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@CollectionTable(name="person_interest")
+	@CollectionTable(name="personalities_positions", joinColumns = @JoinColumn(name = "personality_id"))
 	private List<Position> positions;
 	
 	
