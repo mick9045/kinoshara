@@ -8,6 +8,9 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -69,11 +72,11 @@ public class Film {
 	@JsonIgnore
 	private Double filmLength;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Comment> comments = new ArrayList<Comment>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "film")
+	private Set<Comment> comments = new HashSet<>();
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Review> reviews = new ArrayList<Review>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "film")
+	private Set<Review> reviews = new HashSet<>();
 	//==============================Fields==============================================
 	
 	public Film() {
@@ -82,7 +85,7 @@ public class Film {
 	
 	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, List<Comment> comments, List<Review> reviews, int views, Date additionalDate) {
+			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views, Date additionalDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -141,20 +144,20 @@ public class Film {
 		this.filmLength = filmLength;
 	}
 
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public void setComments(Comment comments) {
+		this.comments.add(comments);
 	}
 
-	public List<Review> getReviews() {
+	public Set<Review> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+	public void setReviews(Review reviews) {
+		this.reviews.add(reviews);
 	}
 
 	public int getId() {
