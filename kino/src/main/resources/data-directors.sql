@@ -20,11 +20,11 @@ insert into films(id, title, image_Small_Path, release_Year, views, rating, film
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (8, 'Man of steel', 'Man_of_Steel.jpg', 2013, 0, 5.45, 120)
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (9, 'Doctor Strange', 'Doctor_Strange_poster.jpg', 2016, 0, 5.45, 120)
 
-insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 1, 'Chris', 'Hemsworth', '1983-08-11', 2)
+insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id, photo, biography) VALUES(1, 1, 'Chris', 'Hemsworth', '1983-08-11', 2, 'prat.jpg', 'Крис Хемсворт родился в 1983 году в Мельбурне. Его братья, Люк и Лиам, тоже актёры. Когда Хемсворту было 14 лет, он и его семья переехали на маленький остров Филипп. В марте 2009 года Хемсворт переехал в Соединенные Штаты, чтобы продолжить свою карьеру там. Он и его брат Лиам остались в гостевом доме агента Криса Уильяма Ворда, прежде чем арендовать свою собственную квартиру в Лос-Анджелесе, где они проживают в настоящее время.')
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 2, 'Scarlett', 'Johansson', '1984-11-22', 2)
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 3, 'Chris', 'Evans', '1981-07-13', 2)
-
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 4, 'Leonardo', 'DiCaprio', '1974-11-11', 2)
+
 
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 5, 'Tessa', 'Thompson', '1983-10-03', 2)
 

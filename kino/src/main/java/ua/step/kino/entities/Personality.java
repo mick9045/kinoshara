@@ -47,6 +47,7 @@ public class Personality {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirthday;
 	
+	@Column(columnDefinition="TEXT")
 	private String biography;
 	
 	private String photo;
