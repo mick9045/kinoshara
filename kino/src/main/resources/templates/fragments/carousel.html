@@ -1,52 +1,70 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link rel="stylesheet"
-		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
-	<link rel="stylesheet"
-		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
-	<link rel="stylesheet"
-		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
-		<link rel="stylesheet" th:href="@{/css/carousel.css}" />
-	<script th:src="@{webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{webjars/jquery-ui/jquery-ui.min.js}"></script>
-	<script th:src="@{scripts/search.js}"></script>
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/carousel.css}" />
+<script th:src="@{webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{webjars/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{scripts/search.js}"></script>
 </head>
 <body>
 
 
+	<div class="carousell">
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel" data-interval="false">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner carousel-container">
+				<div class="carousel-item" th:each="film,iterstat  : ${films}"
+					th:if="${iterstat.index} % 3 == 0"
+					th:classappend="${iterstat.first == true}?active">
+					<div class="carousell-card">
+						<div style="display: inline-block; width: 32%;">
+							<div class="image-wrap">
+								<img
+									th:src="@{'/image/' + ${films[iterstat.count-1].imageSmallPath}}"
+									class=" carousell-image" src="..." alt="Second slide">
 
-<div class="carousell">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item" th:each="film,iterstat  : ${films}" th:if="${iterstat.index} % 3 == 0" th:classappend="${iterstat.first == true}?active">
-   <span th:text="${iterstat.count+1}"></span>
-      <div class="carousell-card" >
-    <span style="display: inline-block" >
-      <img th:src="@{'/image/' + ${films[iterstat.count-1].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${films[iterstat.count-1].title}"></h5>
-     </span>
-       <span  style="display: inline-block">
-       <img th:src="@{'/image/' + ${films[iterstat.count].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-       <h5 class="h5 carousell-h5" th:text="${films[iterstat.count].title}"></h5>
-      </span>
-       <span  style="display: inline-block">
-      <img th:src="@{'/image/' + ${films[iterstat.count+1].imageSmallPath}}" class="d-inline p-3 carousell-image" src="..." alt="Second slide">
-      <h5 class="h5 carousell-h5" th:text="${films[iterstat.count+1].title}"></h5>
-       </span>
-      </div>
-      
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							</div>
+							<h5 class="h5 carousell-h5"
+								th:text="${films[iterstat.count-1].title}"></h5>
+						</div>
+						<div style="display: inline-block; width: 32%;">
+							<div class="image-wrap">
+								<img
+									th:src="@{'/image/' + ${films[iterstat.count].imageSmallPath}}"
+									class=" carousell-image" src="..." alt="Second slide">
+
+							</div>
+							<h5 class="h5 carousell-h5"
+								th:text="${films[iterstat.count].title}"></h5>
+						</div>
+						<div style="display: inline-block; width: 32%;">
+							<div class="image-wrap">
+								<img
+									th:src="@{'/image/' + ${films[iterstat.count+1].imageSmallPath}}"
+									class=" carousell-image" src="..." alt="Second slide">
+							</div>
+							<h5 class="h5 carousell-h5"
+								th:text="${films[iterstat.count+1].title}"></h5>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
@@ -54,8 +72,11 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-</div>
+  
+  
+
+	</div>
+	</div>
 
 </body>
 </html>
