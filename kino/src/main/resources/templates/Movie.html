@@ -40,13 +40,13 @@
 
 	<div th:replace="fragments/header :: header"></div>
 
-	<main role="main" class="container bg-light">
+	<main role="main" class="container bg-light body-container">
 
 	<div class="container-fluid pt-5">
 		<div class="row">
 			<div class="col-md-3" style="height: 370px;">
 				<div id="image">
-					<img th:src="@{'/image/' + ${film.imageSmallPath}}"
+					<img th:src="@{'/image/bigposter/' + ${film.imageSmallPath}}"
 						style="width: 260px; height: 366px;">
 				</div>
 
@@ -148,7 +148,7 @@
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.comments}"
 									th:each="comment : ${film.comments}"><img
-									class="align-self-top mr-3 rounded" src="/image/icon.jpg" alt="...">
+									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg" alt="...">
 									<div class="media-body p-2 border-bottom border-info">
 										<h5 class="text-muted">
 											<span th:text="${comment.getUser().getName()}"></span>
@@ -165,7 +165,7 @@
 							<ul class="list-unstyled">
 								<li class="media mt-3" th:if="${film.reviews}"
 									th:each="review : ${film.reviews}"><img
-									class="align-self-top mr-3 rounded" src="/image/icon.jpg" alt="...">
+									class="align-self-top mr-3 rounded" src="/image/temp/icon.jpg" alt="...">
 									<div class="media-body p-2 "
 										th:classappend="${review.getIsGood() == true} ? 'border-bottom border-success' : 'border-bottom border-danger'">
 										<h5 class="text-muted">
@@ -175,7 +175,7 @@
 											<span th:if="${review.getIsGood() != true}" class="octicon octicon-thumbsdown"></span>
 										</h5>
 										<h5 class="font-weight-light" th:text="${review.text}"></h5>
-										<h6 class="text-right">
+										<h6 class="text-right" th:if="${review.getDate() != null}">
 											<p th:text="${review.getDate().toString()}">
 										</h6>
 									</div></li>

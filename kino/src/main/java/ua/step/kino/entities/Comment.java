@@ -34,7 +34,7 @@ public class Comment {
 	private User user;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="film_id")
+	@JoinColumn(name="films_id", nullable = false)
 	private Film film;
 	
 	 @DateTimeFormat(iso = ISO.DATE)
