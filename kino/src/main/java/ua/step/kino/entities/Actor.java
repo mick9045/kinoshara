@@ -16,5 +16,4 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "actors")
 public class Actor extends Personality {
 	
-	
 }

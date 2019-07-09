@@ -94,7 +94,9 @@
 					<div class="col-md-3 pt-2" th:each="actor, iter : ${film.actors}">
 						<div class="card" style="height: 100px;">
 							<div class="card-body font-weight-light font-weight-bold">
-								<p th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p>
+							<a th:href="@{'/actors/' + ${actor.id}}"><p
+								th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p></a>
+								<!-- <p th:text="${actor.firstName} + ' ' + ${actor.lastName}"></p> -->
 							</div>
 						</div>
 					</div>
