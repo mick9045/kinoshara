@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.step.kino.entities.Director;
@@ -26,6 +27,12 @@ public class DirectorController {
 		List<Director> directors = directorRepository.findAll();
 		model.addAttribute("directors", directors);
 		return "directors";
+	}
+	
+	@GetMapping("/{id}")
+	public String showActor(@PathVariable int id, Model model) {
+		directorRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
+		return "Director";
 	}
 }
 

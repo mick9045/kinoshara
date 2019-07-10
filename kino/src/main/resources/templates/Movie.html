@@ -32,6 +32,9 @@
 	top: 56px;
 	width: 100%;
 }
+a:hover {
+	text-decoration: none;
+}
 </style>
 
 </head>
@@ -107,8 +110,11 @@
 						<h5 class="text-muted font-weight-light">Directors</h5>
 						<ul type="none">
 							<li class="font-weight-lighter"
-								th:each="director : ${film.directors}"
-								th:text="${director.firstName}" />
+								th:each="director : ${film.directors}"><a
+								th:href="@{'/directors/' + ${director.id}}">
+									<p
+										th:text="${director.firstName} + ' ' +  ${director.lastName}"></p>
+							</a></li>
 						</ul>
 					</div>
 

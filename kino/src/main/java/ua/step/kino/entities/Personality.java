@@ -47,6 +47,7 @@ public class Personality {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirthday;
 	
+	@Column(columnDefinition="TEXT")
 	private String biography;
 	
 	private String photo;
@@ -55,12 +56,7 @@ public class Personality {
 	@JoinColumn(name="country_id")
 	private Country country;
 	
-	@ManyToMany
-	@JoinTable(
-			  name = "Actors_Films", 
-			  joinColumns = @JoinColumn(name = "actor_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-	private List<Film> films;
+	
 	
 	public Personality()
 	{
@@ -119,15 +115,6 @@ public class Personality {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
-	public List<Film> getFilms() {
-		return films;
-	}
-
-	public void setFilms(List<Film> films) {
-		this.films = films;
-	}
-	
 
 	public String getBiography() {
 		return biography;
