@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.FilmRepository;
 
-public class SimpleFilmsImpl implements SimpleFilmsServise {
+public class SimilarFilmsImpl implements SimilarFilmsServise {
 
 	@Autowired
 	FilmRepository filmRepo;
