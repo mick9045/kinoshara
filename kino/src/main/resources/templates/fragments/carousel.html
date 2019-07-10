@@ -34,31 +34,33 @@
 							<div style="display: inline-block; width: 32%;">
 								<div class="image-wrap">
 									<img
-										th:src="@{'/image/' + ${similar[iterstat.count-1].imageSmallPath}}"
+										th:src="@{'/image/smallposter/' + ${similar[iterstat.count-1].imageSmallPath}}"
 										class=" carousell-image" src="..." alt="Second slide">
 
 								</div>
+								<a th:href="@{'/films/' + ${similar[iterstat.count-1].id}}">
 								<h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count-1].title}"></h5>
+									th:text="${similar[iterstat.count-1].title}"></h5></a>
 							</div>
 							<div style="display: inline-block; width: 32%;">
 								<div class="image-wrap">
 									<img
-										th:src="@{'/image/' + ${similar[iterstat.count].imageSmallPath}}"
+										th:src="@{'/image/smallposter/' + ${similar[iterstat.count].imageSmallPath}}"
 										class=" carousell-image" src="..." alt="Second slide">
 
 								</div>
-								<h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count].title}"></h5>
+								<a th:href="@{'/films/' + ${similar[iterstat.count].id}}"><h5 class="h5 carousell-h5"
+									th:text="${similar[iterstat.count].title}"></h5></a>
 							</div>
 							<div style="display: inline-block; width: 32%;">
 								<div class="image-wrap">
 									<img
-										th:src="@{'/image/' + ${similar[iterstat.count+1].imageSmallPath}}"
+										th:src="@{'/image/smallposter/' + ${similar[iterstat.count+1].imageSmallPath}}"
 										class=" carousell-image" src="..." alt="Second slide">
 								</div>
+								<a th:href="@{'/films/' + ${similar[iterstat.count+1].id}}">
 								<h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count+1].title}"></h5>
+									th:text="${similar[iterstat.count+1].title}"></h5></a>
 							</div>
 						</div>
 
