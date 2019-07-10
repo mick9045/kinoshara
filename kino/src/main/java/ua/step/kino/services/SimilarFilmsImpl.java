@@ -1,11 +1,16 @@
 package ua.step.kino.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ua.step.kino.entities.Director;
 import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Genre;
 import ua.step.kino.repositories.FilmRepository;
 
 public class SimilarFilmsImpl implements SimilarFilmsServise {
@@ -14,34 +19,95 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 	FilmRepository filmRepo;
 
 	@Override
-	public List<Film> similarFilmsByQuery(String query, Film filmToCompare) {
+	public Set<Film> similarFilmsByTitle(Film filmToCompare) {
 		List<Film> allFilms = filmRepo.findAll();
 		List<Film> resultFilms = new ArrayList<Film>();
-		switch (query) {
-		case "title":
-			String[] strings = filmToCompare.getTitle().split(" ");
-			for(Film film : allFilms)
-			{
-				film.getTitle();
-				
-			}
-			break;
-		case "name":
-			break;
-		case "genre":
-			break;
-		case "actor":
-			break;
-		case "director":
-			break;
+
+		String[] strings = filmToCompare.getTitle().split(" ");
+		for (Film film : allFilms) {
+			film.getTitle();
+
 		}
 		return null;
 	}
 
 	@Override
-	public List<Film> similarFilmsBy() {
+	public Set<Film> similarFilmsByDirectors(Film filmToCompare) 
+	{
+		List<Film> allFilms = filmRepo.findAll();
+		Set<Film> resultFilms = new HashSet<Film>();
 
-		return null;
+		for(Film film: allFilms)
+		{
+			for(Director director : film.getDirectors())
+			{
+				for(Director director2 : filmToCompare.getDirectors())
+				{
+					if(director.getId() == director2.getId())
+					{
+						resultFilms.add(film);
+					}
+				}
+			}
+		}
+		
+		return resultFilms;
+	}
+
+	@Override
+	public Set<Film> similarFilmsByGenres(Film filmToCompare) {
+		List<Film> allFilms = filmRepo.findAll();
+		Set<Film> resultFilms = new HashSet<Film>();
+
+		for(Film film: allFilms)
+		{
+			for(Genre genre : film.getGenres())
+			{
+				for(Genre genre2 : filmToCompare.getGenres())
+				{
+					if(genre.getId() == genre2.getId())
+					{
+						resultFilms.add(film);
+					}
+				}
+			}
+		}
+		
+		return resultFilms;
+	}
+
+	@Override
+	public Set<Film> similarFilmsByActors(Film filmToCompare) {
+		List<Film> allFilms = filmRepo.findAll();
+		Set<Film> resultFilms = new HashSet<Film>();
+
+		for(Film film: allFilms)
+		{
+			for(Genre genre : film.getGenres())
+			{
+				for(Genre genre2 : filmToCompare.getGenres())
+				{
+					if(genre.getId() == genre2.getId())
+					{
+						resultFilms.add(film);
+					}
+				}
+			}
+		}
+		
+		return resultFilms;
+	}
+
+	@Override
+	public Set<Film> similarFilms(Film filmToCompare) {
+		Set<Film> resultFilms = new HashSet<Film>();
+		
+		resultFilms.addAll(similarFilmsByActors(filmToCompare));
+		resultFilms.addAll(similarFilmsByGenres(filmToCompare));
+		resultFilms.addAll(similarFilmsByDirectors(filmToCompare));
+		
+		return resultFilms;
+		
 	}
 
 }
