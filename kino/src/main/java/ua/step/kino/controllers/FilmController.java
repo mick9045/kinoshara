@@ -21,6 +21,7 @@ import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.ReviewRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.ReviewServiceImpl;
+import ua.step.kino.services.SimilarFilmsImpl;
 
 /**
  * 
@@ -35,6 +36,9 @@ public class FilmController {
 	FilmRepository filmsRepository;
 	@Autowired
 	ReviewServiceImpl reviewService;
+	
+	@Autowired 
+	SimilarFilmsImpl similarFilmsService;
 
 	@GetMapping
 	public String showAll(Model model) {
@@ -46,6 +50,9 @@ public class FilmController {
 	@GetMapping("/{id}")
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
+		
+		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
+		
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -55,6 +62,8 @@ public class FilmController {
 			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId() );
 		}
 		model.addAttribute("reviewed", reviewed);
+		
+		
 		return "Movie";
 	}
 

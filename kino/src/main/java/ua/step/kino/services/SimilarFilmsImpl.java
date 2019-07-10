@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import ua.step.kino.entities.Director;
 import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
 import ua.step.kino.repositories.FilmRepository;
 
+
+@Component("SimilarFilmsImpl")
 public class SimilarFilmsImpl implements SimilarFilmsServise {
 
 	@Autowired
@@ -37,8 +41,14 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		List<Film> allFilms = filmRepo.findAll();
 		Set<Film> resultFilms = new HashSet<Film>();
 
+
+		
+		
 		for(Film film: allFilms)
-		{
+		{	
+			//resultFilms.addAll(Stream.of(film.getDirectors(), filmToCompare.getDirectors()).map((f1, f2) -> (f1.getId() == f2.getId())).collect(Collectors.toSet()));
+			
+			
 			for(Director director : film.getDirectors())
 			{
 				for(Director director2 : filmToCompare.getDirectors())
@@ -46,6 +56,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 					if(director.getId() == director2.getId())
 					{
 						resultFilms.add(film);
+						System.out.println("ADDED");
 					}
 				}
 			}
