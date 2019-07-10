@@ -17,7 +17,8 @@
 <h2 class="h2 ml-2">Актёры</h1>
 
 <ol>
-<li th:each="actor : ${actors}" th:text="${actor.firstName} + ' ' +  ${actor.lastName} + ', ' + ${actor.dateOfBirthday} + ', ' + ${actor.Country}"></li>
+<li th:each="actor : ${actors}" ><a th:href="@{'/actors/' + ${actor.id}}"><p
+								th:text="${actor.firstName} + ' ' +  ${actor.lastName} + ', ' + ${actor.dateOfBirthday} + ', ' + ${actor.Country}"></p></a></li>
 </ol>
 
 </body>

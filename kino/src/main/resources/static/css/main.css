@@ -10,3 +10,7 @@ h1{
 h2{
 	color:#FF0000;
 }
+
+.body-container {
+	height: 100%;	
+}
