@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Director</title>
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/movie.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/search.js}" /></script>
+<script th:src="@{/scripts/filter.js}" /></script>
+
+<style>
+
+a:hover {
+	text-decoration: none;
+}
+</style>
+
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+
+	<main role="main" class="container bg-light body-container">
+	<div class="row">
+		<div class="col-md-3" style="height: 185px;">
+			<div id="image">
+				<img th:src="@{'/image/bigportrait/' + ${director.photo}}"
+					style="width: 260px; height: 366px;">
+			</div>
+		</div>
+		<div class="col-md-9">
+			<br>
+			<h1 class="display-4"
+				th:text="${director.firstName} + ' ' +  ${director.lastName}"></h1>
+			<br>
+			<h5 th:text="'Родился: '+${director.dateOfBirthday}" /></h5>
+			<br>
+			<h5 th:text="'Гражданство: '+${director.Country}" />
+				</h5><br>
+		</div>
+	</div>
+	</div>
+	<div class="row  p-2">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h3 class="display-6 ml-2">Биография</h3>
+			<div class="row  p-2">
+				<p th:text="${director.biography}"></p>
+			</div>
+		</div>
+	</div>
+	<div class="row  p-2">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<h3 class="display-6 ml-2">Снятые фильмы</h3>
+			<ol>
+				<li th:if="${director.films}" th:each="film : ${director.films}"><a
+					th:href="@{'/films/' + ${film.id}}"><h5 th:text="${film.title}"></h5></a></li>
+			</ol>
+		</div>
+	</div>
+	</main>
+</body>
+</html>
