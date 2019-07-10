@@ -194,7 +194,7 @@
 		</div>
 	</div>
 	
-	<div th:replace="fragments/carousel"></div>
+	<div th:replace="fragments/carousel :: carousel(${similar})"></div>
 	
 	<script>
 		window.onscroll = function() {
