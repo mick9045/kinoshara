@@ -2,6 +2,7 @@ package ua.step.kino.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.ReviewRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.ReviewServiceImpl;
+import ua.step.kino.services.SimilarFilmsImpl;
 
 /**
  * 
@@ -35,6 +37,9 @@ public class FilmController {
 	FilmRepository filmsRepository;
 	@Autowired
 	ReviewServiceImpl reviewService;
+	
+	@Autowired 
+	SimilarFilmsImpl similarFilmsService;
 
 	@GetMapping
 	public String showAll(Model model) {
@@ -46,7 +51,13 @@ public class FilmController {
 	@GetMapping("/{id}")
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
-
+			
+		
+		//similarFilmsService.similarFilms(filmsRepository.findById(id));
+		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
+	
+		//films.forEach(f -> System.out.println(f.getTitle()));
+		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Boolean reviewed = false;
@@ -55,6 +66,8 @@ public class FilmController {
 			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId() );
 		}
 		model.addAttribute("reviewed", reviewed);
+		
+		
 		return "Movie";
 	}
 
