@@ -36,22 +36,25 @@ public class PersonalityServiceImpl implements PersonalityService {
 		if (!personality.getPhoto().isEmpty()) {
 			String originalName = personality.getPhoto().getOriginalFilename();
 			imageName = FilenameUtils.removeExtension(originalName);
+			imageName += "_";
 			imageName += UUID.randomUUID().toString();
-			imageName += FilenameUtils.getExtension(originalName);
+			imageName += "." + FilenameUtils.getExtension(originalName);
+			System.out.println("image name: " + imageName);
 			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 0) {
+				System.out.println("failed image load");
 				return false;
 			}
 		}
-		
+
 		Personality person = new Personality();
 		person.setFirstName(personality.getFirstname());
 		person.setLastName(personality.getLastname());
 		person.setBiography(personality.getBiography());
-		if (person.getBiography() != null) {
+		if (person.getDateOfBirthday() != null) {
 			person.setDateOfBirthday(new Date(personality.getBirthday().getTime()));
 		}
 		person.setPhoto(imageName);
-		if (!personality.getCountry().isEmpty()) {
+		if (!personality.getCountry().isEmpty() && !personality.getCountry().equals("-1")) {
 			Country country = countryRepository.getOne(Integer.valueOf(personality.getCountry()));
 			person.setCountry(country);
 		}

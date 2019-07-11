@@ -42,6 +42,8 @@
 								<div class="row col-12">
 									<div class="form-group col-6">
 										<label for="input-firstname">First name</label> <input required
+											minlength="2"
+											maxlength="30"
 											name="firstname"
 											type="text" class="form-control" id="input-firstname"
 											aria-describedby="emailHelp" placeholder="Enter firtname">
@@ -49,6 +51,8 @@
 									</div>
 									<div class="form-group col-6">
 										<label for="input-lastname">Last name</label> <input required name="lastname"
+											minlength="2"
+											maxlength="60"
 											type="text" class="form-control" id="input-lastname"
 											aria-describedby="emailHelp" placeholder="Enter lastname">
 
@@ -58,8 +62,8 @@
 									<div class="form-group col-4">
 										<label for="input-photo">Photo</label>
 										<div class="custom-file">
-											<input name="photo" accept=".jpg,.png" type="file"
-												class="custom-file-input" id="input-photo" requried>
+											<input required name="photo" accept=".jpg,.png" type="file"
+												class="custom-file-input" id="input-photo">
 											<label class="custom-file-label" for="input-photo">Choose
 												file...</label>
 										</div>
@@ -67,6 +71,7 @@
 									<div class="form-group col-4">
 										<label for="input-country">Country</label>
 										<select id="input-country" class="custom-select" name="country">
+											<option name="country" th:value="-1">Choose...<option>
 											<option name="country" th:value="${country.id}" th:each="country : ${countries}" th:text="${country.name}"><option>
 										</select>
 									</div>
@@ -80,7 +85,9 @@
 								<div class="col-12">
 									<div class="form-group">
 										<label for="input-biography">Biography</label>
-										<textarea name="biography" class="form-control" id="input-biography" rows="4"></textarea>
+										<textarea
+										maxlength="1024"
+										 name="biography" class="form-control" id="input-biography" rows="4"></textarea>
 									</div>
 								</div>
 							</div>
