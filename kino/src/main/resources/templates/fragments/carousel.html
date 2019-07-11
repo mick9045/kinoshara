@@ -27,43 +27,44 @@
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				</ol>
 				<div class="carousel-inner carousel-container">
-					<div class="carousel-item" th:each="film,iterstat  : ${similar}"
+					<div class="carousel-item" th:each="film, iterstat  : ${similar}"
 						th:if="${iterstat.index} % 3 == 0"
 						th:classappend="${iterstat.first == true}?active">
 						<div class="carousell-card">
 							<div style="display: inline-block; width: 32%;">
 								<div class="image-wrap">
 									<img
-										th:src="@{'/image/smallposter/' + ${similar[iterstat.count-1].imageSmallPath}}"
+										th:src="@{'/image/smallposter/' + ${similar[iterstat.count - 1].imageSmallPath}}"
 										class=" carousell-image" src="..." alt="Second slide">
 
 								</div>
 								<a th:href="@{'/films/' + ${similar[iterstat.count-1].id}}">
-								<h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count-1].title}"></h5></a>
+									<h5 class="h5 carousell-h5"
+										th:text="${similar[iterstat.count-1].title}"></h5>
+								</a>
 							</div>
-							<div style="display: inline-block; width: 32%;">
+							<div style="display: inline-block; width: 32%;"  th:if="${iterstat.index + 1 < iterstat.size}">
 								<div class="image-wrap">
 									<img
 										th:src="@{'/image/smallposter/' + ${similar[iterstat.count].imageSmallPath}}"
-										class=" carousell-image" src="..." alt="Second slide">
-
+										class="carousell-image" src="..." alt="Second slide">
 								</div>
-								<a th:href="@{'/films/' + ${similar[iterstat.count].id}}"><h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count].title}"></h5></a>
+								<a th:href="@{'/films/' + ${similar[iterstat.count].id}}"><h5
+										class="h5 carousell-h5"
+										th:text="${similar[iterstat.count].title}"></h5></a>
 							</div>
-							<div style="display: inline-block; width: 32%;">
+							<div style="display: inline-block; width: 32%;" th:if="${iterstat.index + 2 < iterstat.size}">
 								<div class="image-wrap">
-									<img
-										th:src="@{'/image/smallposter/' + ${similar[iterstat.count+1].imageSmallPath}}"
+									<img 
+										th:src="@{'/image/smallposter/' + ${similar[iterstat.count + 1].imageSmallPath}}"
 										class=" carousell-image" src="..." alt="Second slide">
 								</div>
 								<a th:href="@{'/films/' + ${similar[iterstat.count+1].id}}">
-								<h5 class="h5 carousell-h5"
-									th:text="${similar[iterstat.count+1].title}"></h5></a>
+										<h5 class="h5 carousell-h5"
+										th:text="${similar[iterstat.count+1].title}"></h5>
+								</a>
 							</div>
 						</div>
-
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -75,11 +76,10 @@
 					class="carousel-control-next-icon" aria-hidden="true"></span> <span
 					class="sr-only">Next</span>
 				</a>
-
-
-
 			</div>
+			
 		</div>
+	</div>
 	</div>
 
 </body>
