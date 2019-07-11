@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.step.kino.entities.Director;
+import ua.step.kino.entities.Personality;
+import ua.step.kino.entities.Position;
 import ua.step.kino.repositories.DirectorRepository;
+import ua.step.kino.repositories.PersonalityRepository;
 
 /**
  * 
@@ -22,16 +25,21 @@ import ua.step.kino.repositories.DirectorRepository;
 public class DirectorController {
 	@Autowired DirectorRepository directorRepository;
 	
+	@Autowired
+	PersonalityRepository personalityRepository;
+	
 	@GetMapping
 	public String showAll(Model model) {
-		List<Director> directors = directorRepository.findAll();
+		//List<Director> directors = directorRepository.findAll();
+		List<Personality> directors = personalityRepository.findByPositions(Position.Director);
 		model.addAttribute("directors", directors);
 		return "directors";
 	}
 	
 	@GetMapping("/{id}")
 	public String showActor(@PathVariable int id, Model model) {
-		directorRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
+		//directorRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
+		personalityRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
 		return "Director";
 	}
 }
