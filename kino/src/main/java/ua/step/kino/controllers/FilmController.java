@@ -52,10 +52,9 @@ public class FilmController {
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
 			
-		Set<Film> films = null;
 		
 		//similarFilmsService.similarFilms(filmsRepository.findById(id));
-		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film",similarFilmsService.similarFilms(o)));
+		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
 	
 		//films.forEach(f -> System.out.println(f.getTitle()));
 		
