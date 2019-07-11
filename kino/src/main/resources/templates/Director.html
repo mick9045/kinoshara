@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Actor</title>
+<title>Director</title>
 <link rel="stylesheet" th:href="@{/css/main.css}" />
 <link rel="stylesheet" th:href="@{/css/movie.css}" />
 <link rel="stylesheet"
@@ -38,19 +38,19 @@ a:hover {
 	<main role="main" class="container bg-light body-container">
 	<div class="row">
 		<div class="col-md-3" style="height: 185px;">
-			<div id="image" >
-				<img th:if="${actor.photo != null}" th:src="@{'/image/bigportrait/' + ${actor.photo}}"
+			<div id="image">
+				<img th:if="${director.photo != null}"  th:src="@{'/image/bigportrait/' + ${director.photo}}"
 					style="width: 260px; height: 366px;">
 			</div>
 		</div>
 		<div class="col-md-9">
 			<br>
 			<h1 class="display-4"
-				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h1>
+				th:text="${director.firstName} + ' ' +  ${director.lastName}"></h1>
 			<br>
-			<h5 th:text="'Родился: '+${actor.dateOfBirthday}" /></h5>
+			<h5 th:text="'Родился: '+${director.dateOfBirthday}" /></h5>
 			<br>
-			<h5 th:text="'Гражданство: '+${actor.Country}" />
+			<h5 th:text="'Гражданство: '+${director.Country}" />
 				</h5><br>
 		</div>
 	</div>
@@ -60,16 +60,16 @@ a:hover {
 		<div class="col-md-9">
 			<h3 class="display-6 ml-2">Биография</h3>
 			<div class="row  p-2">
-				<p th:text="${actor.biography}"></p>
+				<p th:text="${director.biography}"></p>
 			</div>
 		</div>
 	</div>
 	<div class="row  p-2">
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
-			<h3 class="display-6 ml-2">Фильмография</h3>
+			<h3 class="display-6 ml-2">Снятые фильмы</h3>
 			<ol>
-				<li th:if="${actor.filmsActed}" th:each="film : ${actor.filmsActed}"><a
+				<li th:if="${director.filmsDirected}" th:each="film : ${director.filmsDirected}"><a
 					th:href="@{'/films/' + ${film.id}}"><h5 th:text="${film.title}"></h5></a></li>
 			</ol>
 		</div>
