@@ -40,7 +40,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 			imageName += UUID.randomUUID().toString();
 			imageName += "." + FilenameUtils.getExtension(originalName);
 			System.out.println("image name: " + imageName);
-			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 0) {
+			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 200) {
 				System.out.println("failed image load");
 				return false;
 			}
