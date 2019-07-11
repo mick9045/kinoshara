@@ -6,6 +6,12 @@
 		<link rel="stylesheet" th:href="@{/css/add_person.css}">
 		<script th:src="@{/scripts/admin/imagePreview.js}"></script>
 		<div class="container bg-light roudned p-4">
+		<div th:if="${result == 'success'}" class="alert alert-success col-12" role="alert">
+			Person was added successfully.	
+		</div>
+		<div th:if="${result == 'fail'}" class="alert alert-danger col-12" role="alert">
+			There was a problem in adding person
+		</div>
 			<div class="row">
 				<h4 class="mb-4 col-12">Person</h4>
 				<form method="POST" enctype="multipart/form-data" class="col-12">

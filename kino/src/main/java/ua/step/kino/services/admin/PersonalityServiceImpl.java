@@ -30,7 +30,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 	CountryRepository countryRepository;
 	
 	@Override
-	public void add(PersonalityDTO personality) {
+	public boolean add(PersonalityDTO personality) {
 		System.out.println("Enter");
 		String imageName = "";
 		if (!personality.getPhoto().isEmpty()) {
@@ -38,7 +38,9 @@ public class PersonalityServiceImpl implements PersonalityService {
 			imageName = FilenameUtils.removeExtension(originalName);
 			imageName += UUID.randomUUID().toString();
 			imageName += FilenameUtils.getExtension(originalName);
-			uploadService.uploadBigPortrait(personality.getPhoto(), imageName);
+			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 0) {
+				return false;
+			}
 		}
 		
 		Personality person = new Personality();
@@ -57,7 +59,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 		
 		
 		personalityRepository.save(person);
-
+		return true;
 	}
 	
 	
