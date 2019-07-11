@@ -38,7 +38,7 @@ a:hover {
 	<main role="main" class="container bg-light body-container">
 	<div class="row">
 		<div class="col-md-3" style="height: 185px;">
-			<div id="image">
+			<div class="image-wrapper" id="image">
 				<img th:if="${director.photo != null}"  th:src="@{'/image/bigportrait/' + ${director.photo}}"
 					style="width: 260px; height: 366px;">
 			</div>
