@@ -1,6 +1,7 @@
 package ua.step.kino.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,18 +22,49 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 
 	@Autowired
 	FilmRepository filmRepo;
+	
+
+	private int calculate(String x, String y) {
+        if (x.isEmpty()) {
+            return y.length();
+        }
+ 
+        if (y.isEmpty()) {
+            return x.length();
+        } 
+ 
+        int substitution = calculate(x.substring(1), y.substring(1)) 
+         + costOfSubstitution(x.charAt(0), y.charAt(0));
+        int insertion = calculate(x, y.substring(1)) + 1;
+        int deletion = calculate(x.substring(1), y) + 1;
+ 
+        return min(substitution, insertion, deletion);
+    }
+ 
+    private int costOfSubstitution(char a, char b) {
+        return a == b ? 0 : 1;
+    }
+ 
+    private int min(int... numbers) {
+        return Arrays.stream(numbers)
+          .min().orElse(Integer.MAX_VALUE);
+    }
 
 	@Override
-	public Set<Film> similarFilmsByTitle(Film filmToCompare) {
+	public Set<Film> similarFilmsByTitle(Film filmToCompare) 
+	{
 		List<Film> allFilms = filmRepo.findAll();
-		List<Film> resultFilms = new ArrayList<Film>();
-
-		String[] strings = filmToCompare.getTitle().split(" ");
-		for (Film film : allFilms) {
-			film.getTitle();
-
+		Set<Film> resultFilms = new HashSet<Film>();
+		
+		for(Film f : allFilms)
+		{
+			if(f.getTitle().compareTo(filmToCompare.getTitle()) <= 2)
+			{
+				System.out.println("JOINEDJOINEDJOINEDJOINEDJOINEDJOINED");
+				resultFilms.add(f);
+			}
 		}
-		return null;
+		return resultFilms;
 	}
 
 	@Override
@@ -116,6 +148,10 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		resultFilms.addAll(similarFilmsByActors(filmToCompare));
 		resultFilms.addAll(similarFilmsByGenres(filmToCompare));
 		resultFilms.addAll(similarFilmsByDirectors(filmToCompare));
+		resultFilms.addAll(similarFilmsByTitle(filmToCompare));
+		resultFilms.remove(filmToCompare);
+		
+		resultFilms.forEach(f -> System.out.println(f.getTitle()));
 		
 		return resultFilms;
 		
