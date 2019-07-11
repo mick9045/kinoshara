@@ -14,32 +14,31 @@
 </head>
 
 <body>
-<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header"></div>
 	<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <a class="navbar-brand" href="#">Kinoshara.com</a></nav> -->
 
-
-<ol>
-<li th:each="director : ${directors}" ><a th:href="@{'/directors/' + ${director.id}}"><p
-								th:text="${director.firstName} + ' ' +  ${director.lastName} + ', ' + ${director.dateOfBirthday} + ', ' + ${director.Country}"></p></a></li>
-</ol>
 
 	<main role="main" class="container">
 
 	<div class="card-columns">
 		<div class="card" th:each="director : ${directors}">
-			<div class="card-header" ><a th:href="@{'/directors/' + ${director.id}}"><p
-								th:text="${director.firstName} + ' ' +  ${director.lastName}"></p></a></div>
+			<div class="card-header">
+				<a th:href="@{'/directors/' + ${director.id}}"><p
+						th:text="${director.firstName} + ' ' +  ${director.lastName}"></p></a>
+			</div>
 			<div class="card-body">
 				<ul type="disc">
 					<li th:text="${director.dateOfBirthday}" />
 					<li th:text="${director.Country}" />
-					 <li>Фильмография:
-							<ol>
-								<li th:if="${director.filmsDirected}" th:each="film : ${director.filmsDirected}" ><a
-					th:href="@{'/films/' + ${film.id}}"><h5 th:text="${film.title}"></h5></a></li>
-							</ol>
-						</li> 
+					<li>Фильмография:
+						<ol>
+							<li th:if="${director.filmsDirected}"
+								th:each="film : ${director.filmsDirected}"><a
+								th:href="@{'/films/' + ${film.id}}"><h5
+										th:text="${film.title}"></h5></a></li>
+						</ol>
+					</li>
 				</ul>
 			</div>
 		</div>
