@@ -50,15 +50,11 @@ public class PersonalityServiceImpl implements PersonalityService {
 			person.setCountry(country);
 		}
 		person.setPositions(personality.getPositions());
-		person.setPositions(loadPositions());
 		
 		
 		personalityRepository.save(person);
 
 	}
 	
-	private List<Position> loadPositions() {
-		return null;
-	}
 	
 }

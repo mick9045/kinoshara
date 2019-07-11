@@ -38,8 +38,8 @@ a:hover {
 	<main role="main" class="container bg-light body-container">
 	<div class="row">
 		<div class="col-md-3" style="height: 185px;">
-			<div id="image">
-				<img th:src="@{'/image/bigportrait/' + ${actor.photo}}"
+			<div id="image" >
+				<img th:if="${actor.photo != null}" th:src="@{'/image/bigportrait/' + ${actor.photo}}"
 					style="width: 260px; height: 366px;">
 			</div>
 		</div>
@@ -69,7 +69,7 @@ a:hover {
 		<div class="col-md-9">
 			<h3 class="display-6 ml-2">Фильмография</h3>
 			<ol>
-				<li th:if="${actor.films}" th:each="film : ${actor.films}"><a
+				<li th:if="${actor.filmsActed}" th:each="film : ${actor.filmsActed}"><a
 					th:href="@{'/films/' + ${film.id}}"><h5 th:text="${film.title}"></h5></a></li>
 			</ol>
 		</div>

@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity(name = "personalities")
 @DiscriminatorColumn(name="personality_position", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue("0")
 public class Personality {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +58,20 @@ public class Personality {
 	@JoinColumn(name="country_id")
 	private Country country;
 	
+	@ManyToMany
+	@JoinTable(
+			  name = "Actors_Films", 
+			  joinColumns = @JoinColumn(name = "actor_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+	private List<Film> filmsActed;
+	
+	@ManyToMany
+	@JoinTable(
+			  name = "Directors_Films", 
+			  joinColumns = @JoinColumn(name = "director_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+	private List<Film> filmsDirected;
+
 	
 	
 	public Personality()
@@ -131,5 +147,33 @@ public class Personality {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	
+
+	/**
+	 * @return the filmsActed
+	 */
+	public List<Film> getFilmsActed() {
+		return filmsActed;
+	}
+
+	/**
+	 * @param filmsActed the filmsActed to set
+	 */
+	public void setFilmsActed(List<Film> filmsActed) {
+		this.filmsActed = filmsActed;
+	}
+
+	/**
+	 * @return the filmsDirected
+	 */
+	public List<Film> getFilmsDirected() {
+		return filmsDirected;
+	}
+
+	/**
+	 * @param filmsDirected the filmsDirected to set
+	 */
+	public void setFilmsDirected(List<Film> filmsDirected) {
+		this.filmsDirected = filmsDirected;
+	}
+
 }

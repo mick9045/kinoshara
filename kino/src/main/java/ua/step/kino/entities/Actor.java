@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @DiscriminatorValue("1")
 public class Actor extends Personality {
+	/*
 	@ManyToMany
 	@JoinTable(
 			  name = "Actors_Films", 
@@ -23,5 +24,6 @@ public class Actor extends Personality {
 	public void setFilms(List<Film> films) {
 		this.films = films;
 	}
+	*/
 	
 }
