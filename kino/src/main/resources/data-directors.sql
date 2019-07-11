@@ -19,6 +19,11 @@ insert into films(id, title, image_Small_Path, release_Year, views, rating, film
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (7, 'Midnight sun', 'midnight_sun.jpg', 2018, 0, 5.45, 120)
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (8, 'Man of steel', 'Man_of_Steel.jpg', 2013, 0, 5.45, 120)
 insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (9, 'Doctor Strange', 'Doctor_Strange_poster.jpg', 2016, 0, 5.45, 120)
+insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (10, 'Men in Black: International 2', 'MIB.jpg', 2019, 0, 5.45, 120)
+insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (11, 'Men in Black: International 3', 'MIB.jpg', 2019, 0, 5.45, 120)
+insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (12, 'Men in Black: International 23', 'MIB.jpg', 2019, 0, 5.45, 120)
+insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (13, 'Men in Black: International 232', 'MIB.jpg', 2019, 0, 5.45, 120)
+insert into films(id, title, image_Small_Path, release_Year, views, rating, film_Length) VALUES (14, 'Men in Black: International 3232', 'MIB.jpg', 2019, 0, 5.45, 120)
 
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 1, 'Chris', 'Hemsworth', '1983-08-11', 2)
 insert into Personalities (personality_position, id, first_Name, last_Name, date_Of_Birthday, country_id) VALUES(1, 2, 'Scarlett', 'Johansson', '1984-11-22', 2)

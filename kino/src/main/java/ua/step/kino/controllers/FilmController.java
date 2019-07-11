@@ -2,6 +2,7 @@ package ua.step.kino.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -50,10 +51,14 @@ public class FilmController {
 	@GetMapping("/{id}")
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
+			
+		Set<Film> films = null;
 		
-		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
+		//similarFilmsService.similarFilms(filmsRepository.findById(id));
+		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film",similarFilmsService.similarFilms(o)));
+	
+		//films.forEach(f -> System.out.println(f.getTitle()));
 		
-
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Boolean reviewed = false;
