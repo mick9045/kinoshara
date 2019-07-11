@@ -12,5 +12,9 @@ public interface UploadService{
 	public int uploadBigPortrait(MultipartFile file, String attachmentFileName);
 	public int uploadSmallPoster(MultipartFile file, String attachmentFileName);
 	public int uploadBigPoster(MultipartFile file, String attachmentFileName);
+	public int uploadBigPoster(byte[] file, String attachmentFileName);
+	public int uploadSmallPoster(byte[] file, String attachmentFileName);
+	public int uploadBigPortrait(byte[] file, String attachmentFileName);
+	public int uploadSmallPortrait(byte[] file, String attachmentFileName);
 	
 }

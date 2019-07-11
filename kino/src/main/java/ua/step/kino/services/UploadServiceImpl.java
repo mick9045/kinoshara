@@ -83,6 +83,57 @@ public class UploadServiceImpl implements UploadService {
 		
 		return 0;
 	}
+	
+	private int uploadBytes(byte[] file, String attachmentName, String attachmentFileName) {
+		
+		
+		
+		HttpURLConnection con;
+		try {
+			
+			con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "multipart/form-data");
+			con.setRequestProperty("Connection", "Keep-Alive");
+			con.setRequestProperty("Cache-Control", "no-cache");
+			con.setUseCaches(false);
+			con.setDoOutput(true);
+			con.setRequestProperty(
+				    "Content-Type", "multipart/form-data;boundary=" + boundary);
+
+			DataOutputStream request = new DataOutputStream(
+					con.getOutputStream());
+
+				request.writeBytes(this.twoHyphens + this.boundary + this.crlf);
+				request.writeBytes("Content-Disposition: form-data; name=\"" +
+				    attachmentName + "\";filename=\"" + 
+				    attachmentFileName + "\"" + this.crlf);
+				request.writeBytes(this.crlf);
+				request.write(file);
+				request.writeBytes(this.crlf);
+				request.writeBytes(this.twoHyphens + this.boundary + 
+				    this.twoHyphens + this.crlf);
+				request.flush();
+				request.close();
+				
+				
+				int response = con.getResponseCode();
+				
+				con.disconnect();
+				
+				return response;
+
+					
+			
+		} catch (IOException e) {
+	
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
 
 
 	@Override
@@ -136,5 +187,32 @@ public class UploadServiceImpl implements UploadService {
 
 		return uploadImage(file, "smallportrait", attachmentFileName);
 	}
+	
+	@Override
+	public int uploadBigPoster(byte[] file, String attachmentFileName) {
+		
+		return uploadBytes(file, "bigposter", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadSmallPoster(byte[] file, String attachmentFileName) {
+		return uploadBytes(file, "smallposter", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadBigPortrait(byte[] file, String attachmentFileName) {
+
+		return uploadBytes(file, "bigportrait", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadSmallPortrait(byte[] file, String attachmentFileName) {
+
+		return uploadBytes(file, "smallportrait", attachmentFileName);
+	}
+	
 
 }
