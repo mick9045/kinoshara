@@ -27,9 +27,9 @@ import ua.step.kino.entities.User;
 import ua.step.kino.repositories.UsersRepository;
 import ua.step.kino.services.FilmSortService;
 import ua.step.kino.services.RegistrationService;
-import validation.EmailExistsException;
-import validation.LoginExistsException;
-import validation.UserDto;
+import ua.step.kino.validation.EmailExistsException;
+import ua.step.kino.validation.LoginExistsException;
+import ua.step.kino.validation.UserDto;
 
 import java.util.Date;
 
@@ -65,8 +65,7 @@ public class AuthorizationController {
 	@GetMapping(value="/registration")
 	public String showAll1(Model model) 
 	{
-		List<User> users = usersRepository.findAll();
-		model.addAttribute("users", users);
+		
 		return "registration";
 	}
 	

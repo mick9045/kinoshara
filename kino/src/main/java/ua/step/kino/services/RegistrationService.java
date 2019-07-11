@@ -1,9 +1,9 @@
 package ua.step.kino.services;
 
 import ua.step.kino.entities.User;
-import validation.EmailExistsException;
-import validation.LoginExistsException;
-import validation.UserDto;
+import ua.step.kino.validation.EmailExistsException;
+import ua.step.kino.validation.LoginExistsException;
+import ua.step.kino.validation.UserDto;
 
 public interface RegistrationService {
 

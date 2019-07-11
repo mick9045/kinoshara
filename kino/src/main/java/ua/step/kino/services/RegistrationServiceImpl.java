@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.step.kino.entities.User;
 import ua.step.kino.repositories.RolesRepository;
 import ua.step.kino.repositories.UsersRepository;
-import validation.EmailExistsException;
-import validation.LoginExistsException;
-import validation.UserDto;
+import ua.step.kino.validation.EmailExistsException;
+import ua.step.kino.validation.LoginExistsException;
+import ua.step.kino.validation.UserDto;
 
 @Component("RegistrationService")
 public class RegistrationServiceImpl implements RegistrationService {
