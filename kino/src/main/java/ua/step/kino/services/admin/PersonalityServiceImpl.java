@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.hibernate.dialect.function.PositionSubstringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,13 @@ public class PersonalityServiceImpl implements PersonalityService {
 		System.out.println("Enter");
 		String imageName = "";
 		if (!personality.getPhoto().isEmpty()) {
-			uploadService.uploadBigPortrait(personality.getPhoto());
-
-			imageName = personality.getPhoto().getOriginalFilename();
+			String originalName = personality.getPhoto().getOriginalFilename();
+			imageName = FilenameUtils.removeExtension(originalName);
+			imageName += UUID.randomUUID().toString();
+			imageName += FilenameUtils.getExtension(originalName);
+			uploadService.uploadBigPortrait(personality.getPhoto(), imageName);
 		}
+		
 		Personality person = new Personality();
 		person.setFirstName(personality.getFirstname());
 		person.setLastName(personality.getLastname());
@@ -44,7 +48,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 		if (person.getBiography() != null) {
 			person.setDateOfBirthday(new Date(personality.getBirthday().getTime()));
 		}
-		person.setPhoto(imageName + "_" + UUID.randomUUID().toString());
+		person.setPhoto(imageName);
 		if (!personality.getCountry().isEmpty()) {
 			Country country = countryRepository.getOne(Integer.valueOf(personality.getCountry()));
 			person.setCountry(country);
