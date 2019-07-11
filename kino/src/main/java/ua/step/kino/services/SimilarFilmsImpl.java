@@ -58,10 +58,10 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		
 		for(Film f : allFilms)
 		{
-			if(f.getTitle().compareTo(filmToCompare.getTitle()) <= 2)
+			if(Math.abs(f.getTitle().compareTo(filmToCompare.getTitle())) <= 2)
 			{
-				System.out.println("JOINEDJOINEDJOINEDJOINEDJOINEDJOINED");
 				resultFilms.add(f);
+				System.out.println("Added from Title: "+ f.getTitle());
 			}
 		}
 		return resultFilms;
@@ -88,7 +88,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 					if(director.getId() == director2.getId())
 					{
 						resultFilms.add(film);
-						System.out.println("ADDED");
+						System.out.println("Added from Directors: "+ film.getTitle());
 					}
 				}
 			}
@@ -111,6 +111,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 					if(genre.getId() == genre2.getId())
 					{
 						resultFilms.add(film);
+						System.out.println("Added from Genres: "+ film.getTitle());
 					}
 				}
 			}
@@ -133,6 +134,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 					if(genre.getId() == genre2.getId())
 					{
 						resultFilms.add(film);
+						System.out.println("Added from Actors: "+ film.getTitle());
 					}
 				}
 			}
@@ -151,7 +153,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		resultFilms.addAll(similarFilmsByTitle(filmToCompare));
 		resultFilms.remove(filmToCompare);
 		
-		resultFilms.forEach(f -> System.out.println(f.getTitle()));
+		//resultFilms.forEach(f -> System.out.println(f.getTitle()));
 		
 		return resultFilms;
 		
