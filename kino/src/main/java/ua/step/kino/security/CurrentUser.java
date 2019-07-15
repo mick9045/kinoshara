@@ -1,7 +1,13 @@
 package ua.step.kino.security;
 
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import ua.step.kino.entities.Role;
 import ua.step.kino.entities.User;
@@ -29,7 +35,24 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
 		return user.getRole();
 	}
 	
-	 @Override
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authoroties = new HashSet<>();
+		authoroties.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName().toUpperCase()));
+		return authoroties;
+	}
+
+	@Override
+	public String getPassword() {
+		return user.getPassword();
+	}
+
+	@Override
+	public String getUsername() {
+		return user.getName();
+	}
+
+	@Override
 	    public String toString() {
 	        return "CurrentUser{" +
 	                "user=" + user +

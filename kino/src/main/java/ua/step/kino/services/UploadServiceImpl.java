@@ -33,10 +33,11 @@ public class UploadServiceImpl implements UploadService {
 	}
 	
 	
-	private int uploadImage(MultipartFile file, String attachmentName) {
+	private int uploadImage(MultipartFile file, String attachmentName, String attachmentFileName) {
 		
-	
-		String attachmentFileName = file.getOriginalFilename();
+		if(attachmentFileName == null)
+		attachmentFileName = file.getOriginalFilename();
+		
 		HttpURLConnection con;
 		try {
 			
@@ -87,27 +88,53 @@ public class UploadServiceImpl implements UploadService {
 	@Override
 	public int uploadBigPoster(MultipartFile file) {
 		
-		return uploadImage(file, "bigposter");
+		return uploadImage(file, "bigposter", null);
 	}
 
 
 	@Override
 	public int uploadSmallPoster(MultipartFile file) {
-		return uploadImage(file, "smallposter");
+		return uploadImage(file, "smallposter", null);
 	}
 
 
 	@Override
 	public int uploadBigPortrait(MultipartFile file) {
 
-		return uploadImage(file, "bigportrait");
+		return uploadImage(file, "bigportrait", null);
 	}
 
 
 	@Override
 	public int uploadSmallPortrait(MultipartFile file) {
 
-		return uploadImage(file, "smallportrait");
+		return uploadImage(file, "smallportrait", null);
+	}
+	
+	@Override
+	public int uploadBigPoster(MultipartFile file, String attachmentFileName) {
+		
+		return uploadImage(file, "bigposter", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadSmallPoster(MultipartFile file, String attachmentFileName) {
+		return uploadImage(file, "smallposter", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadBigPortrait(MultipartFile file, String attachmentFileName) {
+
+		return uploadImage(file, "bigportrait", attachmentFileName);
+	}
+
+
+	@Override
+	public int uploadSmallPortrait(MultipartFile file, String attachmentFileName) {
+
+		return uploadImage(file, "smallportrait", attachmentFileName);
 	}
 
 }

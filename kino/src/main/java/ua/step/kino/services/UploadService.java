@@ -8,5 +8,9 @@ public interface UploadService{
 	public int uploadSmallPoster(MultipartFile file);
 	public int uploadBigPortrait(MultipartFile file);
 	public int uploadSmallPortrait(MultipartFile file);
+	public int uploadSmallPortrait(MultipartFile file, String attachmentFileName);
+	public int uploadBigPortrait(MultipartFile file, String attachmentFileName);
+	public int uploadSmallPoster(MultipartFile file, String attachmentFileName);
+	public int uploadBigPoster(MultipartFile file, String attachmentFileName);
 	
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.hibernate.dialect.function.PositionSubstringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,23 +30,31 @@ public class PersonalityServiceImpl implements PersonalityService {
 	CountryRepository countryRepository;
 	
 	@Override
-	public void add(PersonalityDTO personality) {
+	public boolean add(PersonalityDTO personality) {
 		System.out.println("Enter");
 		String imageName = "";
 		if (!personality.getPhoto().isEmpty()) {
-			uploadService.uploadBigPortrait(personality.getPhoto());
-
-			imageName = personality.getPhoto().getOriginalFilename();
+			String originalName = personality.getPhoto().getOriginalFilename();
+			imageName = FilenameUtils.removeExtension(originalName);
+			imageName += "_";
+			imageName += UUID.randomUUID().toString();
+			imageName += "." + FilenameUtils.getExtension(originalName);
+			System.out.println("image name: " + imageName);
+			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 200) {
+				System.out.println("failed image load");
+				return false;
+			}
 		}
+
 		Personality person = new Personality();
 		person.setFirstName(personality.getFirstname());
 		person.setLastName(personality.getLastname());
 		person.setBiography(personality.getBiography());
-		if (person.getBiography() != null) {
+		if (person.getDateOfBirthday() != null) {
 			person.setDateOfBirthday(new Date(personality.getBirthday().getTime()));
 		}
-		person.setPhoto(imageName + "_" + UUID.randomUUID().toString());
-		if (!personality.getCountry().isEmpty()) {
+		person.setPhoto(imageName);
+		if (!personality.getCountry().isEmpty() && !personality.getCountry().equals("-1")) {
 			Country country = countryRepository.getOne(Integer.valueOf(personality.getCountry()));
 			person.setCountry(country);
 		}
@@ -53,7 +62,7 @@ public class PersonalityServiceImpl implements PersonalityService {
 		
 		
 		personalityRepository.save(person);
-
+		return true;
 	}
 	
 	
