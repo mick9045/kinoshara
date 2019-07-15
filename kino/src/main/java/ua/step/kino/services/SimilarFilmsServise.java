@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Set;
 
 import ua.step.kino.entities.Film;
-
+/**
+ * 
+ * @author Aleksey
+ *
+ */
 public interface SimilarFilmsServise {
 	Set<Film> similarFilmsByTitle(Film filmToCompare);
 	Set<Film> similarFilmsByDirectors(Film filmToCompare);

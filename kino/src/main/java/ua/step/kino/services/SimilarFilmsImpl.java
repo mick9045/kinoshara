@@ -1,21 +1,23 @@
 package ua.step.kino.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ua.step.kino.entities.Actor;
 import ua.step.kino.entities.Director;
 import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
 import ua.step.kino.repositories.FilmRepository;
-
+/**
+ * 
+ * @author Aleksey
+ *
+ */
 
 @Component("SimilarFilmsImpl")
 public class SimilarFilmsImpl implements SimilarFilmsServise {
@@ -23,47 +25,14 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 	@Autowired
 	FilmRepository filmRepo;
 	
-
-	private int calculate(String x, String y) {
-        if (x.isEmpty()) {
-            return y.length();
-        }
- 
-        if (y.isEmpty()) {
-            return x.length();
-        } 
- 
-        int substitution = calculate(x.substring(1), y.substring(1)) 
-         + costOfSubstitution(x.charAt(0), y.charAt(0));
-        int insertion = calculate(x, y.substring(1)) + 1;
-        int deletion = calculate(x.substring(1), y) + 1;
- 
-        return min(substitution, insertion, deletion);
-    }
- 
-    private int costOfSubstitution(char a, char b) {
-        return a == b ? 0 : 1;
-    }
- 
-    private int min(int... numbers) {
-        return Arrays.stream(numbers)
-          .min().orElse(Integer.MAX_VALUE);
-    }
-
 	@Override
 	public Set<Film> similarFilmsByTitle(Film filmToCompare) 
 	{
 		List<Film> allFilms = filmRepo.findAll();
 		Set<Film> resultFilms = new HashSet<Film>();
 		
-		for(Film f : allFilms)
-		{
-			if(Math.abs(f.getTitle().compareTo(filmToCompare.getTitle())) <= 2)
-			{
-				resultFilms.add(f);
-				System.out.println("Added from Title: "+ f.getTitle());
-			}
-		}
+		allFilms.forEach(film -> { if(Math.abs(film.getTitle().compareTo(filmToCompare.getTitle())) <= 2) resultFilms.add(film); });
+		
 		return resultFilms;
 	}
 
@@ -74,25 +43,13 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		Set<Film> resultFilms = new HashSet<Film>();
 
 
-		
-		
-		for(Film film: allFilms)
-		{	
-			//resultFilms.addAll(Stream.of(film.getDirectors(), filmToCompare.getDirectors()).map((f1, f2) -> (f1.getId() == f2.getId())).collect(Collectors.toSet()));
-			
-			
-			for(Director director : film.getDirectors())
+		allFilms.stream().flatMap(d -> d.getDirectors().stream()).forEach(director -> {
+			for(Director director2 : filmToCompare.getDirectors())
 			{
-				for(Director director2 : filmToCompare.getDirectors())
-				{
-					if(director.getId() == director2.getId())
-					{
-						resultFilms.add(film);
-						System.out.println("Added from Directors: "+ film.getTitle());
-					}
-				}
+				if(director.getId() == director2.getId())
+					resultFilms.addAll(director.getFilmsDirected());
 			}
-		}
+		});
 		
 		return resultFilms;
 	}
@@ -102,20 +59,14 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		List<Film> allFilms = filmRepo.findAll();
 		Set<Film> resultFilms = new HashSet<Film>();
 
-		for(Film film: allFilms)
-		{
-			for(Genre genre : film.getGenres())
+		allFilms.stream().flatMap(g -> g.getGenres().stream()).forEach(genre -> {
+			for(Genre genre2 : filmToCompare.getGenres())
 			{
-				for(Genre genre2 : filmToCompare.getGenres())
-				{
-					if(genre.getId() == genre2.getId())
-					{
-						resultFilms.add(film);
-						System.out.println("Added from Genres: "+ film.getTitle());
-					}
-				}
+				if(genre.getId() == genre2.getId())
+					resultFilms.addAll(allFilms.stream().filter(film -> film.getGenres().contains(genre)).collect(Collectors.toSet()));
 			}
-		}
+		});
+		
 		
 		return resultFilms;
 	}
@@ -125,20 +76,13 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		List<Film> allFilms = filmRepo.findAll();
 		Set<Film> resultFilms = new HashSet<Film>();
 
-		for(Film film: allFilms)
-		{
-			for(Genre genre : film.getGenres())
+		allFilms.stream().flatMap(a -> a.getActors().stream()).forEach(actor -> {
+			for(Actor actor2 : filmToCompare.getActors())
 			{
-				for(Genre genre2 : filmToCompare.getGenres())
-				{
-					if(genre.getId() == genre2.getId())
-					{
-						resultFilms.add(film);
-						System.out.println("Added from Actors: "+ film.getTitle());
-					}
-				}
+				if(actor.getId() == actor2.getId())
+					resultFilms.addAll(actor.getFilmsActed());
 			}
-		}
+		});
 		
 		return resultFilms;
 	}
