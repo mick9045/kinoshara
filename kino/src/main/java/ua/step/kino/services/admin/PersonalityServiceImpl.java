@@ -30,35 +30,35 @@ public class PersonalityServiceImpl implements PersonalityService {
 	CountryRepository countryRepository;
 	
 	@Override
-	public boolean add(PersonalityDTO personality) {
+	public boolean add(PersonalityDTO personalityDTO) {
 		System.out.println("Enter");
 		String imageName = "";
-		if (!personality.getPhoto().isEmpty()) {
-			String originalName = personality.getPhoto().getOriginalFilename();
+		if (!personalityDTO.getPhoto().isEmpty()) {
+			String originalName = personalityDTO.getPhoto().getOriginalFilename();
 			imageName = FilenameUtils.removeExtension(originalName);
 			imageName += "_";
 			imageName += UUID.randomUUID().toString();
 			imageName += "." + FilenameUtils.getExtension(originalName);
 			System.out.println("image name: " + imageName);
-			if (uploadService.uploadBigPortrait(personality.getPhoto(), imageName) != 200) {
+			if (uploadService.uploadBigPortrait(personalityDTO.getPhoto(), imageName) != 200) {
 				System.out.println("failed image load");
 				return false;
 			}
 		}
 
 		Personality person = new Personality();
-		person.setFirstName(personality.getFirstname());
-		person.setLastName(personality.getLastname());
-		person.setBiography(personality.getBiography());
-		if (person.getDateOfBirthday() != null) {
-			person.setDateOfBirthday(new Date(personality.getBirthday().getTime()));
-		}
+		person.setFirstName(personalityDTO.getFirstname());
+		person.setLastName(personalityDTO.getLastname());
+		person.setBiography(personalityDTO.getBiography());
+		if (personalityDTO.getBirthday() != null) {
+			person.setDateOfBirthday(personalityDTO.getBirthday());
+		} 
 		person.setPhoto(imageName);
-		if (!personality.getCountry().isEmpty() && !personality.getCountry().equals("-1")) {
-			Country country = countryRepository.getOne(Integer.valueOf(personality.getCountry()));
+		if (!personalityDTO.getCountry().isEmpty() && !personalityDTO.getCountry().equals("-1")) {
+			Country country = countryRepository.getOne(Integer.valueOf(personalityDTO.getCountry()));
 			person.setCountry(country);
 		}
-		person.setPositions(personality.getPositions());
+		person.setPositions(personalityDTO.getPositions());
 		
 		
 		personalityRepository.save(person);

@@ -1,5 +1,6 @@
 package ua.step.kino.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class PersonalityDTO {
 	private String country;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date birthday;
+	private LocalDate birthday;
 	
     @Size(max=1024)
 	@Column(columnDefinition="TEXT")
@@ -63,11 +64,11 @@ public class PersonalityDTO {
 		this.country = country;
 	}
 
-	public Date getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
