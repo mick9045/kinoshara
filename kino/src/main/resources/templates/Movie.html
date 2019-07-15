@@ -52,6 +52,8 @@ a:hover {
 				<div id="image">
 					<img th:src="@{'/image/bigposter/' + ${film.imageSmallPath}}"
 						style="width: 260px; height: 366px;">
+						<h3 class="font-weight-lighter align-center" th:text="'IMDb: ' + ${film.rating}"></h3>
+						
 				</div>
 
 			</div>
@@ -82,10 +84,7 @@ a:hover {
 						</ul>
 					</div>
 					<div class="col-md-3">
-						<h5 class="font-weight-light text-muted">IMDb</h5>
-						<ul type="none">
-							<li><p class="font-weight-lighter" th:text="${film.rating}"></p></li>
-						</ul>
+						
 					</div>
 				</div>
 			</div>
