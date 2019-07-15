@@ -35,7 +35,15 @@ public class User {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ROLE_ID")
     private Role role;
-	
+    
+    @Column(nullable = false)
+    private boolean enabled;
+    
+	public User() {
+		super();
+		this.enabled = false;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -95,6 +103,12 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-		
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

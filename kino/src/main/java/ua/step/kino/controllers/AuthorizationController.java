@@ -24,17 +24,22 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.step.kino.entities.User;
+import ua.step.kino.entities.VerificationToken;
 import ua.step.kino.repositories.UsersRepository;
 import ua.step.kino.services.FilmSortService;
 import ua.step.kino.services.RegistrationService;
+import ua.step.kino.services.UserService;
+import ua.step.kino.verification.OnRegistrationCompleteEvent;
 import validation.EmailExistsException;
 import validation.LoginExistsException;
 import validation.UserDto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.ApplicationEventPublisher;
 
 /**
  * 
@@ -46,10 +51,14 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 @RequestMapping("/login")
 public class AuthorizationController {
 	
-@Autowired UsersRepository usersRepository;
+	@Autowired 
+	UsersRepository usersRepository;
 
 	@Autowired(required = false)
 	RegistrationService registrationService;
+	
+	@Autowired
+	ApplicationEventPublisher eventPublisher;
 
 	@GetMapping
 	public String showAll(Model model, @RequestParam Optional<String> error, @RequestParam Optional<String> logout) 
@@ -78,10 +87,11 @@ public class AuthorizationController {
 	  WebRequest request, 
 	  Errors errors) {
 	     
-	
+		User registered = null;
+		
 	    if (!result.hasErrors()) {
 	    	try {
-	       createUserAccount(accountDto, result);
+	    		registered = createUserAccount(accountDto, result);
 	        }
 	    	catch(EmailExistsException e) {
 	    	
@@ -96,7 +106,14 @@ public class AuthorizationController {
 	    		return "registration";
 	    	}
 	    }
-	   
+	    
+	    try {
+	        String appUrl = request.getContextPath();
+	        eventPublisher.publishEvent(new OnRegistrationCompleteEvent
+	          (registered, request.getLocale(), appUrl));
+	    } catch (Exception me) {
+	       model.addAttribute("error", "Error sending of the email");
+	    }
 	        return "redirect:/";
 	    }
 	
@@ -106,6 +123,28 @@ public class AuthorizationController {
 	        registered = registrationService.registerNewUserAccount(accountDto);
 	  
 	    return registered;
+	}
+	
+	@GetMapping(value = "/regitrationConfirm")
+	public String confirmRegistration
+	  (WebRequest request, Model model, @RequestParam("token") String token) {
+	  	     
+	    VerificationToken verificationToken = registrationService.getVerificationToken(token);
+	    if (verificationToken == null) {
+	        model.addAttribute("error", "Invalid token");
+	        return "redirect:/";
+	    }
+	     
+	    User user = verificationToken.getUser();
+	    Calendar cal = Calendar.getInstance();
+	    if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+	        model.addAttribute("error", "Expired token");
+	        return "redirect:/";
+	    } 
+	     
+	    user.setEnabled(true); 
+	    //service.saveRegisteredUser(user); 
+	    return "redirect:/"; 
 	}
 	
 	 @InitBinder
