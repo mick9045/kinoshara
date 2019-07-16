@@ -30,7 +30,7 @@ public class Film {
 	private int id;
 	
 	private String title;
-	
+	// TODO убрать нафиг релиз йер
 	private int releaseYear;
 	
 	private int views;
