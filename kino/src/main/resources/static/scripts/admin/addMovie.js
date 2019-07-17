@@ -20,7 +20,7 @@ $(function() {
 		searchButton: searchActorsButton,
 		searchInput: searchActors,
 		addButton: addActorButton,
-		removeButton: removeActorButton,
+			removeButton: removeActorButton,
 		all: allActors,
 		added: addedActors,
 		request: '/api/personality',

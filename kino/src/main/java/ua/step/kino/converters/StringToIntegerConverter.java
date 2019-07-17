@@ -16,7 +16,6 @@ public class StringToIntegerConverter implements Converter<String, Integer>  {
 */
 
 public class StringToIntegerConverter   {
-
 	
 
 }
