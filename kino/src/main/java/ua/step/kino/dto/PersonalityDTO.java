@@ -18,12 +18,12 @@ public class PersonalityDTO {
 	@NotNull
     @NotEmpty
     @Size(min=2, max=30)
-	private String firstname;
+	private String firstName;
 
 	@NotNull
     @NotEmpty
     @Size(min=2, max=60)
-	private String lastname;
+	private String lastName;
 	
     @Size(max=15)
 	private String country;
@@ -39,20 +39,20 @@ public class PersonalityDTO {
 	
 	private MultipartFile photo;
 
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstname) {
+		this.firstName = firstname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastname) {
+		this.lastName = lastname;
 	}
 
 	public String getCountry() {

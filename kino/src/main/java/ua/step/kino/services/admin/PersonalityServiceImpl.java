@@ -47,8 +47,8 @@ public class PersonalityServiceImpl implements PersonalityService {
 		}
 
 		Personality person = new Personality();
-		person.setFirstName(personality.getFirstname());
-		person.setLastName(personality.getLastname());
+		person.setFirstName(personality.getFirstName());
+		person.setLastName(personality.getLastName());
 		person.setBiography(personality.getBiography());
 		if (person.getDateOfBirthday() != null) {
 			person.setDateOfBirthday(new Date(personality.getBirthday().getTime()));

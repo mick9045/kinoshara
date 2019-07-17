@@ -23,7 +23,8 @@ $(function() {
 		removeButton: removeActorButton,
 		all: allActors,
 		added: addedActors,
-		getRequest: '/api/personality/Actor'
+		request: '/api/personality',
+		position: 'Actor'
 	});
 	
 	search({
@@ -33,7 +34,8 @@ $(function() {
 		removeButton: removeDirectorButton,
 		all: allDirectors,
 		added: addedDirectors,
-		getRequest: '/api/personality/Actor'
+		request: '/api/personality',
+		position: 'Director'
 	});
 	
 	
@@ -43,7 +45,8 @@ $(function() {
 function search(context) {
 	
 	context.searchButton.click(function(e) {
-		$.get(context.getRequest, function(data){
+		
+		$.get(formatRequest(context), function(data){
 			context.all.empty();
 			data = data.filter(filterById.bind(context));
 
@@ -71,7 +74,7 @@ function search(context) {
 
 	});
 }
-
+	
 function onClick(event) {
 	window.open("/actors/" + event.originalTarget.getAttribute("data-id"));
 	//window.location.href = "/actors/" + event.originalTarget.getAttribute("data-id");
@@ -94,4 +97,7 @@ function filterById(item) {
 	return alreadyAdded === false;
 }
 
+function formatRequest(context) {
+	return context.request + '/' + context.position + '/' + context.searchInput.val();
+}
 

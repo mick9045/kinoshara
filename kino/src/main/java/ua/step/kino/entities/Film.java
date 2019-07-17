@@ -42,7 +42,7 @@ public class Film {
 		     name = "Directors_Films", 
 		     joinColumns = @JoinColumn(name = "films_id"), 
 		     inverseJoinColumns = @JoinColumn(name = "director_id"))
-	private Set<Personality> directors = new HashSet<Personality>();
+	private List<Personality> directors = new ArrayList<Personality>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -54,7 +54,7 @@ public class Film {
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<Genre> genres = new HashSet<Genre>();
+	private List<Genre> genres = new ArrayList<Genre>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -86,7 +86,7 @@ public class Film {
 
 	}
 	
-	public Film(int id, String title, Set<Personality> directors, Set<Personality> actors, Set<Genre> genres,
+	public Film(int id, String title, List<Personality> directors, Set<Personality> actors, List<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
 			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views) {
 		super();
@@ -187,11 +187,11 @@ public class Film {
 		this.releaseYear = releaseYear;
 	}*/
 
-	public Set<Personality> getDirectors() {
+	public List<Personality> getDirectors() {
 		return directors;
 	}
 
-	public void setDirectors(Set<Personality> list) {
+	public void setDirectors(List<Personality> list) {
 		this.directors = list;
 	}
 
@@ -203,11 +203,11 @@ public class Film {
 		this.actors = actors2;
 	}
 
-	public Set<Genre> getGenres() {
+	public List<Genre> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(Set<Genre> list) {
+	public void setGenres(List<Genre> list) {
 		this.genres = list;
 	}
 
@@ -228,7 +228,4 @@ public class Film {
 	}
 
 	
-	
-	
-
 }
