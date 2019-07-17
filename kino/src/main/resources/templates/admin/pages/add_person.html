@@ -70,7 +70,7 @@
 									</div>
 									<div class="form-group col-4">
 										<label for="input-country">Country</label>
-										<select id="input-country" class="custom-select" name="country">
+										<select id="input-country" class="custom-select" data-style="btn-primary" data-live-search="true" name="country">
 											<option name="country" th:value="-1">Choose...<option>
 											<option name="country" th:value="${country.id}" th:each="country : ${countries}" th:text="${country.name}"><option>
 										</select>

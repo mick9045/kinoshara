@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div
+	th:replace="layout/body :: body('Movie', 'add_person', ~{ ::content})">
+	<div th:fragment="content">
+		<link rel="stylesheet" th:href="@{/css/image_wrap.css}">
+		<script th:src="@{/scripts/admin/imagePreview.js}"></script>
+		<script th:src="@{/scripts/admin/addMovie.js}"></script>
+
+		<div class="container bg-light roudned p-4">
+			<!-- Error section for adding  -->
+			<div th:if="${result == 'success'}"
+				class="alert alert-success col-12" role="alert">Person was
+				added successfully.</div>
+			<div th:if="${result == 'fail'}" class="alert alert-danger col-12"
+				role="alert">There was a problem in adding person</div>
+			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+			<div class="row">
+				<h4 class="mb-4 col-12">Person</h4>
+				<form method="POST" enctype="multipart/form-data" class="col-12">
+					<div class="row">
+						<div class="col-3">
+							<div class="form-group">
+								<label for="input-photo">Photo</label>
+								<div class="custom-file">
+									<input required name="photo" accept=".jpg,.png" type="file"
+										class="custom-file-input" id="input-photo"> <label
+										class="custom-file-label" for="input-photo">Choose
+										file...</label>
+								</div>
+							</div>
+							<div class="image-wrapper">
+								<img id="uploaded-image">
+							</div>
+						</div>
+						<div class="col-9">
+							<div class="row">
+								<div class="form-group col-6">
+									<label for="input-title">Title</label> <input required
+										minlength="2" maxlength="60" name="title" type="text"
+										class="form-control" id="input-firstname"
+										aria-describedby="emailHelp" placeholder="Enter firtname">
+								</div>
+								<div class="form-group col-6">
+									<label for="input-title">Release date</label> <input required
+										name="releaseDate" type="date" min="1895-12-28"
+										class="form-control" id="input-rating"
+										aria-describedby="emailHelp" placeholder="Enter rating">
+								</div>
+								<div class="form-group col-6">
+									<label for="input-title">Length</label> <input required
+										minlength="2" maxlength="60" name="filmLength" type="number"
+										class="form-control" id="input-length"
+										aria-describedby="emailHelp" placeholder="Enter length">
+								</div>
+								<div class="form-group col-6">
+									<label for="input-title">Rating</label> <input required min="1"
+										max="10" name="filmLength" type="number" step="0.1"
+										class="form-control" id="input-rating"
+										aria-describedby="emailHelp" placeholder="Enter rating">
+								</div>
+								<div class="form-group col-6">
+									<label for="input-country">Countries</label> <select
+										id="input-country" class="selectpicker"
+										data-style="custom-select" data-live-search="true"
+										data-width="100%" name="countries">
+										<th:block th:if="${genres != null}"
+											th:each="genre : ${genres}">
+											<option th:name="country" th:value="${genre.id}"
+												th:text="${genre.name}">
+											<option>
+										</th:block>
+									</select>
+								</div>
+
+								<div class="form-group col-6">
+									<label for="input-country">Genres</label> <select
+										id="input-genre" class="selectpicker"
+										data-style="custom-select" data-width="100%"
+										data-live-search="true" name="genres" multiple>
+										<th:block th:if="${countries != null}"
+											th:each="country : ${countries}">
+											<option th:name="country" th:value="${country.id}"
+												th:text="${country.name}">
+											<option>
+										</th:block>
+
+									</select>
+								</div>
+								
+								
+								<div class="form-group col-6">
+									<label for="input-country">Actors</label> <select
+										id="input-added-actors" class="form-control" name="actors" size="8">
+									</select>
+									<button id="input-remove-added-actor" class="btn btn-danger my-4" type="button">Remove</button>
+								</div>
+								<div class="form-group col-6">
+									<label for="input-country">Actors</label>
+									<div class="input-group mb-2">
+										<input class="form-control" id="input-search-actors"
+											placeholder="Search" aria-label="Search">
+										<div class="input-group-append">
+											<button id="button-search-actors"
+												class="btn btn-primary octicon octicon-search" type="button"></button>
+										</div>
+									</div>
+									<select id="input-all-actors" class="form-control" name="actors"
+										size="6">
+									</select>
+									<button id="button-add-actor" type="button" class="btn btn-success my-4">Add</button>
+								</div>
+								
+								<div class="form-group col-6">
+									<label for="input-country">Directors</label> <select
+										id="input-added-directors" class="form-control" name="actors" size="8">
+									</select>
+									<button type="button" id="input-remove-added-actor" class="btn btn-danger my-4">Remove</button>
+								</div>
+								<div class="form-group col-6">
+									<label for="input-country">Search Directors</label>
+									<div class="input-group mb-2">
+										<input class="form-control" id="input-search-directors"
+											placeholder="Search" aria-label="Search">
+										<div class="input-group-append">
+											<button id="button-search-directors" type="button"
+												class="btn btn-primary octicon octicon-search"></button>
+										</div>
+									</div>
+									<select id="input-all-directors" class="form-control" name="actors"
+										size="6">
+									</select>
+									<button type="button" id="button-add-director" class="btn btn-success my-4">Add</button>
+								</div>
+							</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+</html>

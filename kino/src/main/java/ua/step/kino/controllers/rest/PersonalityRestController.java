@@ -19,7 +19,7 @@ public class PersonalityRestController {
 	PersonalityRepository personalRepository;
 
 	@GetMapping("/{position}")
-	public int getPersonality(@PathVariable String position) {
-		return personalRepository.findByPositions(Position.Actor).size();
+	public List<Personality> getPersonality(@PathVariable String position) {
+		return personalRepository.findByPositions(Position.Actor);
 	}
 }
