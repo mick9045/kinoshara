@@ -39,9 +39,9 @@
 							th:text="${genre.name}" /><br />
 						</span>
 						<span class="label font-weight-normal"
-							th:if="${film.releaseYear!=null}">Release Year: <span
+							th:if="${film.getReleaseDate()!=null}">Release Year: <span
 							class="badge badge-pill badge-primary"
-							th:if="${film.releaseYear}" th:text="${film.releaseYear}" /><br />
+							th:if="${film.getReleaseDate()}" th:text="${film.getReleaseDate()}" /><br />
 						</span>
 
 					</ul>

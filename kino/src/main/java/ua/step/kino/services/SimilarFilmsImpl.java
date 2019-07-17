@@ -12,6 +12,7 @@ import ua.step.kino.entities.Actor;
 import ua.step.kino.entities.Director;
 import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
+import ua.step.kino.entities.Personality;
 import ua.step.kino.repositories.FilmRepository;
 /**
  * 
@@ -44,7 +45,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 
 
 		allFilms.stream().flatMap(d -> d.getDirectors().stream()).forEach(director -> {
-			for(Director director2 : filmToCompare.getDirectors())
+			for(Personality director2 : filmToCompare.getDirectors())
 			{
 				if(director.getId() == director2.getId())
 					resultFilms.addAll(director.getFilmsDirected());
@@ -77,7 +78,7 @@ public class SimilarFilmsImpl implements SimilarFilmsServise {
 		Set<Film> resultFilms = new HashSet<Film>();
 
 		allFilms.stream().flatMap(a -> a.getActors().stream()).forEach(actor -> {
-			for(Actor actor2 : filmToCompare.getActors())
+			for(Personality actor2 : filmToCompare.getActors())
 			{
 				if(actor.getId() == actor2.getId())
 					resultFilms.addAll(actor.getFilmsActed());

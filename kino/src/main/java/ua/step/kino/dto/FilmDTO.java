@@ -10,37 +10,57 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FilmDTO 
-{
+public class FilmDTO {
 	@NotNull
-    @NotEmpty
-    @Size(min=1, max=64)
+	@NotEmpty
+	@Size(min = 1, max = 64)
 	private String title;
-	
+
+	// private int views;
+
 	@NotNull
-    @NotEmpty
-    @Size(min=2, max=30)
-	private int releaseYear;
-	
-	private int views;
-	
-	@NotNull
-    @NotEmpty
-    @Size(min=1, max=20)
+	@NotEmpty
+	@Size(min = 1, max = 20)
 	private List<Integer> directors;
-	
+
 	@NotNull
-    @NotEmpty
-    @Size(min=1, max=100)
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private List<Integer> actors;
-	
-	
+
+	@Size(min = 1, max = 10)
+	private List<Integer> genres;
+
+	@Size(min = 1, max = 5)
+	private List<Integer> countries;
+
+	@NotNull
+	@NotEmpty
+	private MultipartFile posterBig;
+
+	private MultipartFile posterSmall;
+
+	@NotNull
+	@NotEmpty
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date releaseDate;
+
+	// @DateTimeFormat(pattern="yyyy-MM-dd")
+	// private Date additionalDate;
+
+	@NotNull
+	@NotEmpty
+	private Double rating;
+
+	@NotNull
+	@NotEmpty
+	private Double filmLength;
+
 	public FilmDTO() {
 
 	}
 
 	public FilmDTO(@NotNull @NotEmpty @Size(min = 1, max = 64) String title,
-			@NotNull @NotEmpty @Size(min = 2, max = 30) int releaseYear, int views,
 			@NotNull @NotEmpty @Size(min = 1, max = 20) List<Integer> directors,
 			@NotNull @NotEmpty @Size(min = 1, max = 100) List<Integer> actors,
 			@NotNull @NotEmpty @Size(min = 1, max = 10) List<Integer> genres,
@@ -49,8 +69,8 @@ public class FilmDTO
 			Date additionalDate, @NotNull @NotEmpty Double rating, @NotNull @NotEmpty Double filmLength) {
 		super();
 		this.title = title;
-		this.releaseYear = releaseYear;
-		this.views = views;
+		// this.releaseYear = releaseYear;
+		// this.views = views;
 		this.directors = directors;
 		this.actors = actors;
 		this.genres = genres;
@@ -58,7 +78,6 @@ public class FilmDTO
 		this.posterBig = posterBig;
 		this.posterSmall = posterSmall;
 		this.releaseDate = releaseDate;
-		this.additionalDate = additionalDate;
 		this.rating = rating;
 		this.filmLength = filmLength;
 	}
@@ -69,22 +88,6 @@ public class FilmDTO
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public int getReleaseYear() {
-		return releaseYear;
-	}
-
-	public void setReleaseYear(int releaseYear) {
-		this.releaseYear = releaseYear;
-	}
-
-	public int getViews() {
-		return views;
-	}
-
-	public void setViews(int views) {
-		this.views = views;
 	}
 
 	public List<Integer> getDirectors() {
@@ -143,13 +146,12 @@ public class FilmDTO
 		this.releaseDate = releaseDate;
 	}
 
-	public Date getAdditionalDate() {
-		return additionalDate;
-	}
-
-	public void setAdditionalDate(Date additionalDate) {
-		this.additionalDate = additionalDate;
-	}
+	/*
+	 * public Date getAdditionalDate() { return additionalDate; }
+	 * 
+	 * public void setAdditionalDate(Date additionalDate) { this.additionalDate =
+	 * additionalDate; }
+	 */
 
 	public Double getRating() {
 		return rating;
@@ -167,36 +169,4 @@ public class FilmDTO
 		this.filmLength = filmLength;
 	}
 
-	@NotNull
-    @NotEmpty
-    @Size(min=1, max=10)
-	private List<Integer> genres;
-	
-	@NotNull
-    @NotEmpty
-    @Size(min=1, max=5)
-	private List<Integer> countries;
-	
-	@NotNull
-    @NotEmpty
-	private MultipartFile posterBig;
-	
-	private MultipartFile posterSmall;
-	
-	@NotNull
-    @NotEmpty
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date releaseDate;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date additionalDate;
-	
-	@NotNull
-    @NotEmpty
-	private Double rating;
-	
-	@NotNull
-    @NotEmpty
-	private Double filmLength;
-	
 }

@@ -31,7 +31,7 @@ public class Film {
 	
 	private String title;
 	// TODO убрать нафиг релиз йер
-	private int releaseYear;
+	//private int releaseYear;
 	
 	private int views;
 
@@ -41,7 +41,7 @@ public class Film {
 		     name = "Directors_Films", 
 		     joinColumns = @JoinColumn(name = "films_id"), 
 		     inverseJoinColumns = @JoinColumn(name = "director_id"))
-	private Set<Director> directors = new HashSet<Director>();
+	private Set<Personality> directors = new HashSet<Personality>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -49,7 +49,7 @@ public class Film {
 	     name = "Actors_Films", 
 	     joinColumns = @JoinColumn(name = "films_id"), 
 	     inverseJoinColumns = @JoinColumn(name = "actor_id"))
-	 private Set<Actor> actors = new HashSet<Actor>();
+	 private Set<Personality> actors = new HashSet<Personality>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Genre> genres = new HashSet<Genre>();
@@ -64,8 +64,6 @@ public class Film {
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date releaseDate;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date additionalDate;
 	
 	@JsonIgnore
 	private Double rating;
@@ -83,9 +81,9 @@ public class Film {
 
 	}
 	
-	public Film(int id, String title, Set<Director> directors, Set<Actor> actors, Set<Genre> genres,
+	public Film(int id, String title, Set<Personality> directors, Set<Personality> actors, Set<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views, Date additionalDate) {
+			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -101,7 +99,7 @@ public class Film {
 		this.comments = comments;
 		this.reviews = reviews;
 		this.views = views;
-		this.setAdditionalDate(additionalDate);
+		//this.setAdditionalDate(additionalDate);
 	}
 
 	public String getImageSmallPath() {
@@ -176,36 +174,36 @@ public class Film {
 		this.title = title;
 	}
 	
-	public int getReleaseYear() {
+	/*public int getReleaseYear() {
 		return releaseYear;
 	}
 
 	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
-	}
+	}*/
 
-	public Set<Director> getDirectors() {
+	public Set<Personality> getDirectors() {
 		return directors;
 	}
 
-	public void setDirectors(Set<Director> directors) {
-		this.directors = directors;
+	public void setDirectors(Set<Personality> list) {
+		this.directors = list;
 	}
 
-	public Set<Actor> getActors() {
+	public Set<Personality> getActors() {
 		return actors;
 	}
 
-	public void setActors(Set<Actor> actors) {
-		this.actors = actors;
+	public void setActors(Set<Personality> actors2) {
+		this.actors = actors2;
 	}
 
 	public Set<Genre> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(Set<Genre> genres) {
-		this.genres = genres;
+	public void setGenres(Set<Genre> list) {
+		this.genres = list;
 	}
 
 	public List<Country> getCountries() {
@@ -224,13 +222,6 @@ public class Film {
 		this.views = views;
 	}
 
-	public Date getAdditionalDate() {
-		return additionalDate;
-	}
-
-	public void setAdditionalDate(Date additionlDate) {
-		this.additionalDate = additionlDate;
-	}
 	
 	
 	
