@@ -18,6 +18,7 @@ import ua.step.kino.services.admin.AddFilmService;
 @RestController
 @RequestMapping("api/films")
 public class FilmRestController {
+	/*
 	@Autowired
 	FilmRepository filmRepo;
 	
@@ -26,13 +27,15 @@ public class FilmRestController {
 	
 	
 	@PostMapping("/add")
-	@Secured("ROLE_ADMIN")
+	//@Secured("ROLE_ADMIN")
+	
 	String post(@Valid FilmDTO filmDTO, Model model, Errors errors, RedirectAttributes redir) {
 		if (!errors.hasErrors() && addFilmService.add(filmDTO)) {
 			model.addAttribute("result", "success");
 		} else {
 			model.addAttribute("result", "fail");
 		}
-		return "admin/pages/add_film";
+		return "redirect:admin/pages/add_film";
 	}
+	*/
 }

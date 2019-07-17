@@ -52,7 +52,6 @@ public class AddPersonController {
 			model.addAttribute("result", "fail");
 			//redir.addFlashAttribute("result", "usccess");
 		}
-		//return "redirect:/admin/add/person";
-		return "admin/pages/add_person";
+		return "redirect:/admin/add/person";
 	}
 }

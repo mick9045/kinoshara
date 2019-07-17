@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.step.kino.entities.Position;
 
 public class PersonalityDTO {
-
+	@NotNull
+	private int id;
+	
 	@NotNull
     @NotEmpty
     @Size(min=2, max=30)
@@ -38,6 +40,14 @@ public class PersonalityDTO {
 	private List<Position> positions;
 	
 	private MultipartFile photo;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -94,4 +104,6 @@ public class PersonalityDTO {
 	public void setPhoto(MultipartFile photo) {
 		this.photo = photo;
 	}
+
+	
 }

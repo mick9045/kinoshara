@@ -15,16 +15,15 @@
 			<div th:if="${result == 'fail'}" class="alert alert-danger col-12"
 				role="alert">There was a problem in adding person</div>
 			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
-
 			<div class="row">
 				<h4 class="mb-4 col-12">Person</h4>
-				<form action="api/films/add" method="POST" enctype="multipart/form-data" class="col-12">
+				<form  method="POST" enctype="multipart/form-data" class="col-12">
 					<div class="row">
 						<div class="col-3">
 							<div class="form-group">
 								<label for="input-photo">Photo</label>
 								<div class="custom-file">
-									<input required name="photo" accept=".jpg,.png" type="file"
+									<input required name="posterBig" accept=".jpg,.png" type="file"
 										class="custom-file-input" id="input-photo"> <label
 										class="custom-file-label" for="input-photo">Choose
 										file...</label>
@@ -67,7 +66,7 @@
 										placeholder="Enter views count">
 								</div>
 								<div class="form-group col-6">
-									<label for="input-country">Countries</label> <select
+									<label for="input-country">Countries</label> <select multiple
 										id="input-country" class="selectpicker"
 										data-style="custom-select" data-live-search="true"
 										data-width="100%" name="countries">
@@ -114,7 +113,7 @@
 												class="btn btn-primary octicon octicon-search" type="button"></button>
 										</div>
 									</div>
-									<select id="input-all-actors" class="form-control"
+									<select multiple id="input-all-actors" class="form-control"
 										name="actors" size="6">
 									</select>
 									<button id="button-add-actor" type="button"
@@ -139,7 +138,7 @@
 												class="btn btn-primary octicon octicon-search"></button>
 										</div>
 									</div>
-									<select id="input-all-directors" class="form-control"
+									<select multiple id="input-all-directors" class="form-control"
 										name="actors" size="6">
 									</select>
 									<button type="button" id="button-add-director"

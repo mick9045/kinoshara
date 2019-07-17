@@ -46,7 +46,13 @@ public class AddFilmServiceImpl implements AddFilmService{
 			imageName += UUID.randomUUID().toString();
 			imageName += "." + FilenameUtils.getExtension(originalFileName);
 			
-			if(uploadService.uploadBigPortrait(filmDTO.getPosterBig(), originalFileName) != 200)
+			if (uploadService.uploadBigPoster(filmDTO.getPosterBig(), imageName) != 200)
+			{
+				System.out.println("failed image load");
+				return false;
+			}
+			
+			if (uploadService.uploadSmallPoster(filmDTO.getPosterBig(), imageName) != 200)
 			{
 				System.out.println("failed image load");
 				return false;
@@ -58,24 +64,34 @@ public class AddFilmServiceImpl implements AddFilmService{
 		
 		Set<Personality> actors = new HashSet<Personality>();
 		
-		filmDTO.getActors().stream().forEach(integer -> {
-			personalRepository.findById(integer).ifPresent(person -> {
-				actors.add(person);
+		if (filmDTO.getActors() != null) {
+			filmDTO.getActors().stream().forEach(integer -> {
+				personalRepository.findById(integer).ifPresent(person -> {
+					actors.add(person);
+				});
 			});
-		});
+		}
 		
 		newFilm.setActors(actors);
 		
-		newFilm.setDirectors(personalRepository.findAllById(filmDTO.getDirectors()));
-		newFilm.setCountries(countryRepository.findAllById(filmDTO.getCountries()));
-		newFilm.setGenres(genreRepository.findAllById(filmDTO.getGenres()));
+		if (filmDTO.getDirectors() != null) {
+			newFilm.setDirectors(personalRepository.findAllById(filmDTO.getDirectors()));
+		}
+
+		if (filmDTO.getCountries() != null) {
+			newFilm.setCountries(countryRepository.findAllById(filmDTO.getCountries()));
+		}
+
+		if (filmDTO.getGenres() != null) {
+			newFilm.setGenres(genreRepository.findAllById(filmDTO.getGenres()));
+		}
 		newFilm.setTitle(filmDTO.getTitle());
 		newFilm.setReleaseDate(filmDTO.getReleaseDate());
 		newFilm.setRating(filmDTO.getRating());
 		newFilm.setFilmLength(filmDTO.getFilmLength());
 		
 		newFilm.setPosterBig(imageName);
-		
+		newFilm.setImageSmallPath(imageName);
 		
 		filmRepo.save(newFilm);
 		

@@ -55,6 +55,7 @@ function search(context) {
 				var option = document.createElement("option");
 				option.innerHTML = element.firstName + ' ' +  element.lastName;
 				option.setAttribute('data-id', element.id);
+				option.setAttribute('value', element.id);
 				option.addEventListener('dblclick', onClick);
 				context.all.append(option);
 			}

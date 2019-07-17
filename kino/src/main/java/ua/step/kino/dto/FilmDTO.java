@@ -18,13 +18,9 @@ public class FilmDTO {
 
 	// private int views;
 
-	@NotNull
-	@NotEmpty
 	@Size(min = 1, max = 20)
 	private List<Integer> directors;
 
-	@NotNull
-	@NotEmpty
 	@Size(min = 1, max = 100)
 	private List<Integer> actors;
 
@@ -35,25 +31,20 @@ public class FilmDTO {
 	private List<Integer> countries;
 
 	@NotNull
-	@NotEmpty
 	private MultipartFile posterBig;
 
 	private MultipartFile posterSmall;
 
 	@NotNull
-	@NotEmpty
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDate;
 
 	// @DateTimeFormat(pattern="yyyy-MM-dd")
 	// private Date additionalDate;
 
-	@NotNull
-	@NotEmpty
 	private Double rating;
 
 	@NotNull
-	@NotEmpty
 	private Double filmLength;
 
 	public FilmDTO() {

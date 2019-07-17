@@ -17,6 +17,7 @@ public class PersonalityToDTOServiceImpl implements PersonalityToDTOService{
 	@Override
 	public PersonalityDTO transform(Personality person) {
 		PersonalityDTO personDTO = new PersonalityDTO();
+		personDTO.setId(person.getId());
 		personDTO.setBiography(person.getBiography());
 		personDTO.setBirthday(person.getDateOfBirthday());
 		personDTO.setCountry(person.getCountry().getName());
