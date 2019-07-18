@@ -19,9 +19,6 @@ public class RegistrationListener implements ApplicationListener <OnRegistration
     private RegistrationService registrationService;
   
     @Autowired
-    private MessageSource messages;
-  
-    @Autowired
     private JavaMailSender mailSender;
  
     @Override
@@ -30,20 +27,22 @@ public class RegistrationListener implements ApplicationListener <OnRegistration
     }
  
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
+        
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
         registrationService.createVerificationToken(user, token);
-         
+
         String recipientAddress = user.getEmail();
-        String subject = "Registration Confirmation";
+        String recipientName = user.getName();
+        String subject = "Registration confirmation";
         String confirmationUrl 
-          = event.getAppUrl() + "/regitrationConfirm.html?token=" + token;
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
-         
+          = "http://localhost:8080/login/registrationConfirm.html?token=" + token;       
+        
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText(message + " rn" + "http://localhost:8080" + confirmationUrl);
+        email.setText("Almost done, " + recipientName + "! To complete your Kinoshara sign up, we just need to verify your email address: " + confirmationUrl);
+        
         mailSender.send(email);
     }
 }

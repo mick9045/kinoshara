@@ -106,14 +106,16 @@ public class AuthorizationController {
 	    		return "registration";
 	    	}
 	    }
+
+		try {
+			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered));
+
+		} catch (Exception me) {
+
+			model.addAttribute("error", "Error sending of the email");
+			return "registration";
+		}
 	    
-	    try {
-	        String appUrl = request.getContextPath();
-	        eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-	          (registered, request.getLocale(), appUrl));
-	    } catch (Exception me) {
-	       model.addAttribute("error", "Error sending of the email");
-	    }
 	        return "redirect:/";
 	    }
 	
@@ -125,7 +127,7 @@ public class AuthorizationController {
 	    return registered;
 	}
 	
-	@GetMapping(value = "/regitrationConfirm")
+	@GetMapping(value = "/registrationConfirm")
 	public String confirmRegistration
 	  (WebRequest request, Model model, @RequestParam("token") String token) {
 	  	     
@@ -143,7 +145,6 @@ public class AuthorizationController {
 	    } 
 	     
 	    user.setEnabled(true); 
-	    //service.saveRegisteredUser(user); 
 	    return "redirect:/"; 
 	}
 	
