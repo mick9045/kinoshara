@@ -16,4 +16,6 @@ public interface RegistrationService {
 	 void createVerificationToken(User user, String token);
 	 
 	 VerificationToken getVerificationToken(String VerificationToken);
+	 
+	 void saveRegisteredUser(User user);
 }

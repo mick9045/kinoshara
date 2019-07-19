@@ -109,14 +109,14 @@ public class AuthorizationController {
 
 		try {
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered));
-
+			model.addAttribute("error", "Please verify your email address."
+					+ "An email containing verification instructions was sent to" + registered.getEmail());
 		} catch (Exception me) {
-
 			model.addAttribute("error", "Error sending of the email");
 			return "registration";
 		}
-	    
-	        return "redirect:/";
+		
+			return "registration";
 	    }
 	
 	private User createUserAccount(@Valid UserDto accountDto, BindingResult result) throws EmailExistsException, LoginExistsException {
@@ -130,22 +130,23 @@ public class AuthorizationController {
 	@GetMapping(value = "/registrationConfirm")
 	public String confirmRegistration
 	  (WebRequest request, Model model, @RequestParam("token") String token) {
-	  	     
 	    VerificationToken verificationToken = registrationService.getVerificationToken(token);
 	    if (verificationToken == null) {
 	        model.addAttribute("error", "Invalid token");
-	        return "redirect:/";
+			return "registration";
 	    }
 	     
 	    User user = verificationToken.getUser();
 	    Calendar cal = Calendar.getInstance();
 	    if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
 	        model.addAttribute("error", "Expired token");
-	        return "redirect:/";
+			return "registration";
 	    } 
 	     
 	    user.setEnabled(true); 
-	    return "redirect:/"; 
+ 	    registrationService.saveRegisteredUser(user); 
+
+	    return "login"; 
 	}
 	
 	 @InitBinder
