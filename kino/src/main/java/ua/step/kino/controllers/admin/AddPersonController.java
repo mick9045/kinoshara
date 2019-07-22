@@ -46,11 +46,11 @@ public class AddPersonController {
 	//String post(@RequestParam("photo") MultipartFile file, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String[] positions, @RequestParam String country, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date birthday, @RequestParam String biography, Model model) {
 	String post(@Valid PersonalityDTO personality, Model model, Errors errors, RedirectAttributes redir) {
 		if (!errors.hasErrors() && personalityService.add(personality)) {
-			model.addAttribute("result", "success");
-			//redir.addFlashAttribute("result", "usccess");
+			//model.addAttribute("result", "success");
+			redir.addFlashAttribute("result", "success");
 		} else {
-			model.addAttribute("result", "fail");
-			//redir.addFlashAttribute("result", "usccess");
+			//model.addAttribute("result", "fail");
+			redir.addFlashAttribute("result", "fail");
 		}
 		return "redirect:/admin/add/person";
 	}

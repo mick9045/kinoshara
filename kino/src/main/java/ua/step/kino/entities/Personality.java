@@ -1,6 +1,7 @@
 package ua.step.kino.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -21,6 +22,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -47,7 +50,7 @@ public class Personality {
 	private String lastName;
 	
 	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Date dateOfBirthday;
+	private LocalDate dateOfBirthday;
 	
 	@Column(columnDefinition="TEXT")
 	private String biography;
@@ -116,11 +119,11 @@ public class Personality {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirthday() {
+	public LocalDate getDateOfBirthday() {
 		return dateOfBirthday;
 	}
 
-	public void setDateOfBirthday(Date dateOfBirthday) {
+	public void setDateOfBirthday(LocalDate dateOfBirthday) {
 		this.dateOfBirthday = dateOfBirthday;
 	}
 
