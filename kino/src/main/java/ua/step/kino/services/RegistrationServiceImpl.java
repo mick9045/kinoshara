@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.step.kino.entities.User;
+import ua.step.kino.entities.VerificationToken;
 import ua.step.kino.repositories.RolesRepository;
 import ua.step.kino.repositories.UsersRepository;
+import ua.step.kino.repositories.VerificationTokenRepository;
 import validation.EmailExistsException;
 import validation.LoginExistsException;
 import validation.UserDto;
@@ -21,6 +23,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private RolesRepository rolesRepo;
 	@Autowired
 	private PasswordEncoder encoder;
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
 
 	@Transactional
 	@Override
@@ -59,4 +63,25 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return false;
 	}
 
+	@Override
+	public User getUser(String verificationToken) {
+		User user = tokenRepository.findByToken(verificationToken).getUser();
+		return user;
+	}
+
+	@Override
+	public void createVerificationToken(User user, String token) {
+		VerificationToken myToken = new VerificationToken(token, user);
+		tokenRepository.save(myToken);
+	}
+
+	@Override
+	public VerificationToken getVerificationToken(String VerificationToken) {
+		return tokenRepository.findByToken(VerificationToken);
+	}
+
+	@Override
+	public void saveRegisteredUser(User user) {
+		userRepo.save(user);
+	}
 }

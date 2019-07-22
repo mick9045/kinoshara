@@ -1,8 +1,8 @@
-insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Valery', 'valera228', 'valerabas', '1997-10-29', 'vasya@gmail.com', 1)
-insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', 2)
-insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', 'admin', '1986-08-15','azavoruev@gmail.com', 1)
+insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Valery', 'valera228', 'valerabas', '1997-10-29', 'vasya@gmail.com', true, 1)
+insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', true, 2)
+insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', 'admin', '1986-08-15','azavoruev@gmail.com', true, 1)
 
-insert into users (name, login, password, birthday, email, ROLE_ID) VALUES('Mizanin', 'Mizanin', '$2a$10$ySqBjl.DJ8ycoGIuYQP9qOPDZoAIgLB9TCN.Y/PDFdWenby30uNbu', '1998-08-15','mizanin666@gmail.com', 1)
+insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Mizanin', 'Mizanin', '$2a$10$ySqBjl.DJ8ycoGIuYQP9qOPDZoAIgLB9TCN.Y/PDFdWenby30uNbu', '1998-08-15','mizanin666@gmail.com', true, 1)
 
 
 
