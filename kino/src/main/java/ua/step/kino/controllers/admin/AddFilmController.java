@@ -36,7 +36,7 @@ public class AddFilmController {
 	
 	
 	@GetMapping
-	//@Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	String get(Model model)
 	{
 		model.addAttribute("countries", countryRepo.findAll());
@@ -48,12 +48,12 @@ public class AddFilmController {
 	
 	
 	@PostMapping()
-	//@Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	String post(@Valid FilmDTO filmDTO, Model model, Errors errors, RedirectAttributes redir) {
 		if (!errors.hasErrors() && addFilmService.add(filmDTO)) {
-			redir.addAttribute("result", "success");
+			redir.addFlashAttribute("result", "success");
 		} else {
-			redir.addAttribute("result", "fail");
+			redir.addFlashAttribute("result", "fail");
 		}
 		return "redirect:/admin/add/film";
 	}
