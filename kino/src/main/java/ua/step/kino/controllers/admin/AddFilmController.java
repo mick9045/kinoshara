@@ -51,9 +51,9 @@ public class AddFilmController {
 	//@Secured("ROLE_ADMIN")
 	String post(@Valid FilmDTO filmDTO, Model model, Errors errors, RedirectAttributes redir) {
 		if (!errors.hasErrors() && addFilmService.add(filmDTO)) {
-			model.addAttribute("result", "success");
+			redir.addAttribute("result", "success");
 		} else {
-			model.addAttribute("result", "fail");
+			redir.addAttribute("result", "fail");
 		}
 		return "redirect:/admin/add/film";
 	}
