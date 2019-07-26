@@ -60,14 +60,18 @@ public class AuthorizationController {
 	@Autowired
 	ApplicationEventPublisher eventPublisher;
 
+	Integer count=0;
+	
 	@GetMapping
-	public String showAll(Model model, @RequestParam Optional<String> error, @RequestParam Optional<String> logout) 
+	public String showAll(Model model, @RequestParam Optional<String> error, @RequestParam Optional<String> logout, @RequestParam Optional<String> pass) 
 	{
 		if (error.isPresent()) {
 			model.addAttribute("error", "Invalid login or password.");
+			count++;
 		} else if (logout.isPresent()) {
 			model.addAttribute("logout", "You have successfully log out.");
 		}
+		if(count>0) {model.addAttribute("pass", "Forgot your password?");}
 		return "login"; 
 	}
 	
