@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div
+	th:replace="layout/body :: body('Person', 'add_person', ~{ ::content})">
+	<div th:fragment="content">
+		<link rel="stylesheet" th:href="@{/css/add_person.css}">
+		<script th:src="@{/scripts/admin/imagePreview.js}"></script>
+		<div class="container bg-light roudned p-4">
+		<div th:if="${result == 'success'}" class="alert alert-success col-12" role="alert">
+			Person was added successfully.	
+		</div>
+		<div th:if="${result == 'fail'}" class="alert alert-danger col-12" role="alert">
+			There was a problem in adding person
+		</div>
+			<div class="row">
+				<h4 class="mb-4 col-12">Person</h4>
+				<form method="POST" enctype="multipart/form-data" class="col-12">
+					<div class="row">
+						<div class="col-3">
+							<div class="form-group">
+								<label for="input-positions">Positions</label>
+								<!--
+								<select required
+									name="positions"
+									class="selectpicker" id="input-positions" multiple>
+									<option th:value="">Actor</option>
+									<option th:value="">Director</option>
+								</select>
+								-->
+								<select required
+									name="positions"
+									class="selectpicker" id="input-positions" multiple>
+									<option  th:value="${iter.index}" th:text="${position}" th:each="position, iter : ${T(ua.step.kino.entities.Position).values()}"
+										th:selected="${position == person.getPositions()[0]}"
+									>
+								</select>
+							</div>
+							<div class="image-wrapper">
+								<img th:src="${'/image/bigportrait/' + person.getPhoto()}" id="uploaded-image">
+							</div>
+						</div>
+						<div class="col-9">
+							<div class="row">
+								<div class="row col-12">
+									<div class="form-group col-6">
+										<label for="input-firstname">First name</label> <input required
+											minlength="2"
+											maxlength="30"
+											name="firstName"
+											type="text" class="form-control" id="input-firstname"
+											aria-describedby="emailHelp" placeholder="Enter firtname"
+											th:value="${person.getFirstName()}">
+
+									</div>
+									<div class="form-group col-6">
+										<label for="input-lastname">Last name</label> <input required name="lastName"
+											minlength="2"
+											maxlength="60"
+											type="text" class="form-control" id="input-lastname"
+											aria-describedby="emailHelp" placeholder="Enter lastname"
+											th:value="${person.getLastName()}">
+
+									</div>
+								</div>
+								<div class="row col-12">
+									<div class="form-group col-4">
+										<label for="input-photo">Photo</label>
+										<div class="custom-file">
+											<input th:src="${person.getPhoto()}" name="photo" accept=".jpg,.png" type="file"
+												class="custom-file-input" id="input-photo">
+											<label class="custom-file-label" for="input-photo">Choose
+												file...</label>
+										</div>
+									</div>
+									<div class="form-group col-4">
+										<label for="input-country">Country</label>
+										<select id="input-country" class="custom-select" data-style="btn-primary" data-live-search="true" name="country">
+											<option name="country" th:value="-1">Choose...<option>
+											<option name="country" th:value="${country.id}" th:each="country : ${countries}" th:text="${country.name}" 
+											th:selected="${country.name == person.getCountry().name}"><option>
+										</select>
+									</div>
+									<div class="form-group col-4">
+										<label for="input-birthday-date">Birthday</label> <input name="birthday"
+											th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+											type="date" id="input-birthday-day" class="form-control"
+											th:value="${person.getDateOfBirthday()}">
+									</div>
+
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label for="input-biography">Biography</label>
+										<textarea
+										maxlength="1024"
+										 name="biography" class="form-control" id="input-biography" rows="4"
+										  th:text="${person.getBiography()}"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<button type="submit" class="btn btn-primary mt-2 col-2 offset-5">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
