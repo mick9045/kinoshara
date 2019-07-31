@@ -1,60 +1,77 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Countries list</title>
+<title>Countries list</title>
 
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <script th:src="@{webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
-	
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/scripts/validateLoginForm.js}" /></script>
+
+
 
 </head>
 <style>
 table {
-  border-collapse: collapse;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 th, td {
-  text-align: left;
-  padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 </style>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
+	<div th:replace="fragments/header :: header"></div>
 
-<main role="main" class="container">
-  <h2>Users</h2>
-          <div style="overflow-x:auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr th:each="country : ${countries}">
-                    <td th:text="${country.name}"></td>
-                    <td><a th:href="@{/countries/edit/{id}(id=${country.id})}">Edit</a></td>
-                    <td><a th:href="@{/countries/delete/{id}(id=${country.id})}">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-   </div>
-<a th:href="@{/countries/add}">+Add country</a>
-   
-   </main>
+	<main role="main" class="container">
 
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+
+	<h2>Countries</h2>
+	<div style="overflow-x: auto;">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="country : ${countries}">
+					<td th:text="${country.id}"></td>
+					<td th:text="${country.name}"></td>
+					<td><a th:href="@{/countries/edit/{id}(id=${country.id})}">Edit</a></td>
+					<td><a th:href="@{/countries/delete/{id}(id=${country.id})}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a th:href="@{/countries/add}"><h3>+Add country</h3></a> </main>
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
 </html>

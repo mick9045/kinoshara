@@ -5,7 +5,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Genres list</title>
+<title>Add Genre</title>
 
 <link rel="stylesheet"
 	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
@@ -24,52 +24,32 @@
 	th:src="@{/scripts/validateLoginForm.js}" /></script>
 
 
-
 </head>
-<style>
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
 
-th, td {
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-</style>
 <body>
 
 	<div th:replace="fragments/header :: header"></div>
 
-	<main role="main" class="container">
+	<main>
 
+	<div class="container">
+		<h2>Add Genre</h2>
+		<div class="col-md-5 col-centered">
+			<form action="#" th:action="@{/genre/add}" th:object="${genre}"
+				method="post">
 
-	<h2>Genres</h2>
-	<div style="overflow-x: auto;">
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="genre : ${genres}">
-					<td th:text="${genre.id}"></td>
-					<td th:text="${genre.name}"></td>
-					<td><a th:href="@{/genre/edit/{id}(id=${genre.id})}">Edit</a></td>
-					<td><a th:href="@{/genre/delete/{id}(id=${genre.id})}">Delete</a></td>
-				</tr>
-			</tbody>
-		</table>
+				<div class="form-group">
+					<br> <input type="text" class="form-control form-control"
+						th:field="*{name}" id="name" placeholder="Name"> <br>
+
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+					<input type="submit" class="btn btn-primary" value="Add Genre">
+				</div>
+				<small th:if="${error != null}" class="text-danger">[[${error}]]</small>
+			</form>
+		</div>
 	</div>
-	<a th:href="@{/genre/add}"><h3>+Add genre</h3></a> </main>
+	</main>
 
 	<script type="text/javascript"
 		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
