@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div
+	th:replace="layout/body :: body('Person', 'add_person', ~{ ::content})">
+	<div th:fragment="content">
+		<link rel="stylesheet" th:href="@{/css/add_person.css}">
+		<script th:src="@{/scripts/admin/imagePreview.js}"></script>
+		<div class="container bg-light roudned p-4">
+			<div th:if="${result == 'success'}"
+				class="alert alert-success col-12" role="alert">Country was
+				edited successfully.</div>
+			<div th:if="${result == 'fail'}" class="alert alert-danger col-12"
+				role="alert">There was a problem in editing country</div>
+			<div class="row">
+				<h4 class="mb-4 col-12">Country</h4>
+				<form method="POST" th:object="${genre}">
+					<ul>
+						<li><label>Country:</label> <input type='text' th:field="*{name}" /></li>
+						<li><label>&nbsp;</label> <input type="submit" value="OK" class="btn"></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
