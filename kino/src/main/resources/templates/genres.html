@@ -71,7 +71,7 @@ tr:nth-child(even) {
 					<td>
 						<!-- <a th:href="@{/genre/delete/{id}(id=${genre.id})}">Delete</a> -->
 						<button type="button" class="btn btn-link" data-toggle="modal"
-							data-target="#myModal" data-content="${genre.id}">Delete</button>
+							data-target="#myModal" th:attr="data-content=${genre.id}">Delete</button>
 					</td>
 				</tr>
 			</tbody>
