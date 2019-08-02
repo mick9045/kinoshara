@@ -20,7 +20,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ua.step.kino.entities.Country;
+import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
+import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.GenreRepository;
 
 /**
@@ -34,6 +36,9 @@ public class GenreController {
 	@Autowired
 	GenreRepository genreRepository;
 
+	@Autowired 
+	FilmRepository filmRepo;
+	
 	@GetMapping
 	public String showAll(Model model) {
 		List<Genre> genres = genreRepository.findAll();
@@ -100,8 +105,12 @@ public class GenreController {
 
 	@GetMapping("/delete/{id}")
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Genre genre = genreRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		Genre genre = genreRepository.getOne(id);
+		
+		List<Film> films = filmRepo.findAll();
+		
+		films.forEach(film -> film.getGenres().remove(genre));
+		
 		genreRepository.delete(genre);
 		return "redirect:/genre";
 	}
