@@ -3,24 +3,37 @@
 <div
 	th:replace="layout/body :: body('Person', 'add_person', ~{ ::content})">
 	<div th:fragment="content">
-		<link rel="stylesheet" th:href="@{/css/add_person.css}">
-		<script th:src="@{/scripts/admin/imagePreview.js}"></script>
 		<div class="container bg-light roudned p-4">
 			<div th:if="${result == 'success'}"
-				class="alert alert-success col-12" role="alert">Country was
-				edited successfully.</div>
+				class="alert alert-success col-12" role="alert">Genre was
+				updated successfully.</div>
 			<div th:if="${result == 'fail'}" class="alert alert-danger col-12"
-				role="alert">There was a problem in editing country</div>
+				role="alert">There was a problem in updating genre</div>
 			<div class="row">
-				<h4 class="mb-4 col-12">Country</h4>
-				<form method="POST" th:object="${genre}">
-					<ul>
-						<li><label>Country:</label> <input type='text' th:field="*{name}" /></li>
-						<li><label>&nbsp;</label> <input type="submit" value="OK" class="btn"></li>
-					</ul>
+				<h4 class="mb-4 col-12">Genre</h4>
+				<form method="POST" th:object="${genre}" class="col-12">
+					<div class="row">
+						<div class="col-9">
+							<div class="row">
+								<div class="row col-12">
+									<div class="form-group col-6">
+										<label for="input-firstname">Genre</label> <input
+											required minlength="2" maxlength="30" th:field="*{name}"
+											type="text" class="form-control" id="input-firstname"
+											placeholder="Enter firtname">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<button type="submit" class="btn btn-primary mt-2 col-2 offset-5">Submit</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
 </html>
