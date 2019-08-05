@@ -25,38 +25,25 @@ import ua.step.kino.repositories.PersonalityRepository;
 @Controller
 @RequestMapping("/directors")
 public class DirectorController {
-	@Autowired DirectorRepository directorRepository;
-	
+//	@Autowired DirectorRepository directorRepository;
+
 	@Autowired
 	PersonalityRepository personalityRepository;
-	
-	@Autowired 
-	FilmRepository filmRepository;
-	
+
 	@GetMapping
 	public String showAll(Model model) {
-		//List<Director> directors = directorRepository.findAll();
+		// List<Director> directors = directorRepository.findAll();
 		List<Personality> directors = personalityRepository.findByPositions(Position.Director);
 		model.addAttribute("directors", directors);
 		return "directors";
 	}
-	
+
 	@GetMapping("/{id}")
 	public String showActor(@PathVariable int id, Model model) {
-		//directorRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
+		// directorRepository.findById(id).ifPresent(o -> model.addAttribute("director",
+		// o));
 		personalityRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
 		return "Director";
 	}
-	
-	@GetMapping("/delete/{id}")
-	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Personality personality = personalityRepository.getOne(id);
-		
-		List<Film> films = filmRepository.findAll();
-		films.forEach(film -> film.getDirectors().remove(personality));
-				
-		personalityRepository.delete(personality);
-		return "redirect:/directors";
-	}
-}
 
+}

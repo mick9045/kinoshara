@@ -34,12 +34,6 @@ public class CountryController {
 	@Autowired
 	CountryRepository countryRepository;
 	
-	@Autowired 
-	FilmRepository filmRepository;
-	
-	@Autowired 
-	PersonalityRepository personalityRepository;
-
 	@GetMapping
 	public String showAll(Model model) {
 		List<Country> countries = countryRepository.findAll();
@@ -89,18 +83,5 @@ public class CountryController {
 		return "redirect:/countries";
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Country country = countryRepository.getOne(id);
-		List<Film> films = filmRepository.findAll();
-		films.forEach(film -> film.getCountries().remove(country));
-		
-		
-		List<Personality> personalities=personalityRepository.findByCountry(country);
-		personalities.forEach(personality->personality.setCountry(null));
-		
-		
-		countryRepository.delete(country);
-		return "redirect:/countries";
-	}
+	
 }

@@ -103,15 +103,5 @@ public class GenreController {
 		return "redirect:/genre";
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Genre genre = genreRepository.getOne(id);
-		
-		List<Film> films = filmRepository.findAll();
-		
-		films.forEach(film -> film.getGenres().remove(genre));
-		
-		genreRepository.delete(genre);
-		return "redirect:/genre";
-	}
+	
 }

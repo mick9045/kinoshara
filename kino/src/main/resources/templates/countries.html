@@ -58,24 +58,30 @@ tr:nth-child(even) {
 				<tr>
 					<th>ID</th>
 					<th>Name</th>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<th>Edit</th>
 					<th>Delete</th>
+					</div>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="country : ${countries}">
 					<td th:text="${country.id}"></td>
 					<td th:text="${country.name}"></td>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<td><a th:href="@{/countries/edit/{id}(id=${country.id})}">Edit</a></td>
 					<td><button type="button" class="btn btn-link"
 							data-toggle="modal" data-target="#myModal"
 							th:attr="data-content=${country.id}">Delete</button> 
 					</td>
+					</div>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
 	<a th:href="@{/countries/add}"><h3>+Add country</h3></a> </main>
+	</div>
 
 	<!-- HTML-код модального окна -->
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">

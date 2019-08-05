@@ -60,7 +60,9 @@ tr:nth-child(even) {
 					<th>Last Name</th>
 					<th>Date of birth</th>
 					<th>Origin</th>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<th>Delete</th>
+					</div>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,17 +71,19 @@ tr:nth-child(even) {
 					<td th:text="${director.lastName}"></td>
 					<td th:text="${director.dateOfBirthday}"></td>
 					<td th:text="${director.country}"></td>
-					<!-- <td><a th:href="@{/directors/edit/{id}(id=${director.id})}">Edit</a></td> -->
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<!-- <td><a th:href="@{/directors/edit/{id}(id=${director.id})}">Edit</a></td> -->
 					<td><button type="button" class="btn btn-link"
 							data-toggle="modal" data-target="#myModal"
-							th:attr="data-content=${director.id}">Delete</button> 
-					</td>
+							th:attr="data-content=${director.id}">Delete</button></td>
+					</div>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<!-- <a th:href="@{/directors/add}"><h3>+Add director</h3></a> </main> -->
-
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<!-- <a th:href="@{/directors/add}"><h3>+Add director</h3></a> </main> -->
+	</div>
 	<!-- HTML-код модального окна -->
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-sm">
@@ -106,21 +110,21 @@ tr:nth-child(even) {
 	</div>
 
 	<script type="text/javascript"
-		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
-		
-		<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script> <!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
 	<script>
-		$('#myModal').on('show.bs.modal', function(event) {
+		$('#myModal').on(
+				'show.bs.modal',
+				function(event) {
 
-			var button = $(event.relatedTarget)
+					var button = $(event.relatedTarget)
 
-			var content = button.data('content')
+					var content = button.data('content')
 
-			$(this).find('#content').attr("href", "/directors/delete/" + content);
+					$(this).find('#content').attr("href",
+							"/directors/delete/" + content);
 
-		})
+				})
 	</script>
-	
 </body>
 </html>
 

@@ -40,20 +40,12 @@ import ua.step.kino.services.SimilarFilmsImpl;
 public class FilmController {
 	@Autowired
 	FilmRepository filmsRepository;
+	
 	@Autowired
 	ReviewServiceImpl reviewService;
 	
 	@Autowired 
 	SimilarFilmsImpl similarFilmsService;
-	
-	@Autowired 
-	PersonalityRepository personalityRepository;
-	
-	@Autowired 
-	CommentRepository commentRepository;
-	
-	@Autowired 
-	ReviewRepository reviewRepository;
 	
 	@GetMapping
 	public String showAll(Model model) {
@@ -85,24 +77,5 @@ public class FilmController {
 		return "Movie";
 	}
 	
-	@GetMapping("/delete/{id}")
-	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Film film = filmsRepository.getOne(id);
-
-		List<Personality> personalities=personalityRepository.findAll();
-		personalities.forEach(personality->personality.getFilmsActed().remove(film));
-		personalities.forEach(personality->personality.getFilmsDirected().remove(film));
-		
-		List<Review> reviews=reviewRepository.findByFilm(film);
-		reviews.forEach(review->review.setFilm(null));
-		
-		List<Comment> comments=commentRepository.findByFilm(film);
-		comments.forEach(comment->comment.setFilm(null));
-		
-		film.getCountries().clear();
-		film.getGenres().clear();
-		filmsRepository.delete(film);
-		return "redirect:/films";
-	}
 
 }

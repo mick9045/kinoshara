@@ -19,7 +19,7 @@
 	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
 <link rel="stylesheet"
 	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
-	<link rel="stylesheet" th:href="@{/css/carousel.css}" />
+<link rel="stylesheet" th:href="@{/css/carousel.css}" />
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -33,6 +33,7 @@
 	top: 56px;
 	width: 100%;
 }
+
 a:hover {
 	text-decoration: none;
 }
@@ -52,8 +53,9 @@ a:hover {
 				<div id="image">
 					<img th:src="@{'/image/bigposter/' + ${film.imageSmallPath}}"
 						style="width: 260px; height: 366px;">
-						<h3 class="font-weight-lighter align-center" th:text="'IMDb: ' + ${film.rating}"></h3>
-						
+					<h3 class="font-weight-lighter align-center"
+						th:text="'IMDb: ' + ${film.rating}"></h3>
+
 				</div>
 
 			</div>
@@ -83,36 +85,36 @@ a:hover {
 								th:each="country : ${film.countries}" th:text="${country.name}" />
 						</ul>
 					</div>
-					<button type="button" class="btn btn-link" data-toggle="modal"
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<button type="button" class="btn btn-link" data-toggle="modal"
 							data-target="#myModal" th:attr="data-content=${film.id}">Delete</button>
-					
-					<!-- HTML-код модального окна -->
-	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<!-- Заголовок модального окна -->
-				<div class="modal-header">
-					<h5 class="modal-title" style="text-align: center">Delete
-						Parmanently</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true" style="text-align: right; color: #ff0000">×</button>
-				</div>
-				<!-- Основное содержимое модального окна -->
-				<div class="modal-body">
-					<h5 style="text-align: center;">Are you sure about this ?</h5>
-
-				</div>
-				<!-- Футер модального окна -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-					<a id="content" type="button" class="btn btn-danger">Delete</a>
-				</div>
-			</div>
-		</div>
-	</div>
-					<div class="col-md-3">
-						
 					</div>
+					<!-- HTML-код модального окна -->
+					<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<!-- Заголовок модального окна -->
+								<div class="modal-header">
+									<h5 class="modal-title" style="text-align: center">Delete
+										Parmanently</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true" style="text-align: right; color: #ff0000">×</button>
+								</div>
+								<!-- Основное содержимое модального окна -->
+								<div class="modal-body">
+									<h5 style="text-align: center;">Are you sure about this ?</h5>
+
+								</div>
+								<!-- Футер модального окна -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal">Cancel</button>
+									<a id="content" type="button" class="btn btn-danger">Delete</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3"></div>
 				</div>
 			</div>
 		</div>
@@ -226,11 +228,11 @@ a:hover {
 			</div>
 		</div>
 	</div>
-	
-	<h3 class="display-4 ml-2 d-flex justify-content-center">Similar movies</h3>
+
+	<h3 class="display-4 ml-2 d-flex justify-content-center">Similar
+		movies</h3>
 	<div th:replace="fragments/carousel :: carousel(${similar})"></div>
-	<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
-	<script>
+	<!-- Скрипт, вызывающий модальное окно после загрузки страницы --> <script>
 		$('#myModal').on('show.bs.modal', function(event) {
 
 			var button = $(event.relatedTarget)
@@ -240,7 +242,7 @@ a:hover {
 			$(this).find('#content').attr("href", "/films/delete/" + content);
 
 		})
-	
+
 		window.onscroll = function() {
 			myFunction()
 		};

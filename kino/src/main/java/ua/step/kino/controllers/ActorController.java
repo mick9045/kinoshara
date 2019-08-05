@@ -33,9 +33,6 @@ public class ActorController
 	@Autowired
 	PersonalityRepository personalityRepository;
 	
-	@Autowired 
-	FilmRepository filmRepository;
-	
 	@GetMapping
 	public String showAll(Model model) 
 	{
@@ -55,14 +52,6 @@ public class ActorController
 		return "Actor";
 	}
 	
-	@GetMapping("/delete/{id}")
-	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Personality personality = personalityRepository.getOne(id);
-		List<Film> films = filmRepository.findAll();
-		films.forEach(film -> film.getActors().remove(personality));
-				
-		personalityRepository.delete(personality);
-		return "redirect:/actors";
-	}
+	
 }
 
