@@ -99,7 +99,8 @@ public class FilmController {
 		List<Comment> comments=commentRepository.findByFilm(film);
 		comments.forEach(comment->comment.setFilm(null));
 		
-				
+		film.getCountries().clear();
+		film.getGenres().clear();
 		filmsRepository.delete(film);
 		return "redirect:/films";
 	}
