@@ -3,6 +3,7 @@ package ua.step.kino.controllers.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ public class DeleteController {
 	GenreRepository genreRepository;
 
 	@GetMapping("admin/delete/country/{id}")
+	@Secured("ROLE_ADMIN")
 	public String deleteCountry(@PathVariable("id") int id, Model model) {
 		Country country = countryRepository.getOne(id);
 
@@ -65,6 +67,7 @@ public class DeleteController {
 	}
 	
 	@GetMapping("admin/delete/actor/{id}")
+	@Secured("ROLE_ADMIN")
 	public String deleteActor(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		List<Film> films = filmRepository.findAll();
@@ -74,6 +77,7 @@ public class DeleteController {
 	}
 	
 	@GetMapping("admin/delete/director/{id}")
+	@Secured("ROLE_ADMIN")
 	public String deleteDirector(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		
@@ -85,6 +89,7 @@ public class DeleteController {
 	}
 	
 	@GetMapping("admin/delete/film/{id}")
+	@Secured("ROLE_ADMIN")
 	public String deleteFilm(@PathVariable("id") int id, Model model) {
 		Film film = filmRepository.getOne(id);
 
@@ -105,6 +110,7 @@ public class DeleteController {
 	}
 	
 	@GetMapping("admin/delete/genre/{id}")
+	@Secured("ROLE_ADMIN")
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
 		Genre genre = genreRepository.getOne(id);
 		
