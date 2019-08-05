@@ -1,7 +1,12 @@
 package ua.step.kino.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
 
 /**
@@ -11,4 +16,6 @@ import ua.step.kino.entities.Genre;
  */
 public interface GenreRepository extends JpaRepository<Genre, Integer>{
 
+	@Query("select g from Genre g where lower(g.name) = :name")
+	Genre findByName(@Param("name") String name);
 }

@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ua.step.kino.entities.Comment;
+import ua.step.kino.entities.Country;
 import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.FilmRepository;
+import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.ReviewServiceImpl;
@@ -35,12 +40,13 @@ import ua.step.kino.services.SimilarFilmsImpl;
 public class FilmController {
 	@Autowired
 	FilmRepository filmsRepository;
+	
 	@Autowired
 	ReviewServiceImpl reviewService;
 	
 	@Autowired 
 	SimilarFilmsImpl similarFilmsService;
-
+	
 	@GetMapping
 	public String showAll(Model model) {
 		List<Film> films = filmsRepository.findAll();
@@ -70,5 +76,6 @@ public class FilmController {
 		
 		return "Movie";
 	}
+	
 
 }

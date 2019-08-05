@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Add Genre</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/scripts/validateLoginForm.js}" /></script>
+
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<main>
+
+	<div class="container">
+		<h2>Add Genre</h2>
+		<div class="col-md-5 col-centered">
+			<form action="#" th:action="@{/genre/add}" th:object="${genre}"
+				method="post">
+
+				<div class="form-group">
+					<br> <input type="text" class="form-control form-control"
+						th:field="*{name}" id="name" placeholder="Name"> <br>
+
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+					<input type="submit" class="btn btn-primary" value="Add Genre">
+				</div>
+				<small th:if="${error != null}" class="text-danger">[[${error}]]</small>
+			</form>
+		</div>
+	</div>
+	</main>
+
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
