@@ -16,8 +16,6 @@ import ua.step.kino.entities.Genre;
  */
 public interface GenreRepository extends JpaRepository<Genre, Integer>{
 
-//	@Query("select g from Genre g where lower(g.name) like %:name%")
-//	   List<Genre>  searchGenreByName(@Param("name") String name);
 	@Query("select g from Genre g where lower(g.name) = :name")
 	Genre findByName(@Param("name") String name);
 }

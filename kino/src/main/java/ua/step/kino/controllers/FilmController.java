@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ua.step.kino.entities.Comment;
+import ua.step.kino.entities.Country;
 import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.FilmRepository;
+import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.ReviewServiceImpl;
@@ -40,7 +45,16 @@ public class FilmController {
 	
 	@Autowired 
 	SimilarFilmsImpl similarFilmsService;
-
+	
+	@Autowired 
+	PersonalityRepository personalityRepository;
+	
+	@Autowired 
+	CommentRepository commentRepository;
+	
+	@Autowired 
+	ReviewRepository reviewRepository;
+	
 	@GetMapping
 	public String showAll(Model model) {
 		List<Film> films = filmsRepository.findAll();
@@ -69,6 +83,25 @@ public class FilmController {
 		
 		
 		return "Movie";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteEntity(@PathVariable("id") int id, Model model) {
+		Film film = filmsRepository.getOne(id);
+
+		List<Personality> personalities=personalityRepository.findAll();
+		personalities.forEach(personality->personality.getFilmsActed().remove(film));
+		personalities.forEach(personality->personality.getFilmsDirected().remove(film));
+		
+		List<Review> reviews=reviewRepository.findByFilm(film);
+		reviews.forEach(review->review.setFilm(null));
+		
+		List<Comment> comments=commentRepository.findByFilm(film);
+		comments.forEach(comment->comment.setFilm(null));
+		
+				
+		filmsRepository.delete(film);
+		return "redirect:/films";
 	}
 
 }

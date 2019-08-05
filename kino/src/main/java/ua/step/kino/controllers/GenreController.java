@@ -37,7 +37,7 @@ public class GenreController {
 	GenreRepository genreRepository;
 
 	@Autowired 
-	FilmRepository filmRepo;
+	FilmRepository filmRepository;
 	
 	@GetMapping
 	public String showAll(Model model) {
@@ -107,7 +107,7 @@ public class GenreController {
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
 		Genre genre = genreRepository.getOne(id);
 		
-		List<Film> films = filmRepo.findAll();
+		List<Film> films = filmRepository.findAll();
 		
 		films.forEach(film -> film.getGenres().remove(genre));
 		

@@ -69,7 +69,6 @@ tr:nth-child(even) {
 					<td th:text="${genre.name}"></td>
 					<td><a th:href="@{/genre/edit/{id}(id=${genre.id})}">Edit</a></td>
 					<td>
-						<!-- <a th:href="@{/genre/delete/{id}(id=${genre.id})}">Delete</a> -->
 						<button type="button" class="btn btn-link" data-toggle="modal"
 							data-target="#myModal" th:attr="data-content=${genre.id}">Delete</button>
 					</td>
@@ -99,7 +98,6 @@ tr:nth-child(even) {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
 					<a id="content" type="button" class="btn btn-danger">Delete</a>
-					<!-- <button type="button" class="btn btn-danger">Delete</button> -->
 				</div>
 			</div>
 		</div>
@@ -110,18 +108,15 @@ tr:nth-child(even) {
 
 	<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
 	<script>
-		$('#myModal').on(
-				'show.bs.modal',
-				function(event) {
+		$('#myModal').on('show.bs.modal', function(event) {
 
-					var button = $(event.relatedTarget)
+			var button = $(event.relatedTarget)
 
-					var content = button.data('content')
+			var content = button.data('content')
 
-					$(this).find('#content').attr("href",
-							"/genre/delete/" + content);
+			$(this).find('#content').attr("href", "/genre/delete/" + content);
 
-				})
+		})
 	</script>
 </body>
 </html>

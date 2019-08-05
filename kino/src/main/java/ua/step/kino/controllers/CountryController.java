@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.step.kino.entities.Country;
+import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Personality;
 import ua.step.kino.repositories.CountryRepository;
+import ua.step.kino.repositories.FilmRepository;
+import ua.step.kino.repositories.PersonalityRepository;
 
 /**
  * 
@@ -29,6 +33,12 @@ import ua.step.kino.repositories.CountryRepository;
 public class CountryController {
 	@Autowired
 	CountryRepository countryRepository;
+	
+	@Autowired 
+	FilmRepository filmRepository;
+	
+	@Autowired 
+	PersonalityRepository personalityRepository;
 
 	@GetMapping
 	public String showAll(Model model) {
@@ -81,8 +91,15 @@ public class CountryController {
 
 	@GetMapping("/delete/{id}")
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
-		Country country = countryRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		Country country = countryRepository.getOne(id);
+		List<Film> films = filmRepository.findAll();
+		films.forEach(film -> film.getCountries().remove(country));
+		
+		
+		List<Personality> personalities=personalityRepository.findByCountry(country);
+		personalities.forEach(personality->personality.setCountry(null));
+		
+		
 		countryRepository.delete(country);
 		return "redirect:/countries";
 	}

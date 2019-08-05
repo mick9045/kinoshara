@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.step.kino.entities.Director;
+import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Position;
 import ua.step.kino.repositories.DirectorRepository;
+import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.PersonalityRepository;
 
 /**
@@ -28,6 +30,9 @@ public class DirectorController {
 	@Autowired
 	PersonalityRepository personalityRepository;
 	
+	@Autowired 
+	FilmRepository filmRepository;
+	
 	@GetMapping
 	public String showAll(Model model) {
 		//List<Director> directors = directorRepository.findAll();
@@ -41,6 +46,17 @@ public class DirectorController {
 		//directorRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
 		personalityRepository.findById(id).ifPresent(o -> model.addAttribute("director", o));
 		return "Director";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteEntity(@PathVariable("id") int id, Model model) {
+		Personality personality = personalityRepository.getOne(id);
+		
+		List<Film> films = filmRepository.findAll();
+		films.forEach(film -> film.getDirectors().remove(personality));
+				
+		personalityRepository.delete(personality);
+		return "redirect:/directors";
 	}
 }
 
