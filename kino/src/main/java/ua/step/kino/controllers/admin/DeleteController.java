@@ -50,7 +50,7 @@ public class DeleteController {
 	@Autowired
 	GenreRepository genreRepository;
 
-	@GetMapping("/countries/delete/{id}")
+	@GetMapping("admin/delete/country/{id}")
 	public String deleteCountry(@PathVariable("id") int id, Model model) {
 		Country country = countryRepository.getOne(id);
 
@@ -64,7 +64,7 @@ public class DeleteController {
 		return "redirect:/countries";
 	}
 	
-	@GetMapping("/actors/delete/{id}")
+	@GetMapping("admin/delete/actor/{id}")
 	public String deleteActor(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		List<Film> films = filmRepository.findAll();
@@ -73,7 +73,7 @@ public class DeleteController {
 		return "redirect:/actors";
 	}
 	
-	@GetMapping("/directors/delete/{id}")
+	@GetMapping("admin/delete/director/{id}")
 	public String deleteDirector(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		
@@ -84,7 +84,7 @@ public class DeleteController {
 		return "redirect:/directors";
 	}
 	
-	@GetMapping("/films/delete/{id}")
+	@GetMapping("admin/delete/film/{id}")
 	public String deleteFilm(@PathVariable("id") int id, Model model) {
 		Film film = filmRepository.getOne(id);
 
@@ -104,7 +104,7 @@ public class DeleteController {
 		return "redirect:/films";
 	}
 	
-	@GetMapping("/genre/delete/{id}")
+	@GetMapping("admin/delete/genre/{id}")
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
 		Genre genre = genreRepository.getOne(id);
 		
