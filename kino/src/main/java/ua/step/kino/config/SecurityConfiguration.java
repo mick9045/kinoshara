@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import ua.step.kino.security.UserDetailsServiceImpl;
 
@@ -34,6 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+		 .antMatchers(
+                 "/registration**",
+                 "/forgot-password**",
+                 "/reset-password**").permitAll()
 			.antMatchers("/webjars/**").permitAll()
 			.antMatchers("/scripts/**").permitAll()
 			.antMatchers("/css/**").permitAll()
@@ -46,7 +51,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.failureUrl("/login?error")
 			.permitAll()
 		.and()
-			.logout().permitAll();
+			.logout()
+			.invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/login?logout")
+            .permitAll();
 			
 		
 		//``````````````Only for testing to enable h2-console````````````````````

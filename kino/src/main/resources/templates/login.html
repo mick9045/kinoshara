@@ -46,7 +46,7 @@
 						<small th:if="${error != null}" id="passwordHelp" class="text-danger">[[${error}]]</small>
 						<small th:if="${logout != null}" id="passwordHelp" class="text-success">[[${logout}]]</small>
 					</div>
-					
+					<a th:if="${pass!=null}" class="text-primary" th:href="@{/forgot-password}" >[[${pass}]]</a>
 				</form>
 			</div>
 		</div>
