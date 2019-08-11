@@ -39,6 +39,19 @@ public class User {
     @Column(nullable = false)
     private boolean enabled;
     
+    /**
+     * 
+     * @author AZavoruyev
+     *
+     */
+    
+    private String firstName;
+
+	private String lastName;
+
+	private String avatar;
+
+	   
 	public User() {
 		super();
 		this.enabled = false;
@@ -111,4 +124,30 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	
 }

@@ -5,7 +5,7 @@ insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VAL
 
 insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Mizanin', 'Mizanin', '$2a$10$ySqBjl.DJ8ycoGIuYQP9qOPDZoAIgLB9TCN.Y/PDFdWenby30uNbu', '1998-08-15','mizanin666@gmail.com', true, 1)
 
-
+update users set first_Name='Artem', last_Name='Zavoruyev' where id=4
 
 insert into reviews(id, text, is_good, film_id, user_id) values (1, 'i wish i forget about it and watch it again and again', true, 1, 1)
 insert into reviews(id, text, is_good, film_id, user_id) values (2, 'Its plenty good, but actors play was terrible some moments', true, 2,1 )

@@ -19,6 +19,7 @@ public class UploadController {
 	@Autowired UploadService uploadService;
 	
 	@GetMapping
+	//@Secured("ROLE_ADMIN")
 	public String Test(){
 		
 		return "fileUploadTest";
