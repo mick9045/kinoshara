@@ -1,0 +1,92 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Error 404</title>
+<link rel="stylesheet" th:href="@{/css/errors.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/search.js}" /></script>
+
+
+</head>
+<style>
+
+.main-404 {
+	width: 100%;
+	height: 70vh;
+	position: relative;
+	background: url(../images/404.jpg) no-repeat top center;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.btn-orange {
+	background: #ff9205;
+	border: 1px solid;
+	display: inline-block;
+	vertical-align: middle;
+	height: 41px;
+	padding: 0 20px;
+	line-height: 43px;
+	color: #fff;
+	font-size: 18px;
+	text-transform: uppercase;
+	text-decoration: none !important;
+	border-radius: 42px;
+	transition: all 0.3s ease 0s;
+	text-align: center;
+}
+
+.w200 {
+	width: 200px !important;
+}
+
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+</style>
+<body class="error-layout" data-gr-c-s-loaded="true">
+	<div th:replace="fragments/header :: header"></div>
+	<div id="module_id">
+		<div id="site">
+			<div id="error">
+				<div class="super-wrapper page-404">
+					<div class="main-404" id="main">
+						<div class="wrapper-404">
+							<div class="img"></div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-404">
+					<div class="h3 uppercase mb30">Unfortunately, the page you
+						you are looking for does not exist!</div>
+					 <a class="btn btn-orange w200" href="/"><i
+						class="fa fa-home mr10"></i>Main Page</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+</html>
