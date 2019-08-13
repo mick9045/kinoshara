@@ -41,7 +41,8 @@
 						<span class="label font-weight-normal"
 							th:if="${film.getReleaseDate()!=null}">Release date: <span
 							class="badge badge-pill badge-primary"
-							th:if="${film.getReleaseDate()}" th:text="${#dates.format(film.getReleaseDate(), 'dd-MM-yyyy')}" /><br />
+							th:if="${film.getReleaseDate()}"
+							th:text="${#dates.format(film.getReleaseDate(), 'dd-MM-yyyy')}" /><br />
 						</span>
 
 					</ul>
@@ -49,6 +50,12 @@
 
 			</div>
 		</div>
+		<ul class="pagination" th:each="pageNumber : ${pageNumbers}">
+			<li class="page-item"><a class="page-link"
+				th:href="@{/(page=${pageNumber})}"
+				th:classappend="${pageNumber eq films.number + 1} ? active">
+				<p th:text=${pageNumber}></p></a></li>
+		</ul>
 	</div>
 
 	</main>

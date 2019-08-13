@@ -2,6 +2,8 @@ package ua.step.kino.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,12 +23,15 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 	 * @return
 	 */
 	@Query("select f from Film f join f.genres g where g.name = :genre")
-	List<Film> findByGenres(@Param("genre")String genre);
+	List<Film> findByGenres(@Param("genre") String genre/*, Pageable pageable*/);
+
 	/**
 	 * @author Azavoruyev
 	 * @param search by contains
 	 * @return
 	 */
 	@Query("select b from Film b where lower(b.title) like %:title%")
-	   List<Film>  searchFilmsByName(@Param("title") String name);
+	List<Film> searchFilmsByName(@Param("title") String name/*, Pageable pageable*/);
+
+	//Page<Film> findAll(Pageable pageable);
 }
