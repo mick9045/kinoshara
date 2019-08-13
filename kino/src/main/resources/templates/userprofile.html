@@ -10,7 +10,7 @@
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 <link rel="stylesheet"
 	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
-
+<link rel="stylesheet" th:href="@{/css/image_wrap.css}">
 <link rel="stylesheet"
 	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
 <link rel="stylesheet"
@@ -92,7 +92,7 @@ img:before {
 						<!--/row-->
 					</div>
 					<div class="tab-pane" id="edit">
-						<form method="POST" class="col-12">
+						<form method="POST" enctype="multipart/form-data" class="col-12">
 							<div class="row">
 								<div class="col-3">
 									<div class="form-group">
@@ -108,8 +108,15 @@ img:before {
 										<img id="uploaded-image">
 									</div>
 								</div>
+
+							</div>
+							<div class="col-12">
+								<input class="btn btn-primary" type="submit"
+									id="submit-movie-button" value="Save avatar">
 							</div>
 						</form>
+						<br>
+						
 						<a class="btn btn-primary" href="/users/changePassword"><i
 							class="fa fa-home mr10">Change Password</i></a>
 					</div>
