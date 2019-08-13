@@ -82,7 +82,7 @@ public class GenreController {
 	@GetMapping("/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") int id, Model model) {
 		Genre genre = genreRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+				.orElseThrow(() -> new IllegalArgumentException("Invalid genre Id:" + id));
 
 		model.addAttribute("genre", genre);
 		return "genre-edit";

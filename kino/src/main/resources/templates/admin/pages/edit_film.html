@@ -17,13 +17,14 @@
 			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			<div class="row">
 				<h4 class="mb-4 col-12">Update film</h4>
-				<form method="POST" enctype="multipart/form-data" class="col-12">
+				<form th:action="@{/admin/edit/film/{id}(id=${film.id})}"
+					th:object="${film}" method="post" enctype="multipart/form-data" class="col-12">
 					<div class="row">
 						<div class="col-3">
 							<div class="form-group">
 								<label for="input-photo">Photo</label>
 								<div class="custom-file">
-									<input required th:src="${film.getImageSmallPath()}" name="posterBig" accept=".jpg,.png" type="file"
+									<input th:value="${film.getImageSmallPath()}" name="posterBig" accept=".jpg,.png" type="file"
 										class="custom-file-input" id="input-photo"> 
 									<label
 										class="custom-file-label" for="input-photo">Choose
@@ -31,7 +32,7 @@
 								</div>
 							</div>
 							<div class="image-wrapper">
-								<img id="uploaded-image">
+								<img id="uploaded-image" th:src="${'/image/bigposter/' + film.getImageSmallPath()}">
 							</div>
 						</div>
 						<div class="col-9">
@@ -41,28 +42,28 @@
 										minlength="2" maxlength="60" name="title" type="text"
 										class="form-control" id="input-firstname"
 										aria-describedby="emailHelp" placeholder="Enter firtname"
-										th:value="${film.getTitle()}">
+										th:field="*{title}">
 								</div>
 								<div class="form-group col-6">
 									<label for="input-title">Release date</label> <input
 										name="releaseDate" type="date" min="1895-12-28"
 										class="form-control" id="input-release-date"
 										aria-describedby="emailHelp" placeholder="Enter release date"
-										th:value="${film.getReleaseDate()}">
+										th:field="*{releaseDate}">
 								</div>
 								<div class="form-group col-4">
 									<label for="input-title">Length</label> <input required
 										minlength="2" maxlength="60" name="filmLength" type="number"
 										class="form-control" id="input-length"
 										aria-describedby="emailHelp" placeholder="Enter length"
-										th:value="${film.getFilmLength()}">
+										th:field="*{filmLength}">
 								</div>
 								<div class="form-group col-4">
 									<label for="input-title">Rating</label> <input min="1" max="10"
 										name="rating" type="number" step="0.1" class="form-control"
 										id="input-rating" aria-describedby="emailHelp"
 										placeholder="Enter rating"
-										th:value="${film.getRating()}">
+										th:field="*{rating}">
 										
 								</div>
 								<div class="form-group col-4">
@@ -70,7 +71,7 @@
 										name="views" type="number" class="form-control"
 										id="input-views-count" aria-describedby="emailHelp"
 										placeholder="Enter views count"
-										th:value="${film.getViews()}">
+										th:field="*{views}">
 								</div>
 								<div class="form-group col-6">
 									<label for="input-country">Countries</label> <select multiple
@@ -80,27 +81,35 @@
 											<option th:if="${countries != null}"
 											th:each="country : ${countries}"
 											th:name="country" th:value="${country.id}"
-												th:text="${country.name}">
+												th:text="${country.name}"
+												th:selected="${film.getCountries().contains(country)}">
 											<option>
 									</select>
 								</div>
 
 								<div class="form-group col-6">
-									<label for="input-country">Genres</label> <select
+									<label for="input-country">Genres</label> 
+									<select
 										id="input-genre" class="selectpicker"
 										data-style="custom-select" data-width="100%"
 										data-live-search="true" name="genres" multiple>
 										<option th:if="${genres != null}" th:each="genre : ${genres}"
-											th:name="country" th:value="${genre.id}"
-											th:text="${genre.name}">
-										<option>
+											th:name="genre" th:value="${genre.id}"
+											th:text="${genre.name}"
+											th:selected="${film.getGenres().contains(genre)}">
+										</option>
 									</select>
 								</div>
 
 								<div class="form-group col-6">
-									<label for="input-country">Actors</label> <select
+									<label for="input-country">Actors</label> 
+									<select
 										id="input-added-actors" class="form-control" name="actors"
 										size="8">
+										<option th:if="${film.actors != null}" th:each="actor : ${film.actors}"
+											th:name="actor" th:value="${film.getActors()}"
+											th:text="${actor.firstName + ' ' + actor.lastName}">
+										</option>
 									</select>
 									<button id="button-remove-added-actor"
 										class="btn btn-danger my-4" type="button">Remove</button>
@@ -126,6 +135,10 @@
 									<label for="input-country">Directors</label> <select
 										id="input-added-directors" class="form-control"
 										name="directors" size="8">
+										<option th:if="${film.directors != null}" th:each="director : ${film.directors}"
+											th:name="director" th:value="${film.getDirectors()}"
+											th:text="${director.firstName + ' ' + director.lastName}">
+										</option>
 									</select>
 									<button type="button" id="button-remove-added-director"
 										class="btn btn-danger my-4">Remove</button>

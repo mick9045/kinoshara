@@ -51,7 +51,7 @@ public class FilmController {
 	public String showAll(Model model) {
 		List<Film> films = filmsRepository.findAll();
 		model.addAttribute("films", films);
-		return "allMovies";
+		return "films";
 	}
 
 	@GetMapping("/{id}")

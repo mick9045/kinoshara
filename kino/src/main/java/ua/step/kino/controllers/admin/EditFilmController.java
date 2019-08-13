@@ -17,7 +17,6 @@ import ua.step.kino.dto.FilmDTO;
 import ua.step.kino.repositories.CountryRepository;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.GenreRepository;
-import ua.step.kino.services.admin.AddFilmService;
 import ua.step.kino.services.admin.EditFilmService;
 
 @Controller
@@ -36,6 +35,7 @@ public class EditFilmController {
 	EditFilmService editFilmService;
 	
 	@GetMapping("/{id}")
+	@Secured("ROLE_ADMIN")
 	String get(@PathVariable int id, Model model) {
 		
 		filmRepo.findById(id).ifPresent(f -> model.addAttribute("film", f));
