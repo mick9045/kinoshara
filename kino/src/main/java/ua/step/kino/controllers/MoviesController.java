@@ -1,15 +1,21 @@
 package ua.step.kino.controllers;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.services.FilmFilterService;
+import ua.step.kino.services.FilmPaginationService;
 import ua.step.kino.services.FilmSearchService;
 import ua.step.kino.services.FilmSortService;
 
@@ -31,6 +38,9 @@ import ua.step.kino.services.FilmSortService;
 @RequestMapping("/")
 public class MoviesController {
 
+	@Autowired
+	FilmPaginationService filmPagi;
+	
 	@Autowired 
 	FilmRepository filmsRepository;
 
@@ -46,9 +56,28 @@ public class MoviesController {
 
 	
 	@GetMapping
-	public String showAll(Model model) {
+	public String showAll(Model model, 
+			 @RequestParam("page") Optional<Integer> page, 
+		      @RequestParam("size") Optional<Integer> size/*,@PageableDefault(sort = { "id" }, direction = Direction.DESC) Pageable pageable*/) {
+		
+		int currentPage = page.orElse(1);
+       int pageSize = size.orElse(6);
+       
+       Page<Film> films2 = filmPagi.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+       
+       films2.forEach(f -> System.out.println(f.getTitle()));
+       
 		List<Film> films = filmsRepository.findAll();
-		model.addAttribute("films", films);
+		model.addAttribute("films", films2);
+		
+		int totalPages = films2.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+		
 		return "allMovies";
 	}
 	

@@ -5,6 +5,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +31,7 @@ import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
 import ua.step.kino.security.CurrentUser;
+import ua.step.kino.services.FilmPaginationService;
 import ua.step.kino.services.ReviewServiceImpl;
 import ua.step.kino.services.SimilarFilmsImpl;
 
@@ -47,11 +53,25 @@ public class FilmController {
 	@Autowired 
 	SimilarFilmsImpl similarFilmsService;
 	
-	@GetMapping
-	public String showAll(Model model) {
+	@Autowired
+	FilmPaginationService filmPagi;
+	
+	@GetMapping("/")
+	public String showAll(Model model, 
+			 @RequestParam("page") Optional<Integer> page, 
+		      @RequestParam("size") Optional<Integer> size/*,@PageableDefault(sort = { "id" }, direction = Direction.DESC) Pageable pageable*/) {
+		
+		int currentPage = page.orElse(1);
+        int pageSize = size.orElse(6);
+        
+        Page<Film> films2 = filmPagi.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        
+        films2.forEach(f -> System.out.println(f.getTitle()));
+        
 		List<Film> films = filmsRepository.findAll();
-		model.addAttribute("films", films);
-		return "films";
+
+		model.addAttribute("films", films2);
+		return "allMovies";
 	}
 
 	@GetMapping("/{id}")

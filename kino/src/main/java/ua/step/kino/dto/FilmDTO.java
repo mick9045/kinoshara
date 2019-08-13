@@ -30,7 +30,6 @@ public class FilmDTO {
 	@Size(min = 1, max = 5)
 	private List<Integer> countries;
 
-	@NotNull
 	private MultipartFile posterBig;
 
 	private MultipartFile posterSmall;

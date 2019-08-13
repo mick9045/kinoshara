@@ -24,7 +24,7 @@
 							<div class="form-group">
 								<label for="input-photo">Photo</label>
 								<div class="custom-file">
-									<input th:value="${film.getImageSmallPath()}" name="posterBig" accept=".jpg,.png" type="file"
+									<input th:field="*{imageSmallPath}" name="posterBig" accept=".jpg,.png" type="file"
 										class="custom-file-input" id="input-photo"> 
 									<label
 										class="custom-file-label" for="input-photo">Choose
