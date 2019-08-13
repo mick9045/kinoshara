@@ -110,8 +110,8 @@ img:before {
 								</div>
 							</div>
 						</form>
-						 <a class="btn btn-primary" href="/users/changePassword"><i
-						class="fa fa-home mr10">Change Password</i></a>
+						<a class="btn btn-primary" href="/users/changePassword"><i
+							class="fa fa-home mr10">Change Password</i></a>
 					</div>
 					<div class="tab-pane" id="towatch">
 						<h4 class="blue">Films to watch</h4>
@@ -136,4 +136,10 @@ img:before {
 		</div>
 	</div>
 </body>
+
+<script>
+	$("#input-photo").change(function() {
+		readURL(this);
+	});
+</script>
 </html>

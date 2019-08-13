@@ -28,6 +28,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UsersRepository userRepo;
+	
 	@GetMapping
 	public String showAll(Model model) {
 		List<User> users = usersRepository.findAll();
@@ -61,17 +64,14 @@ public class UserController {
 		User user;
 		CurrentUser currentUser = (CurrentUser) (principal);
 		user = currentUser.getUser();
-		String checkOldPassword = passwordEncoder.encode(oldpassword);
-		System.out.println(oldpassword);
-		System.out.println(checkOldPassword);
-		if(checkOldPassword!=user.getPassword()) {
+		if(!passwordEncoder.matches(oldpassword, user.getPassword())) {
 			model.addAttribute("error", "Wrong old password!");
 			return "changePassword";
 		}
-		System.out.println(password);
-		System.out.println(passwordEncoder.encode(password));
-		userService.updatePassword(passwordEncoder.encode(password), user.getId());
-		return "redirect:/userprofile";
+	
+		String updatedPassword = passwordEncoder.encode(password);
+		userService.updatePassword(updatedPassword, user.getId());
+		model.addAttribute("user", user);
+		return "userprofile";
 	}
-
 }

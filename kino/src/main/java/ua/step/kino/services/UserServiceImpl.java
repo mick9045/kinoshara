@@ -3,6 +3,8 @@ package ua.step.kino.services;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	  }
     
+    @Transactional
     @Override
 	public void updatePassword(String password, int userId) {
 		  userRepository.updatePassword(password, userId);
