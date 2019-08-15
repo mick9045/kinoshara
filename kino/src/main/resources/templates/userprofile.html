@@ -35,6 +35,17 @@ img:before {
 	content: " ";
 	font-size: 100px;
 }
+
+#uploaded-image {
+	height: 100%;
+	width: 100%;
+}
+
+.image-wrapper {
+	height: inherit;
+	width: inherit;
+	overflow: hidden;
+}
 </style>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -91,34 +102,47 @@ img:before {
 
 						<!--/row-->
 					</div>
-					<div class="tab-pane" id="edit">
-						<form method="POST" enctype="multipart/form-data" class="col-12">
-							<div class="row">
-								<div class="col-3">
-									<div class="form-group">
-										<label for="input-photo">Photo</label>
-										<div class="custom-file">
-											<input required name="posterBig" accept=".jpg,.png"
-												type="file" class="custom-file-input" id="input-photo">
-											<label class="custom-file-label" for="input-photo">Choose
-												file...</label>
-										</div>
-									</div>
-									<div class="image-wrapper">
-										<img id="uploaded-image">
-									</div>
-								</div>
 
+					<div class="tab-pane" id="edit">
+						<div th:fragment="content">
+							<link rel="stylesheet" th:href="@{/css/image_wrap.css}">
+							<script th:src="@{/scripts/admin/imagePreview.js}"></script>
+							<script th:src="@{/scripts/admin/addMovie.js}"></script>
+
+							<div class="container bg-light roudned p-4">
+								
+								<div class="row">
+									<h4 class="mb-4 col-12">Avatar add</h4>
+									<form method="POST" enctype="multipart/form-data"
+										class="col-12">
+										<div class="row">
+											<div class="col-3">
+												<div class="form-group">
+													<label for="input-photo">Image Preview</label>
+														<div class="image-wrapper">
+													<img id="uploaded-image">
+												</div>
+													<div class="form-group">
+														<input required name="posterBig" accept=".jpg,.png"
+															type="file" class="cform-control-file" id="input-photo">
+														
+													</div>
+												</div>
+											
+											</div>
+											<div class="col-12" >
+												<input class="btn btn-primary" type="submit"
+													id="submit-movie-button" value="Change Avatar">
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
-							<div class="col-12">
-								<input class="btn btn-primary" type="submit"
-									id="submit-movie-button" value="Save avatar">
-							</div>
-						</form>
-						<br>
-						
-						<a class="btn btn-primary" href="/users/changePassword"><i
+						</div>
+
+						<br> <a class="btn btn-primary" href="/users/changePassword"><i
 							class="fa fa-home mr10">Change Password</i></a>
+
 					</div>
 					<div class="tab-pane" id="towatch">
 						<h4 class="blue">Films to watch</h4>
@@ -145,8 +169,23 @@ img:before {
 </body>
 
 <script>
-	$("#input-photo").change(function() {
-		readURL(this);
-	});
+	$(function() {
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#uploaded-image').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$("#input-photo").change(function() {
+			readURL(this);
+		});
+	})
 </script>
 </html>
