@@ -1,7 +1,10 @@
 package ua.step.kino.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,10 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -53,8 +59,13 @@ public class User {
 
 	private String avatar;
 	
-	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Film> filmsToWatch = new ArrayList<Film>();
 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Film> filmsWatched = new ArrayList<Film>();
 	   
 	public User() {
 		super();
@@ -145,6 +156,22 @@ public class User {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public List<Film> getFilmsToWatch() {
+		return filmsToWatch;
+	}
+
+	public void setFilmsToWatch(List<Film> filmsToWatch) {
+		this.filmsToWatch = filmsToWatch;
+	}
+
+	public List<Film> getFilmsWatched() {
+		return filmsWatched;
+	}
+
+	public void setFilmsWatched(List<Film> filmsWatched) {
+		this.filmsWatched = filmsWatched;
 	}
 
 	
