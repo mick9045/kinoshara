@@ -63,6 +63,13 @@ public class UserServiceImpl implements UserService {
 	public void updatePassword(String password, int userId) {
 		  userRepository.updatePassword(password, userId);
 	}
+    
+    @Transactional
+	@Override
+	public void updateAvatar(String imageName, int userId) {
+    	 userRepository.updateAvatar(imageName, userId);
+		
+	}
 
      /*  @Override
 	public CurrentUser loadUserByUsername(String username) throws UsernameNotFoundException {
