@@ -62,6 +62,7 @@ public class UserController {
 		CurrentUser currentUser = (CurrentUser) (principal);
 		user = currentUser.getUser();
 		model.addAttribute("user", user);
+//		System.out.println(user.getAvatar());
 		return "userprofile";
 	}
 
@@ -70,6 +71,10 @@ public class UserController {
 	@Secured("ROLE_USER")
 	String post(@Valid MultipartFile smallPortrait, Model model, @RequestParam Optional<String> error) {
 		String imageName = "";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user;
+		CurrentUser currentUser = (CurrentUser) (principal);
+		user = currentUser.getUser();
 		if (smallPortrait.isEmpty()) {
 			model.addAttribute("error", "You don't choose image");
 		} else {
@@ -84,16 +89,13 @@ public class UserController {
 
 			} else {
 
-				Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				User user;
-				CurrentUser currentUser = (CurrentUser) (principal);
-				user = currentUser.getUser();
+				
 				userService.updateAvatar(imageName, user.getId());
-				model.addAttribute("user", user);
+				user.setAvatar(imageName);
 			}
 
 		}
-
+		model.addAttribute("user", user);
 		return "userprofile";
 	}
 
