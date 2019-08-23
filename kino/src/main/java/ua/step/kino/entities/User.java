@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -59,13 +60,28 @@ public class User {
 
 	private String avatar;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Film> filmsToWatch = new ArrayList<Film>();
+	@ManyToMany
+	@JoinTable(
+			  name = "Users_Films_To_Watch", 
+			  joinColumns = @JoinColumn(name = "user_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+	private List<Film> filmsToWatch;
+	
+	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private List<Film> filmsToWatch = new ArrayList<Film>();
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Film> filmsWatched = new ArrayList<Film>();
+	@ManyToMany
+	@JoinTable(
+			  name = "Users_Films_Watched", 
+			  joinColumns = @JoinColumn(name = "user_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+	private List<Film> filmsWatched;
+	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private List<Film> filmsWatched = new ArrayList<Film>();
 	   
 	public User() {
 		super();
@@ -174,5 +190,13 @@ public class User {
 		this.filmsWatched = filmsWatched;
 	}
 
+	public Boolean isFilmWatched (Film film){
+		return getFilmsWatched().contains(film);
+	}
+	
+	public Boolean isFilmToWatch (Film film){
+		return getFilmsToWatch().contains(film);
+	}
+	
 	
 }

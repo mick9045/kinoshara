@@ -57,6 +57,8 @@ a:hover {
 						th:text="'IMDb: ' + ${film.rating}"></h3>
 
 				</div>
+				
+<div th:replace="fragments/addFilmStatus :: status (${film}, ${filmStatus})"></div>
 
 			</div>
 			<div class="col-md-9">

@@ -70,6 +70,18 @@ public class FilmController {
 		if (principal instanceof CurrentUser) {
 			CurrentUser currentUser = (CurrentUser) (principal);
 			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId() );
+			User user=currentUser.getUser();
+//			Integer filmStatus = 0;
+//			Film film=filmsRepository.getOne(id);
+//			if (user.isFilmToWatch(film)) {
+//				filmStatus=1;
+//			}
+//			
+//			if (user.isFilmWatched(film)) {
+//				filmStatus=2;
+//			}
+//			
+			model.addAttribute("filmStatus", "");
 		}
 		model.addAttribute("reviewed", reviewed);
 		

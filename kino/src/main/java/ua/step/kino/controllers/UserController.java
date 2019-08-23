@@ -1,5 +1,6 @@
 package ua.step.kino.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,12 +19,16 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ua.step.kino.dto.FilmDTO;
+import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.UsersRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.UploadService;
@@ -41,6 +46,9 @@ public class UserController {
 
 	@Autowired
 	private UsersRepository userRepo;
+
+	@Autowired
+	FilmRepository filmsRepository;
 
 	@Autowired
 	UploadService uploadService;
@@ -84,12 +92,11 @@ public class UserController {
 			imageName += UUID.randomUUID().toString();
 			imageName += "." + FilenameUtils.getExtension(originalFileName);
 
-		if (uploadService.uploadSmallPortrait(smallPortrait, imageName) != 200) {
+			if (uploadService.uploadSmallPortrait(smallPortrait, imageName) != 200) {
 				model.addAttribute("error", "Failed image load");
 
 			} else {
 
-				
 				userService.updateAvatar(imageName, user.getId());
 				user.setAvatar(imageName);
 			}
@@ -122,5 +129,33 @@ public class UserController {
 		userService.updatePassword(updatedPassword, user.getId());
 		model.addAttribute("user", user);
 		return "userprofile";
+	}
+
+	@RequestMapping(value = "/addFilmStatus", method = RequestMethod.POST)
+	public String addReview(Model model, Integer filmId, Integer userId, Integer filmStatus) {
+		User user = usersRepository.findById(userId).get();
+		Film film = filmsRepository.findById(filmId).get();
+		if (filmStatus == 1) {
+			if (user.isFilmWatched(film)) {
+				user.getFilmsWatched().remove(film);
+				if (!user.isFilmToWatch(film)) {
+					user.getFilmsToWatch().add(film);
+				}
+			}
+
+		}
+		if(filmStatus == 2) {
+			if (user.isFilmToWatch(film)) {
+				user.getFilmsToWatch().remove(film);
+				if (!user.isFilmWatched(film)) {
+					user.getFilmsWatched().add(film);
+				}
+			}
+		}
+
+	
+		
+		// System.out.println(text + isGood + userId+ filmId);
+		return "redirect:/films/"+filmId;
 	}
 }
