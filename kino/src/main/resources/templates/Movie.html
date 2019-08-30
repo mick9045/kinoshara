@@ -57,8 +57,8 @@ a:hover {
 						th:text="'IMDb: ' + ${film.rating}"></h3>
 
 				</div>
-				
-<div th:replace="fragments/addFilmStatus :: status (${film}, ${filmStatus})"></div>
+
+
 
 			</div>
 			<div class="col-md-9">
@@ -86,6 +86,10 @@ a:hover {
 							<li class="font-weight-lighter"
 								th:each="country : ${film.countries}" th:text="${country.name}" />
 						</ul>
+					</div>
+					<div class="col-md-3">
+						<div
+							th:replace="fragments/addFilmStatus :: status (${film}, ${filmStatus})"></div>
 					</div>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<button type="button" class="btn btn-link" data-toggle="modal"

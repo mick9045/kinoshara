@@ -60,29 +60,23 @@ public class User {
 
 	private String avatar;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(
 			  name = "Users_Films_To_Watch", 
 			  joinColumns = @JoinColumn(name = "user_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-	private List<Film> filmsToWatch;
+	private List<Film> filmsToWatch= new ArrayList<Film>();
 	
-	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private List<Film> filmsToWatch = new ArrayList<Film>();
-
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(
 			  name = "Users_Films_Watched", 
 			  joinColumns = @JoinColumn(name = "user_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-	private List<Film> filmsWatched;
+	private List<Film> filmsWatched= new ArrayList<Film>();
 	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private List<Film> filmsWatched = new ArrayList<Film>();
-	   
+
 	public User() {
 		super();
 		this.enabled = false;
@@ -190,13 +184,6 @@ public class User {
 		this.filmsWatched = filmsWatched;
 	}
 
-	public Boolean isFilmWatched (Film film){
-		return getFilmsWatched().contains(film);
-	}
-	
-	public Boolean isFilmToWatch (Film film){
-		return getFilmsToWatch().contains(film);
-	}
-	
+
 	
 }

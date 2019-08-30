@@ -40,13 +40,13 @@ import ua.step.kino.services.SimilarFilmsImpl;
 public class FilmController {
 	@Autowired
 	FilmRepository filmsRepository;
-	
+
 	@Autowired
 	ReviewServiceImpl reviewService;
-	
-	@Autowired 
+
+	@Autowired
 	SimilarFilmsImpl similarFilmsService;
-	
+
 	@GetMapping
 	public String showAll(Model model) {
 		List<Film> films = filmsRepository.findAll();
@@ -57,37 +57,43 @@ public class FilmController {
 	@GetMapping("/{id}")
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
-			
-		
-		//similarFilmsService.similarFilms(filmsRepository.findById(id));
+
+		// similarFilmsService.similarFilms(filmsRepository.findById(id));
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
-	
-		//films.forEach(f -> System.out.println(f.getTitle()));
-		
+
+		// films.forEach(f -> System.out.println(f.getTitle()));
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+
 		Boolean reviewed = false;
 		if (principal instanceof CurrentUser) {
 			CurrentUser currentUser = (CurrentUser) (principal);
-			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId() );
-			User user=currentUser.getUser();
-//			Integer filmStatus = 0;
-//			Film film=filmsRepository.getOne(id);
-//			if (user.isFilmToWatch(film)) {
-//				filmStatus=1;
-//			}
-//			
-//			if (user.isFilmWatched(film)) {
-//				filmStatus=2;
-//			}
-//			
-			model.addAttribute("filmStatus", "");
+			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId());
+			User user = currentUser.getUser();
+			Integer filmStatus = 0;
+
+			Film film = filmsRepository.getOne(id);
+			if (user.getFilmsToWatch() != null && !user.getFilmsToWatch().isEmpty()) {
+				System.out.println(1.1);
+				if (user.getFilmsToWatch().contains(film)) {
+					System.out.println(1.2);
+					filmStatus = 1;
+				}
+			}
+
+			if (user.getFilmsWatched() != null && !user.getFilmsToWatch().isEmpty()) {
+				System.out.println(2.1);
+				if (user.getFilmsWatched().contains(film)) {
+					System.out.println(2.2);
+					filmStatus = 2;
+				}
+			}
+			System.out.println(3);
+			model.addAttribute("filmStatus", filmStatus);
 		}
 		model.addAttribute("reviewed", reviewed);
-		
-		
+
 		return "Movie";
 	}
-	
 
 }

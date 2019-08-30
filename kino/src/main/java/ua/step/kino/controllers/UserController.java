@@ -31,6 +31,7 @@ import ua.step.kino.entities.User;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.UsersRepository;
 import ua.step.kino.security.CurrentUser;
+import ua.step.kino.services.SimilarFilmsImpl;
 import ua.step.kino.services.UploadService;
 import ua.step.kino.services.UserService;
 
@@ -52,6 +53,9 @@ public class UserController {
 
 	@Autowired
 	UploadService uploadService;
+	
+	@Autowired
+	SimilarFilmsImpl similarFilmsService;
 
 	@GetMapping
 	public String showAll(Model model) {
@@ -132,30 +136,35 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/addFilmStatus", method = RequestMethod.POST)
-	public String addReview(Model model, Integer filmId, Integer userId, Integer filmStatus) {
+	public String addReview(Model model, Integer filmId, Integer userId, Integer status) {
 		User user = usersRepository.findById(userId).get();
 		Film film = filmsRepository.findById(filmId).get();
-		if (filmStatus == 1) {
-			if (user.isFilmWatched(film)) {
+		model.addAttribute("film",film);
+		filmsRepository.findById(filmId).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
+		
+		System.out.println(status);
+		
+		if (status == 1) {
+			if (user.getFilmsWatched().contains(film)) {
 				user.getFilmsWatched().remove(film);
-				if (!user.isFilmToWatch(film)) {
+				if (!user.getFilmsToWatch().contains(film)) {
 					user.getFilmsToWatch().add(film);
 				}
 			}
 
 		}
-		if(filmStatus == 2) {
-			if (user.isFilmToWatch(film)) {
+		if(status == 2) {
+			if (user.getFilmsToWatch().contains(film)) {
 				user.getFilmsToWatch().remove(film);
-				if (!user.isFilmWatched(film)) {
+				if (!user.getFilmsWatched().contains(film)) {
 					user.getFilmsWatched().add(film);
 				}
 			}
 		}
 
+		model.addAttribute("filmStatus", status);
 	
-		
 		// System.out.println(text + isGood + userId+ filmId);
-		return "redirect:/films/"+filmId;
+		return "Movie";
 	}
 }
