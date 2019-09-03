@@ -46,9 +46,6 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private UsersRepository userRepo;
-
-	@Autowired
 	FilmRepository filmsRepository;
 
 	@Autowired

@@ -63,7 +63,7 @@ public class Personality {
 	@JoinColumn(name="country_id")
 	private Country country;
 	
-	@ManyToMany
+	@ManyToMany 
 	@JoinTable(
 			  name = "Actors_Films", 
 			  joinColumns = @JoinColumn(name = "actor_id"), 

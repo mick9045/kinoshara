@@ -73,22 +73,17 @@ public class FilmController {
 			Integer filmStatus = 0;
 
 			Film film = filmsRepository.getOne(id);
-			if (user.getFilmsToWatch() != null && !user.getFilmsToWatch().isEmpty()) {
-				System.out.println(1.1);
+			if (user.getFilmsToWatch() != null || !user.getFilmsToWatch().isEmpty()) {
 				if (user.getFilmsToWatch().contains(film)) {
-					System.out.println(1.2);
 					filmStatus = 1;
 				}
 			}
 
-			if (user.getFilmsWatched() != null && !user.getFilmsToWatch().isEmpty()) {
-				System.out.println(2.1);
+			if (user.getFilmsWatched() != null || !user.getFilmsToWatch().isEmpty()) {
 				if (user.getFilmsWatched().contains(film)) {
-					System.out.println(2.2);
 					filmStatus = 2;
 				}
 			}
-			System.out.println(3);
 			model.addAttribute("filmStatus", filmStatus);
 		}
 		model.addAttribute("reviewed", reviewed);

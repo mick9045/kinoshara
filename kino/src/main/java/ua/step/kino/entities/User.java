@@ -2,7 +2,9 @@ package ua.step.kino.entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -60,21 +65,31 @@ public class User {
 
 	private String avatar;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	//@Fetch(value = FetchMode.SUBSELECT)
 	@JsonIgnore
-	@JoinTable(
-			  name = "Users_Films_To_Watch", 
-			  joinColumns = @JoinColumn(name = "user_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-	private List<Film> filmsToWatch= new ArrayList<Film>();
+	private List<Film> filmsToWatch =  new ArrayList<Film>();
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	//@Fetch(value = FetchMode.SUBSELECT)
 	@JsonIgnore
-	@JoinTable(
-			  name = "Users_Films_Watched", 
-			  joinColumns = @JoinColumn(name = "user_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-	private List<Film> filmsWatched= new ArrayList<Film>();
+	private List<Film> filmsWatched = new ArrayList<Film>();
+	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	@JoinTable(
+//			  name = "USERS_FILMS_TO_WATCH", 
+//			  joinColumns = @JoinColumn(name = "user_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+//	private List<Film> filmsToWatch= new ArrayList<Film>();
+//	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	@JoinTable(
+//			  name = "USERS_FILMS_WATCHED", 
+//			  joinColumns = @JoinColumn(name = "user_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+//	private List<Film> filmsWatched= new ArrayList<Film>();
 	
 
 	public User() {
@@ -168,22 +183,35 @@ public class User {
 		this.avatar = avatar;
 	}
 
+//	public List<Film> getFilmsToWatch() {
+//		return filmsToWatch;
+//	}
+//
+//	public void setFilmsToWatch(List<Film> filmsToWatch) {
+//		this.filmsToWatch = filmsToWatch;
+//	}
+//
+//	public List<Film> getFilmsWatched() {
+//		return filmsWatched;
+//	}
+//
+//	public void setFilmsWatched(List<Film> filmsWatched) {
+//		this.filmsWatched = filmsWatched;
+//	}
 	public List<Film> getFilmsToWatch() {
 		return filmsToWatch;
 	}
 
-	public void setFilmsToWatch(List<Film> filmsToWatch) {
-		this.filmsToWatch = filmsToWatch;
+	public void setFilmsToWatch(Film films) {
+		this.filmsToWatch.add(films);
 	}
-
+	
 	public List<Film> getFilmsWatched() {
 		return filmsWatched;
 	}
 
-	public void setFilmsWatched(List<Film> filmsWatched) {
-		this.filmsWatched = filmsWatched;
+	public void setFilmsWatched(Film films) {
+		this.filmsWatched.add(films);
 	}
-
-
 	
 }
