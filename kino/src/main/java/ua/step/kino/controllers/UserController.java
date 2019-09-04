@@ -1,6 +1,5 @@
 package ua.step.kino.controllers;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,21 +14,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import ua.step.kino.dto.FilmDTO;
 import ua.step.kino.entities.Film;
-import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.entities.Users_Films;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.UsersRepository;
+import ua.step.kino.repositories.Users_FilmsRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.SimilarFilmsImpl;
 import ua.step.kino.services.UploadService;
@@ -52,6 +48,9 @@ public class UserController {
 	UploadService uploadService;
 	
 	@Autowired
+	Users_FilmsRepository users_FilmsRepository;
+	
+	@Autowired
 	SimilarFilmsImpl similarFilmsService;
 
 	@GetMapping
@@ -71,7 +70,6 @@ public class UserController {
 		CurrentUser currentUser = (CurrentUser) (principal);
 		user = currentUser.getUser();
 		model.addAttribute("user", user);
-//		System.out.println(user.getAvatar());
 		return "userprofile";
 	}
 
@@ -133,35 +131,24 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/addFilmStatus", method = RequestMethod.POST)
-	public String addReview(Model model, Integer filmId, Integer userId, Integer status) {
+	@Transactional
+	public String addFilmStatus(Model model, Integer filmId, Integer userId, Integer status) {
 		User user = usersRepository.findById(userId).get();
 		Film film = filmsRepository.findById(filmId).get();
 		model.addAttribute("film",film);
 		filmsRepository.findById(filmId).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
-		
-		System.out.println(status);
-		
-		if (status == 1) {
-			if (user.getFilmsWatched().contains(film)) {
-				user.getFilmsWatched().remove(film);
-				if (!user.getFilmsToWatch().contains(film)) {
-					user.getFilmsToWatch().add(film);
-				}
-			}
 
-		}
-		if(status == 2) {
-			if (user.getFilmsToWatch().contains(film)) {
-				user.getFilmsToWatch().remove(film);
-				if (!user.getFilmsWatched().contains(film)) {
-					user.getFilmsWatched().add(film);
-				}
+		
+		if (status != 0) {
+			Users_Films  users_Films=users_FilmsRepository.findByFilmAndUserId(user.getId(), film.getId());
+			if(users_Films!=null) {
+				users_FilmsRepository.updateStatus(status, users_Films.getId());
+			}else {
+				users_Films=new Users_Films(status, user, film);
+				users_FilmsRepository.save(users_Films);
 			}
 		}
-
-		model.addAttribute("filmStatus", status);
-	
-		// System.out.println(text + isGood + userId+ filmId);
-		return "Movie";
+	model.addAttribute("filmStatus", status);
+			return "Movie";
 	}
 }

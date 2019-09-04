@@ -21,10 +21,12 @@ import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.entities.Users_Films;
 import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
+import ua.step.kino.repositories.Users_FilmsRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.ReviewServiceImpl;
 import ua.step.kino.services.SimilarFilmsImpl;
@@ -46,6 +48,9 @@ public class FilmController {
 
 	@Autowired
 	SimilarFilmsImpl similarFilmsService;
+	
+	@Autowired
+	Users_FilmsRepository users_FilmsRepository;
 
 	@GetMapping
 	public String showAll(Model model) {
@@ -72,17 +77,10 @@ public class FilmController {
 			User user = currentUser.getUser();
 			Integer filmStatus = 0;
 
-			Film film = filmsRepository.getOne(id);
-			if (user.getFilmsToWatch() != null || !user.getFilmsToWatch().isEmpty()) {
-				if (user.getFilmsToWatch().contains(film)) {
-					filmStatus = 1;
-				}
-			}
 
-			if (user.getFilmsWatched() != null || !user.getFilmsToWatch().isEmpty()) {
-				if (user.getFilmsWatched().contains(film)) {
-					filmStatus = 2;
-				}
+			Users_Films  users_Films=users_FilmsRepository.findByFilmAndUserId(user.getId(), id);
+			if(users_Films!=null) {
+				filmStatus=users_Films.getStatus();
 			}
 			model.addAttribute("filmStatus", filmStatus);
 		}
