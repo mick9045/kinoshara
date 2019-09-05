@@ -70,6 +70,11 @@ public class UserController {
 		CurrentUser currentUser = (CurrentUser) (principal);
 		user = currentUser.getUser();
 		model.addAttribute("user", user);
+		
+		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
+		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+		model.addAttribute("listOfWatchLater", listOfWatchLater);
+		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
 	}
 
@@ -102,6 +107,11 @@ public class UserController {
 
 		}
 		model.addAttribute("user", user);
+		
+		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
+		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+		model.addAttribute("listOfWatchLater", listOfWatchLater);
+		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
 	}
 
@@ -127,6 +137,11 @@ public class UserController {
 		String updatedPassword = passwordEncoder.encode(password);
 		userService.updatePassword(updatedPassword, user.getId());
 		model.addAttribute("user", user);
+		
+		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
+		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+		model.addAttribute("listOfWatchLater", listOfWatchLater);
+		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
 	}
 

@@ -15,3 +15,9 @@ insert into reviews(id, text, is_good, film_id, user_id) values (4, 'You are all
 insert into reviews(id, text, is_good, film_id, user_id) values (5, 'Hate it',false,5,3)
 insert into reviews(id, text, is_good, film_id, user_id) values (6, 'Best movie ever',true,6,3)
 
+insert into  USERS_FILMS(id, status, film_id, user_id) values (1, 1, 6, 4)
+insert into  USERS_FILMS(id, status, film_id, user_id) values (2, 1, 2, 4)
+insert into  USERS_FILMS(id, status, film_id, user_id) values (3, 1, 4, 4)
+insert into  USERS_FILMS(id, status, film_id, user_id) values (4, 2, 1, 4)
+insert into  USERS_FILMS(id, status, film_id, user_id) values (5, 2, 3, 4)
+
