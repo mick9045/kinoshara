@@ -139,21 +139,33 @@ img:before {
 					</div>
 					<div class="tab-pane" id="towatch">
 						<h4 class="blue">Films to watch</h4>
-						<ol>
-							<li th:if="${listOfWatchLater}"
-								th:each="unit : ${listOfWatchLater}"><a
-								th:href="@{'/films/' + ${unit.film.id}}"><h5
-										th:text="${unit.film.title}"></h5></a></li>
-						</ol>
+						<table>
+							<tbody>
+								<tr th:if="${listOfWatchLater}"
+									th:each="unit : ${listOfWatchLater}">
+									<td><a th:href="@{'/films/' + ${unit.film.id}}"><h5
+												th:text="${unit.film.title}"></h5></a></td>
+									<td><a
+										th:href="@{/users/deleteFilm/{id}(id=${unit.film.id})}">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+
 					</div>
 					<div class="tab-pane" id="watched">
 						<h4 class="blue">Watched films</h4>
-						<ol>
-							<li th:if="${listOfWatched}"
-								th:each="unit : ${listOfWatched}"><a
-								th:href="@{'/films/' + ${unit.film.id}}"><h5
-										th:text="${unit.film.title}"></h5></a></li>
-						</ol>
+						<table>
+							<tbody>
+								<tr th:if="${listOfWatched}" th:each="unit : ${listOfWatched}">
+									<td><a th:href="@{'/films/' + ${unit.film.id}}"><h5
+												th:text="${unit.film.title}"></h5></a></td>
+									<td><a
+										th:href="@{/users/deleteFilm/{id}(id=${unit.film.id})}">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+
+
 					</div>
 				</div>
 			</div>

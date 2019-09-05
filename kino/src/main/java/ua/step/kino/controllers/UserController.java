@@ -15,12 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ua.step.kino.entities.Film;
+import ua.step.kino.entities.Genre;
 import ua.step.kino.entities.User;
 import ua.step.kino.entities.Users_Films;
 import ua.step.kino.repositories.FilmRepository;
@@ -46,10 +48,10 @@ public class UserController {
 
 	@Autowired
 	UploadService uploadService;
-	
+
 	@Autowired
 	Users_FilmsRepository users_FilmsRepository;
-	
+
 	@Autowired
 	SimilarFilmsImpl similarFilmsService;
 
@@ -70,9 +72,9 @@ public class UserController {
 		CurrentUser currentUser = (CurrentUser) (principal);
 		user = currentUser.getUser();
 		model.addAttribute("user", user);
-		
-		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
-		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+
+		List<Users_Films> listOfWatchLater = users_FilmsRepository.findByStatus(user.getId(), 1);
+		List<Users_Films> listOfWatched = users_FilmsRepository.findByStatus(user.getId(), 2);
 		model.addAttribute("listOfWatchLater", listOfWatchLater);
 		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
@@ -107,9 +109,9 @@ public class UserController {
 
 		}
 		model.addAttribute("user", user);
-		
-		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
-		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+
+		List<Users_Films> listOfWatchLater = users_FilmsRepository.findByStatus(user.getId(), 1);
+		List<Users_Films> listOfWatched = users_FilmsRepository.findByStatus(user.getId(), 2);
 		model.addAttribute("listOfWatchLater", listOfWatchLater);
 		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
@@ -137,9 +139,9 @@ public class UserController {
 		String updatedPassword = passwordEncoder.encode(password);
 		userService.updatePassword(updatedPassword, user.getId());
 		model.addAttribute("user", user);
-		
-		List<Users_Films>  listOfWatchLater=users_FilmsRepository.findByStatus(user.getId(),1);
-		List<Users_Films>  listOfWatched=users_FilmsRepository.findByStatus(user.getId(),2);
+
+		List<Users_Films> listOfWatchLater = users_FilmsRepository.findByStatus(user.getId(), 1);
+		List<Users_Films> listOfWatched = users_FilmsRepository.findByStatus(user.getId(), 2);
 		model.addAttribute("listOfWatchLater", listOfWatchLater);
 		model.addAttribute("listOfWatched", listOfWatched);
 		return "userprofile";
@@ -150,20 +152,37 @@ public class UserController {
 	public String addFilmStatus(Model model, Integer filmId, Integer userId, Integer status) {
 		User user = usersRepository.findById(userId).get();
 		Film film = filmsRepository.findById(filmId).get();
-		model.addAttribute("film",film);
-		filmsRepository.findById(filmId).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
+		model.addAttribute("film", film);
+		filmsRepository.findById(filmId)
+				.ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
 
-		
 		if (status != 0) {
-			Users_Films  users_Films=users_FilmsRepository.findByFilmAndUserId(user.getId(), film.getId());
-			if(users_Films!=null) {
+			Users_Films users_Films = users_FilmsRepository.findByFilmAndUserId(user.getId(), film.getId());
+			if (users_Films != null) {
 				users_FilmsRepository.updateStatus(status, users_Films.getId());
-			}else {
-				users_Films=new Users_Films(status, user, film);
+			} else {
+				users_Films = new Users_Films(status, user, film);
 				users_FilmsRepository.save(users_Films);
 			}
 		}
-	model.addAttribute("filmStatus", status);
-			return "Movie";
+		model.addAttribute("filmStatus", status);
+		return "Movie";
+	}
+
+	@GetMapping("deleteFilm/{id}")
+	
+	public String deleteEntity(@PathVariable("id") int id, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user;
+		CurrentUser currentUser = (CurrentUser) (principal);
+		user = currentUser.getUser();
+		Users_Films users_Films = users_FilmsRepository.findByFilmAndUserId(user.getId(), id);
+		users_FilmsRepository.delete(users_Films);
+		model.addAttribute("user", user);
+		List<Users_Films> listOfWatchLater = users_FilmsRepository.findByStatus(user.getId(), 1);
+		List<Users_Films> listOfWatched = users_FilmsRepository.findByStatus(user.getId(), 2);
+		model.addAttribute("listOfWatchLater", listOfWatchLater);
+		model.addAttribute("listOfWatched", listOfWatched);
+		return "userprofile";
 	}
 }
