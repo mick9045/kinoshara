@@ -33,5 +33,5 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 	@Query("select b from Film b where lower(b.title) like %:title%")
 	List<Film> searchFilmsByName(@Param("title") String name/*, Pageable pageable*/);
 
-	//Page<Film> findAll(Pageable pageable);
+	Page<Film> findAll(Pageable pageable);
 }
