@@ -54,10 +54,10 @@ public class FilmController {
 	
 	@Autowired
 	Users_FilmsRepository users_FilmsRepository;
-	
+
 	@Autowired
 	FilmPaginationService filmPagi;
-
+	
 	@GetMapping("/")
 	public String showAll(Model model, 
 			 @RequestParam("page") Optional<Integer> page, 
@@ -71,7 +71,6 @@ public class FilmController {
         films2.forEach(f -> System.out.println(f.getTitle()));
         
 		List<Film> films = filmsRepository.findAll();
-
 		model.addAttribute("films", films2);
 		return "allMovies";
 	}
