@@ -114,7 +114,7 @@ public class AuthorizationController {
 		try {
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered));
 			model.addAttribute("error", "Please verify your email address."
-					+ "An email containing verification instructions was sent to" + registered.getEmail());
+					+ "An email containing verification instructions was sent to " + registered.getEmail());
 		} catch (Exception me) {
 			model.addAttribute("error", "Error sending of the email");
 			return "registration";

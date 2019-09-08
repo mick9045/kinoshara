@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Control panel</title>
+
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/octicons/build/font/octicons.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/carousel.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script charset="utf-8" type="text/javascript"
+	th:src="@{/scripts/validateLoginForm.js}" /></script>
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script th:src="@{/scripts/search.js}" /></script>
+
+</head>
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+</style>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<main role="main" class="container">
+	<h2>Manage entities</h2>
+	<div style="overflow-x: auto;">
+		<div class="list-group">
+			<a th:href="@{/films}" class="list-group-item list-group-item-action"> Films </a>
+			<a th:href="@{/actors}" class="list-group-item list-group-item-action"> Actors </a>
+			<a th:href="@{/directors}" class="list-group-item list-group-item-action"> Directors </a>
+			<a th:href="@{/genre}" class="list-group-item list-group-item-action"> Genres </a>
+			<a th:href="@{/countries}" class="list-group-item list-group-item-action"> Countries </a>
+			<a th:href="@{/users}" class="list-group-item list-group-item-action"> Users </a>
+			<a href="#" class="list-group-item list-group-item-action disabled"> Comments </a>
+			<a th:href="@{/reviews}" class="list-group-item list-group-item-action"> Reviews </a>
+		</div>
+	</div>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
