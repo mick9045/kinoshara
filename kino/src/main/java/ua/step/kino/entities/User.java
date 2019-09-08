@@ -1,7 +1,12 @@
 package ua.step.kino.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,10 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -39,6 +51,47 @@ public class User {
     @Column(nullable = false)
     private boolean enabled;
     
+    /**
+     * 
+     * @author AZavoruyev
+     *
+     */
+    
+	/*
+	 * private String firstName;
+	 * 
+	 * private String lastName;
+	 */
+
+	private String avatar;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	//@Fetch(value = FetchMode.SUBSELECT)
+	@JsonIgnore
+	private List<Film> filmsToWatch =  new ArrayList<Film>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	//@Fetch(value = FetchMode.SUBSELECT)
+	@JsonIgnore
+	private List<Film> filmsWatched = new ArrayList<Film>();
+	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	@JoinTable(
+//			  name = "USERS_FILMS_TO_WATCH", 
+//			  joinColumns = @JoinColumn(name = "user_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+//	private List<Film> filmsToWatch= new ArrayList<Film>();
+//	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	@JoinTable(
+//			  name = "USERS_FILMS_WATCHED", 
+//			  joinColumns = @JoinColumn(name = "user_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
+//	private List<Film> filmsWatched= new ArrayList<Film>();
+	
+
 	public User() {
 		super();
 		this.enabled = false;
@@ -111,4 +164,54 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	/*
+	 * public String getFirstName() { return firstName; }
+	 * 
+	 * public void setFirstName(String firstName) { this.firstName = firstName; }
+	 * 
+	 * public String getLastName() { return lastName; }
+	 * 
+	 * public void setLastName(String lastName) { this.lastName = lastName; }
+	 */
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+//	public List<Film> getFilmsToWatch() {
+//		return filmsToWatch;
+//	}
+//
+//	public void setFilmsToWatch(List<Film> filmsToWatch) {
+//		this.filmsToWatch = filmsToWatch;
+//	}
+//
+//	public List<Film> getFilmsWatched() {
+//		return filmsWatched;
+//	}
+//
+//	public void setFilmsWatched(List<Film> filmsWatched) {
+//		this.filmsWatched = filmsWatched;
+//	}
+	public List<Film> getFilmsToWatch() {
+		return filmsToWatch;
+	}
+
+	public void setFilmsToWatch(Film films) {
+		this.filmsToWatch.add(films);
+	}
+	
+	public List<Film> getFilmsWatched() {
+		return filmsWatched;
+	}
+
+	public void setFilmsWatched(Film films) {
+		this.filmsWatched.add(films);
+	}
+	
 }

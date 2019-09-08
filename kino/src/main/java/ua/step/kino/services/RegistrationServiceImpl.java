@@ -44,6 +44,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		user.setEmail(accountDto.getEmail());
 		user.setBirthday(accountDto.getBirthday());
 		user.setRole(rolesRepo.getOne(1));
+		
 		return userRepo.save(user);
 	}
 
