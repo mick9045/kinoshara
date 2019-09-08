@@ -106,7 +106,8 @@ img:before {
 						<div th:fragment="content">
 							<div class="container bg-light roudned p-4">
 								<div class="row">
-								   <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"> </div>
+									<div class="alert alert-danger" role="alert"
+										th:if="${error != null}" th:text="${error}"></div>
 									<h4 class="mb-4 col-12">Avatar add</h4>
 									<form method="POST" enctype="multipart/form-data"
 										class="col-12">
@@ -138,21 +139,33 @@ img:before {
 					</div>
 					<div class="tab-pane" id="towatch">
 						<h4 class="blue">Films to watch</h4>
-						<!-- <ol>
-							<li th:if="${user.filmsToWatch}"
-								th:each="film : ${user.filmsToWatch}"><a
-								th:href="@{'/films/' + ${film.id}}"><h5
-										th:text="${film.title}"></h5></a></li>
-						</ol> -->
+						<table>
+							<tbody>
+								<tr th:if="${listOfWatchLater}"
+									th:each="unit : ${listOfWatchLater}">
+									<td><a th:href="@{'/films/' + ${unit.film.id}}"><h5
+												th:text="${unit.film.title}"></h5></a></td>
+									<td><a
+										th:href="@{/users/deleteFilm/{id}(id=${unit.film.id})}">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+
 					</div>
 					<div class="tab-pane" id="watched">
 						<h4 class="blue">Watched films</h4>
-						<!-- <ol>
-							<li th:if="${user.filmsWatched}"
-								th:each="film : ${user.filmsWatched}"><a
-								th:href="@{'/films/' + ${film.id}}"><h5
-										th:text="${film.title}"></h5></a></li>
-						</ol> -->
+						<table>
+							<tbody>
+								<tr th:if="${listOfWatched}" th:each="unit : ${listOfWatched}">
+									<td><a th:href="@{'/films/' + ${unit.film.id}}"><h5
+												th:text="${unit.film.title}"></h5></a></td>
+									<td><a
+										th:href="@{/users/deleteFilm/{id}(id=${unit.film.id})}">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+
+
 					</div>
 				</div>
 			</div>
