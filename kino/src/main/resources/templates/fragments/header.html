@@ -1,6 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	
+	<link rel="stylesheet"
+		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet"
+		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
+	<link rel="stylesheet"
+		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
 
 <link rel="stylesheet"
 	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
@@ -45,6 +52,9 @@
 						</div>
 					</div>
 				</form>
+				<form sec:authorize="hasRole('ROLE_ADMIN')" class="form-inline" th:action="@{/admin/controlPanel}" method="POST">
+					<button class="btn btn-outline-danger mx-2" id="logout-button" type="submit">control panel</button>
+				</form>
 				<div sec:authorize="isAuthenticated()" class="form-inline">
 					<a th:href="@{/users/user}"><span sec:authentication="name" style="margin:30px"></span></a>
 				</div>
@@ -53,6 +63,7 @@
 					<button class="btn btn-outline-success mx-2" id="logout-button"
 						type="submit">logout</button>
 				</form>
+				
 				<button th:onclick="window.location.href='/login/registration'"
 					th:href="@{/login/registration}" sec:authorize="isAnonymous()"
 					class="btn btn-outline-success mr-2 ml-3" id="singup-button"

@@ -71,6 +71,7 @@ public class FilmController {
         films2.forEach(f -> System.out.println(f.getTitle()));
         
 		List<Film> films = filmsRepository.findAll();
+
 		model.addAttribute("films", films2);
 		return "allMovies";
 	}

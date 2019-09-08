@@ -61,6 +61,7 @@ tr:nth-child(even) {
 					<th>Date of birth</th>
 					<th>Origin</th>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<th>Edit</th>
 					<th>Delete</th>
 					</div>
 				</tr>
@@ -73,6 +74,7 @@ tr:nth-child(even) {
 					<td th:text="${actor.Country}"></td>
 					<!-- <td><a th:href="@{/actors/edit/{id}(id=${actor.id})}">Edit</a></td> -->
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<td><a th:href="@{/admin/edit/person/{id}(id=${actor.id})}">Edit</a></td>
 					<td><button type="button" class="btn btn-link"
 							data-toggle="modal" data-target="#myModal"
 							th:attr="data-content=${actor.id}">Delete</button> 

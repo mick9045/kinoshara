@@ -43,7 +43,6 @@ public class CommentController {
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
 	private String addComment(Model model, Integer filmId, Integer userId, String text) {
 		
-		
 		Comment comment = new Comment();
 		comment.setFilm(filmRepository.findById(filmId).get());
 		comment.setUser(userRepository.findById(userId).get());
@@ -56,9 +55,6 @@ public class CommentController {
 		film.setComments(comment);
 		filmRepository.save(film);
 		
-		
-		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!" + comment.getText() + comment.getUser()+ comment.getFilm() + comment.getDate());
-
 		return "redirect:/films/" + comment.getFilm().getId();
 	}
 }
