@@ -1,4 +1,4 @@
-package validation;
+package ua.step.kino.validation;
 
 import java.time.LocalDate;
 

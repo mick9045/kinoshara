@@ -1,4 +1,4 @@
-package validation;
+package ua.step.kino.validation;
 
 public class EmailExistsException extends Exception {
 
