@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+
+</head>
+<body>
+	<div th:fragment="status (film, filmStatus)" id="rev">
+		<div sec:authorize="isAuthenticated()">
+			<form th:action="@{/users/addFilmStatus}" th:object="${status}"
+				method="post">
+				<div class="row ml-2">
+					<input type="hidden" name="filmId" th:value="${film.id}"> <input
+						type="hidden" name="userId" th:value="${currentUser.user.id}">
+					 <label>Select Status: </label>
+					  <select name="status" id="status">
+						<option value="0" th:selected="${filmStatus==0}">--
+							Select film status --</option>
+						<option value="1" th:selected="${filmStatus==1}">Watch
+							later</option>
+						<option value="2" th:selected="${filmStatus==2}">Already
+							watched</option>
+					</select>
+					<p>
+						<input type="submit" value="Submit" class="btncls">
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

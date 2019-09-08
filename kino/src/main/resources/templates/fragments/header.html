@@ -1,19 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	
-	<link rel="stylesheet"
-		th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
-	<link rel="stylesheet"
-		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
-	<link rel="stylesheet"
-		th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"/>
 
-	<script th:src="@{webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{webjars/jquery-ui/jquery-ui.min.js}"></script>
-	<script th:src="@{scripts/search.js}"></script>
+<link rel="stylesheet"
+	th:href="@{webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+
+<script th:src="@{webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{webjars/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{scripts/search.js}"></script>
 </head>
 <body>
 	<nav class="navbar 	navbar-expand-lg navbar-dark bg-dark"
@@ -28,17 +28,19 @@
 
 			<div class="collapse navbar-collapse" id="navbarTogglerKino">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item" th:classappend="${module == 'movies' ? 'active' : ''}"><a class="nav-link" href="/">Movies
-							<span class="sr-only">(current)</span>
+					<li class="nav-item"
+						th:classappend="${module == 'movies' ? 'active' : ''}"><a
+						class="nav-link" href="/">Movies <span class="sr-only">(current)</span>
 					</a></li>
 				</ul>
 				<form autocomplete="off" class="form-inline">
 					<div class="autocomplete">
 						<div class="input-group">
 							<input class="form-control" id="searchTextBox"
-								 placeholder="Search" aria-label="Search">
+								placeholder="Search" aria-label="Search">
 							<div class="input-group-append">
-								<button id="searchButton" class="btn btn-primary octicon octicon-search" type="button"></button>
+								<button id="searchButton"
+									class="btn btn-primary octicon octicon-search" type="button"></button>
 							</div>
 						</div>
 					</div>
@@ -46,13 +48,23 @@
 				<form sec:authorize="hasRole('ROLE_ADMIN')" class="form-inline" th:action="@{/admin/controlPanel}" method="POST">
 					<button class="btn btn-outline-danger mx-2" id="logout-button" type="submit">control panel</button>
 				</form>
-				<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/logout}" method="POST">
-					<button class="btn btn-outline-success mx-2" id="logout-button" type="submit">logout</button>
+				<div sec:authorize="isAuthenticated()" class="form-inline">
+					<a th:href="@{/users/user}"><span sec:authentication="name" style="margin:30px"></span></a>
+				</div>
+				<form sec:authorize="isAuthenticated()" class="form-inline"
+					th:action="@{/logout}" method="POST">
+					<button class="btn btn-outline-success mx-2" id="logout-button"
+						type="submit">logout</button>
 				</form>
 				
-				<button th:onclick="window.location.href='/login/registration'" th:href="@{/login/registration}" sec:authorize="isAnonymous()" class="btn btn-outline-success mr-2 ml-3" id="singup-button" type="submit">sign up</button>
-				<button th:onclick="window.location.href='/login'" sec:authorize="isAnonymous()" class="btn btn-outline-success ml-1" id="signin-button" type="submit">sign in</button>
-				
+				<button th:onclick="window.location.href='/login/registration'"
+					th:href="@{/login/registration}" sec:authorize="isAnonymous()"
+					class="btn btn-outline-success mr-2 ml-3" id="singup-button"
+					type="submit">sign up</button>
+				<button th:onclick="window.location.href='/login'"
+					sec:authorize="isAnonymous()" class="btn btn-outline-success ml-1"
+					id="signin-button" type="submit">sign in</button>
+
 			</div>
 		</div>
 	</nav>

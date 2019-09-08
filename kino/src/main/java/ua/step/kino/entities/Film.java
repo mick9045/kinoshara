@@ -227,5 +227,18 @@ public class Film {
 		this.views = views;
 	}
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_ID")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 	
 }

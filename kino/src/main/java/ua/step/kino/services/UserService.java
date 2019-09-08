@@ -12,4 +12,6 @@ public interface UserService  {
 	User save(UserDto registration);
    
 	void updatePassword(String password, int userId);
+	
+	void updateAvatar(String imageName, int userId);
 }

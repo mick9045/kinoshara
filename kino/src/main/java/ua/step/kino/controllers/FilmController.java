@@ -26,10 +26,12 @@ import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Review;
 import ua.step.kino.entities.User;
+import ua.step.kino.entities.Users_Films;
 import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
+import ua.step.kino.repositories.Users_FilmsRepository;
 import ua.step.kino.security.CurrentUser;
 import ua.step.kino.services.FilmPaginationService;
 import ua.step.kino.services.ReviewServiceImpl;
@@ -46,15 +48,18 @@ import ua.step.kino.services.SimilarFilmsImpl;
 public class FilmController {
 	@Autowired
 	FilmRepository filmsRepository;
-	
+
 	@Autowired
 	ReviewServiceImpl reviewService;
-	
-	@Autowired 
+
+	@Autowired
 	SimilarFilmsImpl similarFilmsService;
 	
 	@Autowired
 	FilmPaginationService filmPagi;
+	
+	@Autowired
+	Users_FilmsRepository users_FilmsRepository;
 	
 	@GetMapping("/")
 	public String showAll(Model model, 
@@ -67,35 +72,42 @@ public class FilmController {
         Page<Film> films2 = filmPagi.findPaginated(PageRequest.of(currentPage - 1, pageSize));
         
         films2.forEach(f -> System.out.println(f.getTitle()));
-        
+
+
 		List<Film> films = filmsRepository.findAll();
 
-		model.addAttribute("films", films2);
+		model.addAttribute("films", films);
 		return "allMovies";
 	}
 
 	@GetMapping("/{id}")
 	public String showOne(@PathVariable int id, Model model) {
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("film", o));
-			
-		
-		//similarFilmsService.similarFilms(filmsRepository.findById(id));
+
+		// similarFilmsService.similarFilms(filmsRepository.findById(id));
 		filmsRepository.findById(id).ifPresent(o -> model.addAttribute("similar", similarFilmsService.similarFilms(o)));
-	
-		//films.forEach(f -> System.out.println(f.getTitle()));
-		
+
+		// films.forEach(f -> System.out.println(f.getTitle()));
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+
 		Boolean reviewed = false;
 		if (principal instanceof CurrentUser) {
 			CurrentUser currentUser = (CurrentUser) (principal);
-			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId() );
+			reviewed = reviewService.isFilmReviewedByUser(id, currentUser.getId());
+			User user = currentUser.getUser();
+			Integer filmStatus = 0;
+
+
+			Users_Films  users_Films=users_FilmsRepository.findByFilmAndUserId(user.getId(), id);
+			if(users_Films!=null) {
+				filmStatus=users_Films.getStatus();
+			}
+			model.addAttribute("filmStatus", filmStatus);
 		}
 		model.addAttribute("reviewed", reviewed);
-		
-		
+
 		return "Movie";
 	}
-	
 
 }
