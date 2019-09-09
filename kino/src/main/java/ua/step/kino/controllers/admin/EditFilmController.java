@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,13 +42,18 @@ public class EditFilmController {
 		filmRepo.findById(id).ifPresent(f -> model.addAttribute("film", f));
 		model.addAttribute("countries", countryRepo.findAll());
 		model.addAttribute("genres", genreRepo.findAll());
+		model.addAttribute("commandObject", new FilmDTO());
+		
 		
 		return "admin/pages/edit_film";
 	}
 	
 	@PostMapping("/{id}")
 	@Secured("ROLE_ADMIN")
-	String post(@PathVariable int id, @Valid FilmDTO filmDTO, Model model, Errors errors, RedirectAttributes redir) {
+	String post(@ModelAttribute("commandObject") FilmDTO filmDTO, @PathVariable int id, Model model, Errors errors, RedirectAttributes redir) {
+		
+		
+		System.out.println("Entered");
 		if (!errors.hasErrors() && editFilmService.add(filmDTO, id)) {
 			redir.addFlashAttribute("result", "success");
 		} else {
