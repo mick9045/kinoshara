@@ -109,5 +109,15 @@ public class FilmController {
 
 		return "Movie";
 	}
+	
+	@GetMapping("/list")
+	public String showAll(Model model) {
+
+
+		List<Film> films = filmsRepository.findAll();
+
+		model.addAttribute("films", films);
+		return "films";
+	}
 
 }

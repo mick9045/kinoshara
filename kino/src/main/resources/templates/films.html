@@ -60,21 +60,22 @@ tr:nth-child(even) {
 					<th>ID</th>
 					<th>Name</th>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<th>Edit</th>
-					<th>Delete</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</div>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="film : ${films}">
 					<td th:text="${film.id}"></td>
-					<td th:text="${film.title}"></td>
+					<td><a th:href="@{'/films/' + ${film.id}}"><h5
+								th:text="${film.title}"></h5></a></td>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<td><a th:href="@{/admin/edit/film/{id}(id=${film.id})}">Edit</a></td>
-					<td>
-						<button type="button" class="btn btn-link" data-toggle="modal"
-							data-target="#myModal" th:attr="data-content=${film.id}">Delete</button>
-					</td>
+						<td><a th:href="@{/admin/edit/film/{id}(id=${film.id})}">Edit</a></td>
+						<td>
+							<button type="button" class="btn btn-link" data-toggle="modal"
+								data-target="#myModal" th:attr="data-content=${film.id}">Delete</button>
+						</td>
 					</div>
 				</tr>
 			</tbody>
@@ -120,7 +121,7 @@ tr:nth-child(even) {
 
 			var content = button.data('content')
 
-			$(this).find('#content').attr("href", "admin/delete/film/" + content);
+			$(this).find('#content').attr("href", "/films/delete/" + content);
 
 		})
 	</script>

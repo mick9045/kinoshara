@@ -3,8 +3,8 @@ package ua.step.kino.controllers.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +16,14 @@ import ua.step.kino.entities.Film;
 import ua.step.kino.entities.Genre;
 import ua.step.kino.entities.Personality;
 import ua.step.kino.entities.Review;
+import ua.step.kino.entities.Users_Films;
 import ua.step.kino.repositories.CommentRepository;
 import ua.step.kino.repositories.CountryRepository;
 import ua.step.kino.repositories.FilmRepository;
 import ua.step.kino.repositories.GenreRepository;
 import ua.step.kino.repositories.PersonalityRepository;
 import ua.step.kino.repositories.ReviewRepository;
+import ua.step.kino.repositories.Users_FilmsRepository;
 
 /**
  * 
@@ -50,9 +52,11 @@ public class DeleteController {
 	
 	@Autowired
 	GenreRepository genreRepository;
+	
+	@Autowired
+	Users_FilmsRepository users_FilmsRepository;
 
-	@GetMapping("admin/delete/country/{id}")
-	@Secured("ROLE_ADMIN")
+	@GetMapping("/countries/delete/{id}")
 	public String deleteCountry(@PathVariable("id") int id, Model model) {
 		Country country = countryRepository.getOne(id);
 
@@ -66,8 +70,7 @@ public class DeleteController {
 		return "redirect:/countries";
 	}
 	
-	@GetMapping("admin/delete/actor/{id}")
-	@Secured("ROLE_ADMIN")
+	@GetMapping("/actors/delete/{id}")
 	public String deleteActor(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		List<Film> films = filmRepository.findAll();
@@ -76,8 +79,7 @@ public class DeleteController {
 		return "redirect:/actors";
 	}
 	
-	@GetMapping("admin/delete/director/{id}")
-	@Secured("ROLE_ADMIN")
+	@GetMapping("/directors/delete/{id}")
 	public String deleteDirector(@PathVariable("id") int id, Model model) {
 		Personality personality = personalityRepository.getOne(id);
 		
@@ -88,14 +90,16 @@ public class DeleteController {
 		return "redirect:/directors";
 	}
 	
-	@GetMapping("admin/delete/film/{id}")
-	@Secured("ROLE_ADMIN")
+	@GetMapping("/films/delete/{id}")
+	  @Transactional
 	public String deleteFilm(@PathVariable("id") int id, Model model) {
 		Film film = filmRepository.getOne(id);
 
 		List<Personality> personalities=personalityRepository.findAll();
 		personalities.forEach(personality->personality.getFilmsActed().remove(film));
 		personalities.forEach(personality->personality.getFilmsDirected().remove(film));
+		
+		users_FilmsRepository.deleteByFilm(id);
 		
 		List<Review> reviews=reviewRepository.findByFilm(film);
 		reviews.forEach(review->review.setFilm(null));
@@ -106,11 +110,10 @@ public class DeleteController {
 		film.getCountries().clear();
 		film.getGenres().clear();
 		filmRepository.delete(film);
-		return "redirect:/films";
+		return "redirect:/films/list";
 	}
 	
-	@GetMapping("admin/delete/genre/{id}")
-	@Secured("ROLE_ADMIN")
+	@GetMapping("/genre/delete/{id}")
 	public String deleteEntity(@PathVariable("id") int id, Model model) {
 		Genre genre = genreRepository.getOne(id);
 		
