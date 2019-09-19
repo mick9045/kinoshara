@@ -37,13 +37,13 @@ a:hover {
 
 	<main role="main" class="container bg-light body-container">
 	<div class="row">
-		<div class="col-md-3" style="height: 185px;">
+		<div class="col-xs-12 col-sm-4 col-md-3" style="height: 366px;">
 			<div class="image-wrapper" id="image" >
 				<img th:if="${actor.photo != null}" th:src="@{'/image/bigportrait/' + ${actor.photo}}"
 					style="width: 260px; height: 366px;">
 			</div>
 		</div>
-		<div class="col-md-9">
+		<div class="col-xs-12 col-sm-8 col-md-9">
 			<br>
 			<h1 class="display-4"
 				th:text="${actor.firstName} + ' ' +  ${actor.lastName}"></h1>
@@ -56,8 +56,8 @@ a:hover {
 	</div>
 	</div>
 	<div class="row  p-2">
-		<div class="col-md-3"></div>
-		<div class="col-md-9">
+		<div class="col-xs-12 col-sm-4 col-md-3"></div>
+		<div class="col-xs-12 col-sm-8 col-md-9">
 			<h3 class="display-6 ml-2">Биография</h3>
 			<div class="row  p-2">
 				<p th:text="${actor.biography}"></p>
@@ -65,8 +65,8 @@ a:hover {
 		</div>
 	</div>
 	<div class="row  p-2">
-		<div class="col-md-3"></div>
-		<div class="col-md-9">
+		<div class="col-xs-12 col-sm-4 col-md-3"></div>
+		<div class="col-xs-12 col-sm-8 col-md-9">
 			<h3 class="display-6 ml-2">Фильмография</h3>
 			<ol>
 				<li th:if="${actor.filmsActed}" th:each="film : ${actor.filmsActed}"><a
