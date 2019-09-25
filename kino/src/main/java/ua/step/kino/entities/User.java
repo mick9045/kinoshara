@@ -57,41 +57,8 @@ public class User {
      *
      */
     
-	/*
-	 * private String firstName;
-	 * 
-	 * private String lastName;
-	 */
-
 	private String avatar;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-	//@Fetch(value = FetchMode.SUBSELECT)
-	@JsonIgnore
-	private List<Film> filmsToWatch =  new ArrayList<Film>();
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-	//@Fetch(value = FetchMode.SUBSELECT)
-	@JsonIgnore
-	private List<Film> filmsWatched = new ArrayList<Film>();
-	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	@JoinTable(
-//			  name = "USERS_FILMS_TO_WATCH", 
-//			  joinColumns = @JoinColumn(name = "user_id"), 
-//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-//	private List<Film> filmsToWatch= new ArrayList<Film>();
-//	
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	@JoinTable(
-//			  name = "USERS_FILMS_WATCHED", 
-//			  joinColumns = @JoinColumn(name = "user_id"), 
-//			  inverseJoinColumns = @JoinColumn(name = "films_id"))
-//	private List<Film> filmsWatched= new ArrayList<Film>();
-	
-
 	public User() {
 		super();
 		this.enabled = false;
@@ -165,16 +132,7 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	/*
-	 * public String getFirstName() { return firstName; }
-	 * 
-	 * public void setFirstName(String firstName) { this.firstName = firstName; }
-	 * 
-	 * public String getLastName() { return lastName; }
-	 * 
-	 * public void setLastName(String lastName) { this.lastName = lastName; }
-	 */
-
+	
 	public String getAvatar() {
 		return avatar;
 	}
@@ -183,35 +141,6 @@ public class User {
 		this.avatar = avatar;
 	}
 
-//	public List<Film> getFilmsToWatch() {
-//		return filmsToWatch;
-//	}
-//
-//	public void setFilmsToWatch(List<Film> filmsToWatch) {
-//		this.filmsToWatch = filmsToWatch;
-//	}
-//
-//	public List<Film> getFilmsWatched() {
-//		return filmsWatched;
-//	}
-//
-//	public void setFilmsWatched(List<Film> filmsWatched) {
-//		this.filmsWatched = filmsWatched;
-//	}
-	public List<Film> getFilmsToWatch() {
-		return filmsToWatch;
-	}
 
-	public void setFilmsToWatch(Film films) {
-		this.filmsToWatch.add(films);
-	}
-	
-	public List<Film> getFilmsWatched() {
-		return filmsWatched;
-	}
-
-	public void setFilmsWatched(Film films) {
-		this.filmsWatched.add(films);
-	}
 	
 }

@@ -10,8 +10,8 @@
 		<div class="container bg-light roudned p-4">
 			<!-- Error section for adding  -->
 			<div th:if="${result == 'success'}"
-				class="alert alert-success col-12" role="alert">Film was
-				added successfully.</div>
+				class="alert alert-success col-12" role="alert">Film was added
+				successfully.</div>
 			<div th:if="${result == 'fail'}" class="alert alert-danger col-12"
 				role="alert">There was a problem in adding film</div>
 			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -35,6 +35,11 @@
 						</div>
 						<div class="col-9">
 							<div class="row">
+								<div class="form-group col-12">
+									<label for="input-description">Description</label>
+									<textarea maxlength="1024" name="description"
+										class="form-control" id="input-description" rows="4"></textarea>
+								</div>
 								<div class="form-group col-6">
 									<label for="input-title">Title</label> <input required
 										minlength="2" maxlength="60" name="title" type="text"
@@ -70,11 +75,10 @@
 										id="input-country" class="selectpicker"
 										data-style="custom-select" data-live-search="true"
 										data-width="100%" name="countries">
-											<option th:if="${countries != null}"
-											th:each="country : ${countries}"
-											th:name="country" th:value="${country.id}"
-												th:text="${country.name}">
-											<option>
+										<option th:if="${countries != null}"
+											th:each="country : ${countries}" th:name="country"
+											th:value="${country.id}" th:text="${country.name}">
+										<option>
 									</select>
 								</div>
 

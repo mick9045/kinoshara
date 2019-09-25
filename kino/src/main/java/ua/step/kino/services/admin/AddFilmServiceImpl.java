@@ -86,6 +86,7 @@ public class AddFilmServiceImpl implements AddFilmService{
 			newFilm.setGenres(genreRepository.findAllById(filmDTO.getGenres()));
 		}
 		newFilm.setTitle(filmDTO.getTitle());
+		newFilm.setDescription(filmDTO.getDescription());
 		newFilm.setReleaseDate(filmDTO.getReleaseDate());
 		newFilm.setRating(filmDTO.getRating());
 		newFilm.setFilmLength(filmDTO.getFilmLength());

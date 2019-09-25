@@ -3,6 +3,7 @@ package ua.step.kino.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,12 +46,17 @@ public class FilmDTO {
 
 	@NotNull
 	private Double filmLength;
+	
+	@Size(max=1024)
+	@Column(columnDefinition="TEXT")
+	private String description;
 
 	public FilmDTO() {
 
 	}
 
 	public FilmDTO(@NotNull @NotEmpty @Size(min = 1, max = 64) String title,
+			@NotNull @NotEmpty @Size(min = 1, max = 1024) String description,
 			@NotNull @NotEmpty @Size(min = 1, max = 20) List<Integer> directors,
 			@NotNull @NotEmpty @Size(min = 1, max = 100) List<Integer> actors,
 			@NotNull @NotEmpty @Size(min = 1, max = 10) List<Integer> genres,
@@ -59,6 +65,7 @@ public class FilmDTO {
 			Date additionalDate, @NotNull @NotEmpty Double rating, @NotNull @NotEmpty Double filmLength) {
 		super();
 		this.title = title;
+		this.setDescription(description);
 		// this.releaseYear = releaseYear;
 		// this.views = views;
 		this.directors = directors;
@@ -136,13 +143,6 @@ public class FilmDTO {
 		this.releaseDate = releaseDate;
 	}
 
-	/*
-	 * public Date getAdditionalDate() { return additionalDate; }
-	 * 
-	 * public void setAdditionalDate(Date additionalDate) { this.additionalDate =
-	 * additionalDate; }
-	 */
-
 	public Double getRating() {
 		return rating;
 	}
@@ -157,6 +157,14 @@ public class FilmDTO {
 
 	public void setFilmLength(Double filmLength) {
 		this.filmLength = filmLength;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

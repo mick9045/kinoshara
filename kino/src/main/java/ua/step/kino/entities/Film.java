@@ -33,7 +33,8 @@ public class Film {
 	private String title;
 	// TODO убрать нафиг релиз йер
 	//private int releaseYear;
-	
+	@Column(columnDefinition="TEXT")
+	private String description;
 	private int views;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -88,10 +89,11 @@ public class Film {
 	
 	public Film(int id, String title, List<Personality> directors, Set<Personality> actors, List<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views) {
+			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views, String description) {
 		super();
 		this.id = id;
 		this.title = title;
+		this.setDescription(description);
 		this.directors = directors;
 		this.actors = actors;
 		this.genres = genres;
@@ -179,13 +181,6 @@ public class Film {
 		this.title = title;
 	}
 	
-	/*public int getReleaseYear() {
-		return releaseYear;
-	}
-
-	public void setReleaseYear(int releaseYear) {
-		this.releaseYear = releaseYear;
-	}*/
 
 	public List<Personality> getDirectors() {
 		return directors;
@@ -227,16 +222,13 @@ public class Film {
 		this.views = views;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_ID")
-	private User user;
-	
-	public User getUser() {
-		return user;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
