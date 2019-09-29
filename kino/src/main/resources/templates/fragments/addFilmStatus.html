@@ -14,7 +14,7 @@
 				<div class="row ml-2">
 					<input type="hidden" name="filmId" th:value="${film.id}"> <input
 						type="hidden" name="userId" th:value="${currentUser.user.id}">
-					 <label>Select Status: </label>
+					 <label><h3>Select Status:</h3> </label>
 					  <select name="status" id="status">
 						<option value="0" th:selected="${filmStatus==0}">--
 							Select film status --</option>
@@ -24,7 +24,7 @@
 							watched</option>
 					</select>
 					<p>
-						<input type="submit" value="Submit" class="btncls">
+						<button type="submit" value="Submit" class="btn btn-primary"><h4>Submit</h4></button>
 					</p>
 				</div>
 			</form>
