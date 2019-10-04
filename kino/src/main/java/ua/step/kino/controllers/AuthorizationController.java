@@ -71,7 +71,8 @@ public class AuthorizationController {
 		} else if (logout.isPresent()) {
 			model.addAttribute("logout", "You have successfully log out.");
 		}
-		if(count>0) {model.addAttribute("pass", "Forgot your password?");}
+		if(count>2) {model.addAttribute("pass", "Forgot your password?");
+		model.addAttribute("error", "If you are sure in input data your account might be blocked. Please contact to the administrator for information");}
 		return "login"; 
 	}
 	
