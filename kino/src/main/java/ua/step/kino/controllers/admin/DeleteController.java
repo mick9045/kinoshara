@@ -91,7 +91,7 @@ public class DeleteController {
 	}
 	
 	@GetMapping("/films/delete/{id}")
-	  @Transactional
+	@Transactional
 	public String deleteFilm(@PathVariable("id") int id, Model model) {
 		Film film = filmRepository.getOne(id);
 

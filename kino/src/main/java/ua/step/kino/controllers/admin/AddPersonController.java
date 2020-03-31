@@ -2,17 +2,21 @@ package ua.step.kino.controllers.admin;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
+import javax.swing.text.Position;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,20 +28,29 @@ import ua.step.kino.dto.PersonalityDTO;
 import ua.step.kino.entities.Personality;
 import ua.step.kino.services.CountryService;
 import ua.step.kino.services.admin.PersonalityService;
+import ua.step.kino.services.util.UtilService;
 
 @Controller
-@RequestMapping("/admin/add/person")
+@RequestMapping("admin/add/person")
 public class AddPersonController {
 	@Autowired
 	PersonalityService personalityService;
 	
 	@Autowired 
 	CountryService countryService;
+	
+	@Autowired
+	UtilService utilService;
 
-	@GetMapping
+	@GetMapping(value = { "", "{position}" })
 	@Secured("ROLE_ADMIN")
-	String add(Model model) {
+	String add(
+			@PathVariable(name = "position") Optional<String> position,
+			Model model) {
 		model.addAttribute("countries", countryService.getAll());
+		position
+			.ifPresent(pos -> model.addAttribute("preselectedPosition", utilService.searchEnum(ua.step.kino.entities.Position.class, pos)));
+		
 		return "admin/pages/add_person";
 	}
 	

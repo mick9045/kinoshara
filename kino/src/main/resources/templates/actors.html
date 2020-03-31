@@ -49,41 +49,42 @@ tr:nth-child(even) {
 	<div th:replace="fragments/header :: header"></div>
 
 	<main role="main" class="container">
-
-
-	<h2>Actors</h2>
-	<div style="overflow-x: auto;">
-		<table>
-			<thead>
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Date of birth</th>
-					<th>Origin</th>
-					<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<th>Edit</th>
-					<th>Delete</th>
-					</div>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="actor : ${actors}">
-					<td th:text="${actor.firstName}"></td>
-					<td th:text="${actor.lastName}"></td>
-					<td th:text="${actor.dateOfBirthday}"></td>
-					<td th:text="${actor.Country}"></td>
-					<!-- <td><a th:href="@{/actors/edit/{id}(id=${actor.id})}">Edit</a></td> -->
-					<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<td><a th:href="@{/admin/edit/person/{id}(id=${actor.id})}">Edit</a></td>
-					<td><button type="button" class="btn btn-link"
-							data-toggle="modal" data-target="#myModal"
-							th:attr="data-content=${actor.id}">Delete</button> 
-					</td></tr>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<!-- <a th:href="@{/actors/add}"><h3>+Add actor</h3></a> </main> -->
+		<h2>Actors</h2>
+		<div style="overflow-x: auto;">
+			<table>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Date of birth</th>
+						<th>Origin</th>
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<th>Edit</th>
+						<th>Delete</th>
+						</div>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="actor : ${actors}">
+						<td th:text="${actor.firstName}"></td>
+						<td th:text="${actor.lastName}"></td>
+						<td th:text="${actor.dateOfBirthday}"></td>
+						<td th:text="${actor.Country}"></td>
+						<!-- <td><a th:href="@{/actors/edit/{id}(id=${actor.id})}">Edit</a></td> -->
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<td><a th:href="@{/admin/edit/person/{id}(id=${actor.id})}">Edit</a></td>
+						<td><button type="button" class="btn btn-link"
+								data-toggle="modal" data-target="#myModal"
+								th:attr="data-content=${actor.id}">Delete</button> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<a th:href="@{admin/add/person/actor}"><h3>+Add actor</h3></a>
+		</div>
+	</main>
 
 	<!-- HTML-код модального окна -->
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
@@ -120,7 +121,8 @@ tr:nth-child(even) {
 			var button = $(event.relatedTarget)
 
 			var content = button.data('content')
-
+			
+			debugger;
 			$(this).find('#content').attr("href", "/actors/delete/" + content);
 
 		})
