@@ -11,22 +11,23 @@
 		<div sec:authorize="isAuthenticated()">
 			<form th:action="@{/users/addFilmStatus}" th:object="${status}"
 				method="post">
-				<div class="row ml-2">
+			
 					<input type="hidden" name="filmId" th:value="${film.id}"> <input
 						type="hidden" name="userId" th:value="${currentUser.user.id}">
-					 <label><h3>Select Status:</h3> </label>
-					  <select name="status" id="status">
-						<option value="0" th:selected="${filmStatus==0}">--
-							Select film status --</option>
-						<option value="1" th:selected="${filmStatus==1}">Watch
-							later</option>
-						<option value="2" th:selected="${filmStatus==2}">Already
-							watched</option>
-					</select>
-					<p>
-						<button type="submit" value="Submit" class="btn btn-primary"><h4>Submit</h4></button>
-					</p>
-				</div>
+						  <div class="form-group">
+							 <label><h4>Select Status:</h3> </label>
+					  		<select name="status" id="status" class="form-control">
+								<option value="0" th:selected="${filmStatus==0}">--
+									Select film status --</option>
+								<option value="1" th:selected="${filmStatus==1}">Watch
+									later</option>
+								<option value="2" th:selected="${filmStatus==2}">Already
+									watched</option>
+							</select>
+							</div>
+					
+						<button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+			
 			</form>
 		</div>
 	</div>
