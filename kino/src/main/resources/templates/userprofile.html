@@ -52,7 +52,8 @@ img:before {
 
 	<div class="container">
 		<div class="row my-2">
-			<div class="col-lg-8 order-lg-2">
+		<div class="col-2"> </div>
+			<div class="col-8 align-self-center">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a href="" data-target="#profile"
 						data-toggle="tab" class="nav-link active">Profile</a></li>
@@ -67,11 +68,12 @@ img:before {
 					<div class="tab-pane active" id="profile">
 						<h4 class="blue">User Profile</h4>
 						<div class="row">
+							<div class= "col-lg-3"></div>
 							<div class="col-lg-6 order-lg-1 text-center">
 								<img th:src="@{'/image/smallportrait/' + ${user.avatar}}"
-									class="mx-auto img-fluid img-circle d-block"
+									class="mt-2 mx-auto img-fluid img-circle d-block"
 									style="width: 200px; height: 200px">
-								<h5 class="mb-3">
+								<h5 class="mb-3 mt-5">
 									<span class="middle" th:text="${user.name}">John Doe</span>
 								</h5>
 								<div class="profile-user-info">
