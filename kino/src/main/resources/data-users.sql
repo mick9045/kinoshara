@@ -2,7 +2,7 @@ insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VAL
 insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('admin', 'admin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '2000-10-29', 'kolia@gmail.com', true, 2)
 insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Zavoruyev', 'Zavoruyev', 'admin', '1986-08-15','zavoruyev@gmail.com', true, 1)
 insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('AZavoruyev', 'AZavoruyev', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '1986-08-15','azavoruyev@gmail.com', true, 1)
-insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Admin', 'admin', '$2a$04$8DkE2YLwOC6Pql/2ualN2uCThw4RVeE3kptm4G3aYkZcK51gMevWa', '1997-12-03','mick9045@gmail.com', true, 2)
+--insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('admin', 'admin', '$2a$04$8DkE2YLwOC6Pql/2ualN2uCThw4RVeE3kptm4G3aYkZcK51gMevWa', '1997-12-03','mick9045@gmail.com', true, 2)
 
 insert into users (name, login, password, birthday, email, enabled, ROLE_ID) VALUES('Mizanin', 'Mizanin', '$2a$10$RfpUhq/sOlN8e2j0JSRZZeCyCCmA06XC88dFGVYpA9NrFGqN46Wcu', '1998-08-15','mizanin666@gmail.com', true, 1)
 
