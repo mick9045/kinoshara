@@ -1,6 +1,7 @@
 $(function() {
 	var genresSection = $("#genres-filter-select-section");
 	var allGenresRequest = "/genre/all";
+	var genreFiltrPath = "filter/genre/";
 	
 	$.get(allGenresRequest, function(data) {
 		var fieldSet = $("<fieldset>");
@@ -9,7 +10,7 @@ $(function() {
 		genresSection.append(fieldSet);
 
 		$.each(data, function(i, val) {
-			var checkbox = $("<input type='radio'>");
+			var checkbox = $("<input type='checkbox'>");
 			var label = $("<label>");
 			checkbox.prop("id", "genre-radio-" + i);
 			checkbox.prop("name", "genre-radio");
@@ -20,8 +21,8 @@ $(function() {
 			fieldSet.append(label);
 			fieldSet.controlgroup();
 			checkbox.checkboxradio();
-			if (window.location.pathname.startsWith("/filter/genre/") &&
-					window.location.pathname.endsWith(val.name)) {
+			if (window.location.pathname.includes(genreFiltrPath) &&
+					window.location.pathname.includes(val.name)) {
 				checkbox.prop("checked", true);
 				checkbox.attr("on", true);
 				checkbox.button("refresh");
@@ -32,18 +33,23 @@ $(function() {
 			checkbox.on("change", onRadioChangeHandler);
 			checkbox.on("click", function (event) {
 				var t = $(this);
+				var addPath = "";	
+				if(!window.location.pathname.includes(genreFiltrPath)){
+					addPath = genreFiltrPath;
+				}
 				if (t.attr("on") == "true") {
 					t.prop("checked", false);
 					t.attr("on", false);
 					
 					t.button("refresh");
-					window.location.href = "/";
+					
+					window.location.href = window.location.pathname.replace(this.getAttribute("key") + "$", "");
 				} else {
 					t.prop("checked", true);
 					t.button("refresh");
 					
 					t.attr("on", true);
-					window.location.href = "/filter/genre/" + this.getAttribute("key");
+					window.location.href = window.location + addPath + this.getAttribute("key") + "$";
 				}
 			});
 		});
