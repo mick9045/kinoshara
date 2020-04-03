@@ -1,10 +1,12 @@
 package ua.step.kino.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import antlr.StringUtils;
 import ua.step.kino.entities.Film;
 import ua.step.kino.repositories.FilmRepository;
 
@@ -15,8 +17,16 @@ public class FilmFilterServiceImpl implements FilmFilterService{
 	FilmRepository filmRepository;
 	
 	@Override
-	public List<Film> filterFilmsByGenre(String genre) {
-		return filmRepository.findByGenres(genre);
+	public List<Film> filterFilmsByGenre(String genreQuery) {
+		
+		List<Film> result = new ArrayList<Film>();
+		genreQuery =  StringUtils.stripBack(genreQuery, "$");
+		String[] genres = genreQuery.split("[$]");
+		for(String genre : genres) {
+			
+		result.addAll(filmRepository.findByGenres(genre));
+		}
+		return result;
 	}
 
 	@Override

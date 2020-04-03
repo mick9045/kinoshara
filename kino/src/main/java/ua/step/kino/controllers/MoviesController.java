@@ -111,13 +111,18 @@ public class MoviesController {
 		return "allMovies";
 	}
 	
-	@GetMapping(value = "filter/{type}/{query}")
-	public String filterFilms(@PathVariable String type, @PathVariable String query, Model model) {
+	@GetMapping(value = {"filter/{type}","filter/{type}/{query}"})
+	public String filterFilms(@PathVariable String type, @PathVariable(required = false) String query, Model model) {
+		
+		if(query == null)
+		{
+			 return "redirect:/";
+		}
+		
 		List<Film> films = filterService.filterBy(type, query);
 		model.addAttribute("films", films);
 		return "allMovies";
 	}
-	
 	
 
 }
