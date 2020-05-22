@@ -34,6 +34,8 @@ public class FilmDTO {
 	private MultipartFile posterBig;
 
 	private MultipartFile posterSmall;
+	
+	private String imdbRef;
 
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -42,7 +44,6 @@ public class FilmDTO {
 	// @DateTimeFormat(pattern="yyyy-MM-dd")
 	// private Date additionalDate;
 
-	private Double rating;
 
 	@NotNull
 	private Double filmLength;
@@ -62,7 +63,8 @@ public class FilmDTO {
 			@NotNull @NotEmpty @Size(min = 1, max = 10) List<Integer> genres,
 			@NotNull @NotEmpty @Size(min = 1, max = 5) List<Integer> countries,
 			@NotNull @NotEmpty MultipartFile posterBig, MultipartFile posterSmall, @NotNull @NotEmpty Date releaseDate,
-			Date additionalDate, @NotNull @NotEmpty Double rating, @NotNull @NotEmpty Double filmLength) {
+			Date additionalDate, @NotNull @NotEmpty Double filmLength,
+			@NotNull String imdbRef) {
 		super();
 		this.title = title;
 		this.setDescription(description);
@@ -75,8 +77,8 @@ public class FilmDTO {
 		this.posterBig = posterBig;
 		this.posterSmall = posterSmall;
 		this.releaseDate = releaseDate;
-		this.rating = rating;
 		this.filmLength = filmLength;
+		this.imdbRef = imdbRef;
 	}
 
 	public String getTitle() {
@@ -143,14 +145,6 @@ public class FilmDTO {
 		this.releaseDate = releaseDate;
 	}
 
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double rating) {
-		this.rating = rating;
-	}
-
 	public Double getFilmLength() {
 		return filmLength;
 	}
@@ -165,6 +159,14 @@ public class FilmDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getImdbRef() {
+		return imdbRef;
+	}
+
+	public void setImdbRef(String imdbRef) {
+		this.imdbRef = imdbRef;
 	}
 
 }

@@ -16,7 +16,7 @@
 				role="alert">There was a problem in adding film</div>
 			<!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			<div class="row">
-				<h4 class="mb-4 col-12">Person</h4>
+				<h4 class="mb-4 col-12">Film</h4>
 				<form method="POST" enctype="multipart/form-data" class="col-12">
 					<div class="row">
 						<div class="col-3">
@@ -52,23 +52,24 @@
 										class="form-control" id="input-release-date"
 										aria-describedby="emailHelp" placeholder="Enter release date">
 								</div>
-								<div class="form-group col-4">
+								<div class="form-group col-6">
 									<label for="input-title">Length</label> <input required
 										minlength="2" maxlength="60" name="filmLength" type="number"
 										class="form-control" id="input-length"
 										aria-describedby="emailHelp" placeholder="Enter length">
 								</div>
-								<div class="form-group col-4">
-									<label for="input-title">Rating</label> <input min="1" max="10"
-										name="rating" type="number" step="0.1" class="form-control"
-										id="input-rating" aria-describedby="emailHelp"
-										placeholder="Enter rating">
-								</div>
-								<div class="form-group col-4">
+								
+								<div class="form-group col-6">
 									<label for="input-title">Views count</label> <input min="0"
 										name="views" type="number" class="form-control"
 										id="input-views-count" aria-describedby="emailHelp"
 										placeholder="Enter views count">
+								</div>
+								<div class="form-group col-12">
+									<label for="input-imdb">Imdb</label> <input
+										name="imdbRef" type="text" class="form-control"
+										id="input-imdb" aria-describedby="emailHelp"
+										placeholder="Enter IMDB reference">
 								</div>
 								<div class="form-group col-6">
 									<label for="input-country">Countries</label> <select multiple
