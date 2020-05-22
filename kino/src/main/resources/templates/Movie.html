@@ -78,9 +78,11 @@ a:hover {
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-3 col-md-3">
+		<div th:if="${film.imdbRef != '' && film.imdbRef != null}">
 			<div 
-				th:if="${film.imdbRef != null}"
+				
 				th:replace="fragments/imdbRating :: imdbRating (${film.imdbId}, ${film.imdbRef})"></div>
+				</div>
 			<h5 class="font-weight-light text-muted">Genres</h5>
 			<ul type="none">
 				<li class="font-weight-lighter" th:each="genre : ${film.genres}"

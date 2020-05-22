@@ -83,11 +83,11 @@ public class EditFilmServiceImpl implements EditFilmService{
 		}
 		film.setTitle(filmDTO.getTitle());
 		film.setReleaseDate(filmDTO.getReleaseDate());
-		film.setRating(filmDTO.getRating());
 		film.setFilmLength(filmDTO.getFilmLength());
 		
 		film.setPosterBig(imageName);
 		film.setImageSmallPath(imageName);
+		film.setImbdRef(filmDTO.getImdbRef());
 		
 		filmRepo.save(film);
 		return true;

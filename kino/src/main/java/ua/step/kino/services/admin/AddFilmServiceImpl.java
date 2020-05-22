@@ -1,12 +1,15 @@
 package ua.step.kino.services.admin;
 
 import java.util.HashSet;
+
 import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.apache.commons.lang3.StringUtils;
 
 import ua.step.kino.dto.FilmDTO;
 import ua.step.kino.entities.Film;
@@ -88,12 +91,14 @@ public class AddFilmServiceImpl implements AddFilmService{
 		newFilm.setTitle(filmDTO.getTitle());
 		newFilm.setDescription(filmDTO.getDescription());
 		newFilm.setReleaseDate(filmDTO.getReleaseDate());
-		newFilm.setRating(filmDTO.getRating());
 		newFilm.setFilmLength(filmDTO.getFilmLength());
 		
 		newFilm.setPosterBig(imageName);
 		newFilm.setImageSmallPath(imageName);
 		
+		if(filmDTO.getImdbRef() != null) {
+			newFilm.setImbdRef(StringUtils.strip(filmDTO.getImdbRef(), "/"));
+		}
 		filmRepo.save(newFilm);
 		
 		
