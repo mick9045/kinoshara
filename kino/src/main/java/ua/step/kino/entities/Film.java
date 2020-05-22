@@ -31,10 +31,12 @@ public class Film {
 	private int id;
 	
 	private String title;
-	// TODO убрать нафиг релиз йер
-	//private int releaseYear;
+
 	@Column(columnDefinition="TEXT")
 	private String description;
+	
+	private String imdbRef;
+	
 	private int views;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -89,7 +91,7 @@ public class Film {
 	
 	public Film(int id, String title, List<Personality> directors, Set<Personality> actors, List<Genre> genres,
 			List<Country> countries, String posterSmall, String posterBig, Date releaseDate, Double rating,
-			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views, String description) {
+			Double filmLength, Set<Comment> comments, Set<Review> reviews, int views, String description, String imdbRef) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -106,6 +108,8 @@ public class Film {
 		this.comments = comments;
 		this.reviews = reviews;
 		this.views = views;
+		this.imdbRef = imdbRef;
+		
 		//this.setAdditionalDate(additionalDate);
 	}
 
@@ -231,6 +235,26 @@ public class Film {
 		this.description = description;
 	}
 	
+	public String getImdbRef() {
+		return imdbRef;
+	}
+
+	public void setImbdRef(String imdbRef) {
+		this.imdbRef = imdbRef;
+	}
 	
+	public String getImdbId()
+	{
+		if(this.imdbRef != null)
+		{
+			 String[] imdbRefPathParts = this.imdbRef.split("/");
+			 if(imdbRefPathParts.length > 0) {
+				 return imdbRefPathParts[imdbRefPathParts.length-1];
+			 }
+			 
+		}
+		
+		return "";
+	}
 	
 }
